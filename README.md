@@ -1,9 +1,9 @@
-# Projet - Programmation Système
-Dépôt Github pour le projet de Programmation Système.
+# Project - System Programming
+GitHub repository for the project "System Programming".
 
-# Membres
-Warren Gaure  
-Esteban Lavaux  
-Mallory Gesbert  
-Hugo Vallemont  
-Ahmed Amara  
+# Members
+• Warren Gaure  
+• Esteban Lavaux  
+• Mallory Gesbert  
+• Hugo Vallemont  
+• Ahmed Amara  
