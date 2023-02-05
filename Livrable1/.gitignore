@@ -10,3 +10,9 @@
 *.v2
 # Ignorer tous les fichiers .suo
 *.suo
+# Ignorer tous le dossier bin
+/bin/*
+# Ignorer tous le dossier .vs
+/.vs/*
+# Ignorer tous le dossier obj
+/obj/*
