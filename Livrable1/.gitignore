@@ -1,0 +1,12 @@
+# Ignorer tous les fichiers .log
+*.log
+# Ignorer tous les fichiers .vsidx
+*.vsidx
+# Ignorer tous les fichiers .v5.2
+*.v5.2
+# Ignorer tous les fichiers .csproj
+*.csproj
+# Ignorer tous les fichiers .v2
+*.v2
+# Ignorer tous les fichiers .suo
+*.suo
