@@ -21,7 +21,7 @@ namespace livrableMVC.Model
 
         public Dictionary<string, string> languages(string lang)
         {
-            if (lang.Equals("ang"))
+            if (lang.Equals("eng"))
             {
                 return english;
             }
