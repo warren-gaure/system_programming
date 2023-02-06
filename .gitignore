@@ -8,6 +8,10 @@
 *.v2
 # Ignorer tous les fichiers .suo
 *.suo
+# Ignorer tous les fichiers .dll
+*.dll
+# Ignorer tous les fichiers .pdb
+*.pdb
 # Ignorer tous les fichiers .json
 *.json
 # Ignorer tous le dossier bin

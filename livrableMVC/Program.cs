@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using livrableMVC.ControllerSpace;
+using livrableMVC.ControllerSpace;
 
 namespace livrableMVC
 {
@@ -12,6 +13,9 @@ namespace livrableMVC
         public static void Main(string[] args)
         {
             Controller controller = new Controller();
+            controller.languageSettings();
+            controller.saveSetting();
+            controller.execSaveSetting();
             controller.start();
         }
     }
