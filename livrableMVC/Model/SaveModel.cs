@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -20,24 +21,26 @@ namespace livrableMVC.Model
 
     internal class SaveModel
     {
-        public Boolean executeSave(string saveName)
+
+        long time;
+        public long executeSave(string saveName)
         {
+            var sw = new Stopwatch();
+            sw.Start();
             string save = "";
-            string fileName = "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\WeatherForecast.json";
-            File.ReadAllText(fileName);
-            foreach (string line in System.IO.File.ReadLines(@"D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\WeatherForecast.json"))
-            {
-                if (line.Contains(saveName))
-                {
-                    save = line;
-                }
-            }
+            string fileName = "..\\..\\..\\"+ saveName + ".json";
+            save = System.IO.File.ReadAllText(fileName);
             Console.WriteLine(save);
-            return true;
+            System.Threading.Thread.Sleep(10000);
+            sw.Stop();
+            Console.WriteLine(sw.ElapsedMilliseconds);
+            time = sw.ElapsedMilliseconds;
+            return time ;
         }
 
-        public Boolean createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
-
+        public long createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
+            var sw = new Stopwatch();
+            sw.Start();
             var saves = new Saves()
             {
                 sourceTarget = sourceTargetEntry,
@@ -47,15 +50,20 @@ namespace livrableMVC.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\Save.json";
+            string fileName = "..\\..\\..\\" + saveNameEntry + ".json";
             if (!File.Exists(fileName))
             {
-                File.WriteAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString);
+            }
+            else
+            {
+
             }
             Console.WriteLine(jsonString);
-            Console.WriteLine(File.ReadAllText(fileName));
-
-            return true;
+            sw.Stop();
+            Console.WriteLine(sw.ElapsedMilliseconds);
+            time = sw.ElapsedMilliseconds;
+            return time;
         }
     }
 }

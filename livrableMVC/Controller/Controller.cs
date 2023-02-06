@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace livrableMVC.ControllerSpace
 {
@@ -13,7 +15,12 @@ namespace livrableMVC.ControllerSpace
         string languageUsed = "";
         LanguageModel lang = new LanguageModel();
         SaveModel saveModel = new SaveModel();
+        DailyLogs dailyLogs = new DailyLogs(); 
         Dictionary<string, string> sentences = new Dictionary<string, string>();
+        long timeExec;
+        long timeCreate;
+        long globalTime;
+
 
         public void languageSettings()
         {
@@ -25,18 +32,39 @@ namespace livrableMVC.ControllerSpace
                 Console.WriteLine("eng = Engish / fr = Français");
                 languageUsed = Console.ReadLine();
             }
-            Console.WriteLine(sentences["hello"]);
+            Console.Clear();
             sentences = lang.languages(languageUsed);
-
+            Console.WriteLine(sentences["hello"]);
         }
 
-        public void saveSetting()
+        public long saveSetting()
         {
-            saveModel.createNewSave("C:/", "D:/", "COMPLETE", "first");
+            timeCreate = saveModel.createNewSave("C:/", "D:/", "COMPLETE", "first");
+            globalTimeCreate();
+            return timeCreate;
         }
-        public void execSaveSetting()
+        public long execSaveSetting()
         {
-            saveModel.executeSave("first");
+            timeExec = saveModel.executeSave("first");
+            globalTimeExec();
+            return timeExec;
+        }
+
+        public long globalTimeExec()
+        {
+            globalTime += timeExec;
+            return globalTime;
+        }
+        public long globalTimeCreate()
+        {
+            globalTime += timeCreate;
+            return globalTime;
+        }
+
+        public void dailyLogsFunction()
+        {
+            dailyLogs.DailyLogsFunction("test", "test", "test", "test", globalTime, DateTime.Now);
+            globalTime = 0;
         }
     }
 
