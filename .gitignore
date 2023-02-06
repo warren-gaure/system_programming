@@ -4,15 +4,17 @@
 *.vsidx
 # Ignorer tous les fichiers .v5.2
 *.v5.2
-# Ignorer tous les fichiers .csproj
-*.csproj
 # Ignorer tous les fichiers .v2
 *.v2
 # Ignorer tous les fichiers .suo
 *.suo
+# Ignorer tous les fichiers .json
+*.json
 # Ignorer tous le dossier bin
 bin/*
 # Ignorer tous le dossier .vs
 .vs/*
 # Ignorer tous le dossier obj
 obj/*
+# Ignorer tous le dossier obj
+livrableMVC/obj/Debug/*
