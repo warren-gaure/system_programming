@@ -2,6 +2,7 @@
 using livrableMVC.View;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +11,48 @@ namespace livrableMVC.ControllerSpace
 {
     internal class Controller
     {
-  
-        LanguageModel lang = new LanguageModel();
+        string languageUsed = "";
+        public LanguageModel langModel { get; set; }
+        public SaveModel saveModel { get; set; }
+        public LanguageView langView { get; set; }
+
         Dictionary<string, string> sentences = new Dictionary<string, string>();
 
-        public void test()
+        public Controller()
         {
-            sentences = lang.languages("ang");
+            saveModel = new SaveModel();
+            langModel = new LanguageModel();
+            langView = new LanguageView();
+            // consoleView = new ConsoleView();
+        }
+        public void start()
+        {
+        }
+
+        public void saveSetting()
+        {
+            saveModel.createNewSave("C:/", "D:/", "COMPLETE", "first");
+        }
+        public void execSaveSetting()
+        {
+            saveModel.executeSave("first");
+        }
+
+    
+        public void languageSettings()
+        {
+           
+            while (!languageUsed.Equals("eng") && !languageUsed.Equals("fr"))
+            {
+                Console.WriteLine("Please unter your language :");
+                Console.WriteLine("Merci d'indiquer la langue souhaiter:");
+                Console.WriteLine("eng = Engish / fr = Français");
+                languageUsed = Console.ReadLine();
+            }
+            Console.Clear();
+            sentences = langModel.languages(languageUsed);
             Console.WriteLine(sentences["hello"]);
-            new SaveView();
+
         }
     }
-
 }
