@@ -9,15 +9,22 @@ namespace livrableMVC.ControllerSpace
 {
     internal class Controller
     {
-  
-        LanguageModel lang = new LanguageModel();
-        Dictionary<string, string> sentences = new Dictionary<string, string>();
 
-        public void test()
+        public static void start()
         {
-            sentences = lang.languages("ang");
-            Console.WriteLine(sentences["hello"]);
+
+
+
+            //LanguageModel lang = new LanguageModel();
+            //Dictionary<string, string> sentences = new Dictionary<string, string>();
+
+
+
+
+
         }
+
+
 
 
     }
