@@ -11,7 +11,7 @@ namespace livrableMVC
     {
         public static void Main(string[] args)
         {
-            ControllerLanguage controller = new ControllerLanguage();
+            ControllerSolution controller = new ControllerSolution();
             controller.test();
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace livrableMVC.Controller
 {
-    internal class ControllerLanguage
+    internal class ControllerSolution
     {
   
         LanguageModel lang = new LanguageModel();
