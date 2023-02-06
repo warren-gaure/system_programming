@@ -7,34 +7,29 @@ using System.Threading.Tasks;
 
 namespace Livrable1.model
 {
-    internal class LanguageModel
+    public class LanguageModel
     {
+        public LanguageModel() { }
         Dictionary<string, string> french = new Dictionary<string, string>
         {
             { "hello" , "Bonjour et bienvenue dans votre solution de sauvegarde." }
         };
         Dictionary<string, string> english = new Dictionary<string, string>
         {
-            { "hello" , "Hello, welcome in ouor solution" }
+            { "hello" , "Hello, welcome in ur solution" }
         };
-        string sentences = "";
 
-        public string languages( string lang, string keys)
+
+        public Dictionary<string, string> languages( string lang)
         {
             if (lang.Equals("ang"))
             {
-                sentences = english[keys];
-            }
-            else if (lang.Equals( "fr"))
-            {
-                sentences = french[keys];
+                return english;
             }
             else
             {
-                sentences= "Error, no lnaguage value found ";
-            }
-
-            return sentences;
+                return french;
+            }           
         }
     }
 }
