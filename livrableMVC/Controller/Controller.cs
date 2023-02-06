@@ -15,6 +15,7 @@ namespace livrableMVC.ControllerSpace
         public LanguageModel langModel { get; set; }
         public SaveModel saveModel { get; set; }
         public LanguageView langView { get; set; }
+        public SaveView saveView { get; set; }
 
         Dictionary<string, string> sentences = new Dictionary<string, string>();
 
@@ -23,10 +24,11 @@ namespace livrableMVC.ControllerSpace
             saveModel = new SaveModel();
             langModel = new LanguageModel();
             langView = new LanguageView();
-            // consoleView = new ConsoleView();
+            saveView = new SaveView();
         }
         public void start()
         {
+            saveView.Start();
         }
 
         public void saveSetting()

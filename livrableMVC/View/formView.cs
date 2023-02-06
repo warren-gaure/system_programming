@@ -32,7 +32,7 @@ namespace livrableMVC.View
                 }
                 else
                 {
-                    using (var menu = new MenuController(0 + model.left, i * 2 + 1 + model.top))
+                    using (var menu = new MenuModel(0 + model.left, i * 2 + 1 + model.top))
                     {
                         foreach (var Answer in model.questions[i].Answers)
                         {

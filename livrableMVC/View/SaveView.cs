@@ -10,21 +10,19 @@ namespace livrableMVC.View
 {
     internal class SaveView
     {
-        public SaveView() 
-        { 
+        public SaveView() { }
+
+        public List<string> Start()
+        {
             var answer = new List<QuestionModel>();
-            using (var form = new formController(0, 1))
+            using (var form = new formModel(0, 4))
             {
                 form.AddQuestions(new string[3] { "Name", "Src", "tget" });
                 form.AddQuestion(new QuestionModel("Type", new string[2] { "complet", "partiel" }));
                 answer = form.Start();
             }
-            var save = new SaveModel(answer[0].Answer, answer[1].Answer, answer[2].Answer, answer[3].Answer);
-            Console.WriteLine("réponses");
-            foreach(var question in answer)
-            {
-                Console.WriteLine(question.Answer);
-            }
+            return new List<string> { answer[0].Answer, answer[1].Answer, answer[2].Answer, answer[3].Answer };
         }
+
     }
 }
