@@ -23,9 +23,9 @@ namespace livrableMVC.Model
         public Boolean executeSave(string saveName)
         {
             string save = "";
-            string fileName = "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\WeatherForecast.json";
-            File.ReadAllText(fileName);
-            foreach (string line in System.IO.File.ReadLines(@"D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\WeatherForecast.json"))
+            string fileName = "..\\..\\..\\Save.json";
+            
+            foreach (string line in System.IO.File.ReadLines(fileName))
             {
                 if (line.Contains(saveName))
                 {
@@ -47,7 +47,7 @@ namespace livrableMVC.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\Save.json";
+            string fileName = "..\\..\\..\\Save.json";
             if (!File.Exists(fileName))
             {
                 File.WriteAllText(fileName, jsonString);

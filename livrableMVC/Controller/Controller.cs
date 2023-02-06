@@ -11,16 +11,19 @@ namespace livrableMVC.ControllerSpace
 {
     internal class Controller
     {
+        string languageUsed = "";
         public LanguageModel langModel { get; set; }
         public SaveModel saveModel { get; set; }
         public LanguageView langView { get; set; }
 
-        public Controller() 
-        { 
+        Dictionary<string, string> sentences = new Dictionary<string, string>();
+
+        public Controller()
+        {
             saveModel = new SaveModel();
             langModel = new LanguageModel();
             langView = new LanguageView();
-            consoleView = new ConsoleView();
+            // consoleView = new ConsoleView();
         }
         public void start()
         {
@@ -35,8 +38,8 @@ namespace livrableMVC.ControllerSpace
             saveModel.executeSave("first");
         }
 
-    }
-    public void languageSettings()
+    
+        public void languageSettings()
         {
            
             while (!languageUsed.Equals("eng") && !languageUsed.Equals("fr"))
@@ -46,7 +49,10 @@ namespace livrableMVC.ControllerSpace
                 Console.WriteLine("eng = Engish / fr = Français");
                 languageUsed = Console.ReadLine();
             }
+            Console.Clear();
+            sentences = langModel.languages(languageUsed);
             Console.WriteLine(sentences["hello"]);
 
         }
+    }
 }
