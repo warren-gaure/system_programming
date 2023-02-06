@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Livrable1.controller;
 
 namespace Livrable1
 {
@@ -10,6 +11,9 @@ namespace Livrable1
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("test");
+            SaveController controller = new SaveController();
+            controller.test();
 
         }
     }
