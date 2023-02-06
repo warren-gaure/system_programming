@@ -1,21 +1,19 @@
-﻿using System;
+﻿using livrableMVC.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Livrable1.view;
-using Livrable1.model;
-using System.Net.Security;
 
-namespace Livrable1.controller
+namespace livrableMVC.Controller
 {
-    public class SaveController
+    internal class ControllerLanguage
     {
-        SaveView view = new SaveView();
+  
         LanguageModel lang = new LanguageModel();
         Dictionary<string, string> sentences = new Dictionary<string, string>();
 
-       public void test()
+        public void test()
         {
             sentences = lang.languages("ang");
             Console.WriteLine(sentences["hello"]);
@@ -23,4 +21,5 @@ namespace Livrable1.controller
 
 
     }
+
 }

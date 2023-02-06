@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Livrable1.controller;
+using livrableMVC.Controller;
 
-namespace Livrable1
+namespace livrableMVC
 {
     internal class Program
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("test");
-            SaveController controller = new SaveController();
+            ControllerLanguage controller = new ControllerLanguage();
             controller.test();
-
         }
     }
 }
