@@ -24,12 +24,8 @@ namespace livrableMVC.View
                 if (model.questions[i].Answers.Count == 0) 
                 {
                     string? answer = "";
-                    var temp = Console.ReadLine();
-                    if(temp != null)
-                    {
-                        answer = temp;
-                    }
-                    if(!string.IsNullOrEmpty(answer) )
+                    answer = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(answer) )
                     {
                         model.questions[i].Answer = answer;
                     }

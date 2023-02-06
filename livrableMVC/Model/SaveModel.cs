@@ -12,19 +12,12 @@ namespace livrableMVC.Model
         string source;
         string target;
         string method;
-        public SaveModel(string name, string source, string target, int methode)
+        public SaveModel(string name, string source, string target, string methode)
         {
             this.name = name;
             this.source = source;
             this.target = target;
-            if (methode == 0)
-            {
-                this.method = "complet";
-            }
-            else
-            {
-                this.method = "partiel";
-            }
+            this.method = methode;
         }
         public List<string> saveInformation()
         {
