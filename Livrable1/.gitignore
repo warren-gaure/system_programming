@@ -11,8 +11,8 @@
 # Ignorer tous les fichiers .suo
 *.suo
 # Ignorer tous le dossier bin
-/bin/*
+bin/*
 # Ignorer tous le dossier .vs
-/.vs/*
+.vs/*
 # Ignorer tous le dossier obj
-/obj/*
+obj/*
