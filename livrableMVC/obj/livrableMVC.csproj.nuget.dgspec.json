@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\livrableMVC.csproj": {}
+    "C:\\Users\\huval\\OneDrive\\Documents\\Cesi\\system_programming\\livrableMVC\\livrableMVC.csproj": {}
   },
   "projects": {
-    "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\livrableMVC.csproj": {
+    "C:\\Users\\huval\\OneDrive\\Documents\\Cesi\\system_programming\\livrableMVC\\livrableMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\livrableMVC.csproj",
+        "projectUniqueName": "C:\\Users\\huval\\OneDrive\\Documents\\Cesi\\system_programming\\livrableMVC\\livrableMVC.csproj",
         "projectName": "livrableMVC",
-        "projectPath": "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\livrableMVC.csproj",
-        "packagesPath": "C:\\Users\\nzxtl\\.nuget\\packages\\",
-        "outputPath": "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\obj\\",
+        "projectPath": "C:\\Users\\huval\\OneDrive\\Documents\\Cesi\\system_programming\\livrableMVC\\livrableMVC.csproj",
+        "packagesPath": "C:\\Users\\huval\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\huval\\OneDrive\\Documents\\Cesi\\system_programming\\livrableMVC\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nzxtl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\huval\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
