@@ -14,7 +14,6 @@ namespace livrableMVC.ControllerSpace
         public LanguageModel langModel { get; set; }
         public SaveModel saveModel { get; set; }
         public LanguageView langView { get; set; }
-        public ConsoleView conView { get; set; }
 
         public Controller() 
         { 
@@ -25,23 +24,6 @@ namespace livrableMVC.ControllerSpace
         }
         public void start()
         {
-
-
-
-
-
-
-        }
-
-        public void translateApp(string language)
-        {
-            langModel.getTranslations()
-        }
-        
-        public void addSave()
-        {
-            sentences = lang.languages("ang");
-            Console.WriteLine(sentences["hello"]);
         }
 
         public void saveSetting()
@@ -65,7 +47,6 @@ namespace livrableMVC.ControllerSpace
                 languageUsed = Console.ReadLine();
             }
             Console.WriteLine(sentences["hello"]);
-            sentences = lang.languages(languageUsed);
 
         }
 }
