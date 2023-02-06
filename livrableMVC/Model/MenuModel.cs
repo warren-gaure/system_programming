@@ -51,7 +51,7 @@ namespace livrableMVC.Model
         {
             while (Return == -1)
             {
-                Thread.Sleep(150);
+                Thread.Sleep(120);
                 if (NativeKeyboard.IsKeyDown(KeyCode.Up))
                 {
                     if (Selected > 0)

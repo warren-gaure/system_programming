@@ -12,10 +12,10 @@ namespace livrableMVC.View
     {
         public SaveView() { }
 
-        public List<string> Start()
+        public List<string> Start(int left = 0, int top = 0)
         {
             var answer = new List<QuestionModel>();
-            using (var form = new formModel(0, 4))
+            using (var form = new formModel(left, top))
             {
                 form.AddQuestions(new string[3] { "Name", "Src", "tget" });
                 form.AddQuestion(new QuestionModel("Type", new string[2] { "complet", "partiel" }));

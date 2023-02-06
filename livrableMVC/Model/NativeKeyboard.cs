@@ -10,6 +10,7 @@ namespace TestConsole.Models
     //https://learn.microsoft.com/fr-fr/dotnet/api/system.windows.forms.keys?view=windowsdesktop-7.0
     {
         Enter = 13,
+        Space = 32,
         Left = 37,
         Up,
         Right,

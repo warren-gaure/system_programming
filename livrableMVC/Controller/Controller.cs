@@ -28,7 +28,18 @@ namespace livrableMVC.ControllerSpace
         }
         public void start()
         {
-            saveView.Start();
+            var res = new List<string>();
+            using (var exModel = new ExecuteModel(0, 4))
+            {
+                exModel.AddSaves(new string[3] { "test", "test2", "test3" });
+                res = exModel.Start();
+            }
+            Console.WriteLine("rép");
+            foreach(var val in res)
+            {
+                Console.WriteLine(val);
+            }
+            var result = saveView.Start(0, 8);
         }
 
         public void saveSetting()
