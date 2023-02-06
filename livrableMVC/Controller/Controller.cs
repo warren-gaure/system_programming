@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace livrableMVC.Controller
+namespace livrableMVC.ControllerSpace
 {
-    internal class ControllerSolution
+    internal class Controller
     {
   
         LanguageModel lang = new LanguageModel();
