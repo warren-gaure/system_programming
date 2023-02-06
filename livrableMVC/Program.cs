@@ -13,6 +13,8 @@ namespace livrableMVC
         {
             Controller controller = new Controller();
             controller.languageSettings();
+            controller.saveSetting();
+            controller.execSaveSetting();
         }
     }
 }

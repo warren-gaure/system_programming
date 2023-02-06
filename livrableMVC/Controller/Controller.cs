@@ -12,6 +12,7 @@ namespace livrableMVC.ControllerSpace
     {
         string languageUsed = "";
         LanguageModel lang = new LanguageModel();
+        SaveModel saveModel = new SaveModel();
         Dictionary<string, string> sentences = new Dictionary<string, string>();
 
         public void languageSettings()
@@ -24,8 +25,18 @@ namespace livrableMVC.ControllerSpace
                 Console.WriteLine("eng = Engish / fr = Français");
                 languageUsed = Console.ReadLine();
             }
-            sentences = lang.languages(languageUsed);
             Console.WriteLine(sentences["hello"]);
+            sentences = lang.languages(languageUsed);
+
+        }
+
+        public void saveSetting()
+        {
+            saveModel.createNewSave("C:/", "D:/", "COMPLETE", "first");
+        }
+        public void execSaveSetting()
+        {
+            saveModel.executeSave("first");
         }
     }
 
