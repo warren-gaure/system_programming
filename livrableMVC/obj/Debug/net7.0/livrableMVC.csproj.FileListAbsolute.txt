@@ -1,0 +1,15 @@
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.csproj.AssemblyReference.cache
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.GeneratedMSBuildEditorConfig.editorconfig
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.AssemblyInfoInputs.cache
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.AssemblyInfo.cs
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.csproj.CoreCompileInputs.cache
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\bin\Debug\net7.0\livrableMVC.exe
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\bin\Debug\net7.0\livrableMVC.deps.json
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\bin\Debug\net7.0\livrableMVC.runtimeconfig.json
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\bin\Debug\net7.0\livrableMVC.dll
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\bin\Debug\net7.0\livrableMVC.pdb
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.dll
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\refint\livrableMVC.dll
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.pdb
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\livrableMVC.genruntimeconfig.cache
+D:\cours\CESI2022-2023\ProgramationSystem\programmation_systeme\livrableMVC\obj\Debug\net7.0\ref\livrableMVC.dll

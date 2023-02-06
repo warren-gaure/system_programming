@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Livrable1.model
+namespace livrableMVC.Model
 {
-    public class LanguageModel
+    internal class LanguageModel
     {
         public LanguageModel() { }
         Dictionary<string, string> french = new Dictionary<string, string>
@@ -20,7 +19,7 @@ namespace Livrable1.model
         };
 
 
-        public Dictionary<string, string> languages( string lang)
+        public Dictionary<string, string> languages(string lang)
         {
             if (lang.Equals("ang"))
             {
@@ -29,7 +28,7 @@ namespace Livrable1.model
             else
             {
                 return french;
-            }           
+            }
         }
     }
 }

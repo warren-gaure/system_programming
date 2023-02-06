@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Livrable1.model
+namespace livrableMVC.View
 {
-    internal class Saves
+    internal class LanguageView
     {
     }
 }

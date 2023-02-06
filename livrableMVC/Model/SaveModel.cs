@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Livrable1.model
+namespace livrableMVC.Model
 {
     internal class SaveModel
     {
@@ -12,7 +12,8 @@ namespace Livrable1.model
         string source;
         string target;
         string method;
-        public SaveModel(string name, string source, string target, int methode) { 
+        public SaveModel(string name, string source, string target, int methode)
+        {
             this.name = name;
             this.source = source;
             this.target = target;
