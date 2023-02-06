@@ -11,10 +11,8 @@
 # Ignorer tous les fichiers .json
 *.json
 # Ignorer tous le dossier bin
-bin/*
+bin/
 # Ignorer tous le dossier .vs
-.vs/*
+.vs/
 # Ignorer tous le dossier obj
-obj/*
-# Ignorer tous le dossier obj
-livrableMVC/obj/Debug/*
+obj/
