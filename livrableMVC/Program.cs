@@ -12,9 +12,6 @@ namespace livrableMVC
         public static void Main(string[] args)
         {
             Controller controller = new Controller();
-            controller.languageSettings();
-            controller.saveSetting();
-            controller.execSaveSetting();
             controller.start();
         }
     }

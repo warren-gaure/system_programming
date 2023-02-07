@@ -17,7 +17,9 @@ namespace livrableMVC.View
             var answer = new List<QuestionModel>();
             using (var form = new formModel(left, top))
             {
-                form.AddQuestions(new string[3] { "Name", "Src", "tget" });
+                form.AddQuestion("Name");
+                form.AddQuestion("Src");
+                form.AddQuestion("Tgt");
                 form.AddQuestion(new QuestionModel("Type", new string[2] { "complet", "partiel" }));
                 answer = form.Start();
             }

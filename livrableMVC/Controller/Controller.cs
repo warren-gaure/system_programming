@@ -15,6 +15,7 @@ namespace livrableMVC.ControllerSpace
         public LanguageModel langModel { get; set; }
         public SaveModel saveModel { get; set; }
         public LanguageView langView { get; set; }
+        public MainView mainView { get; set; }
         public SaveView saveView { get; set; }
 
         Dictionary<string, string> sentences = new Dictionary<string, string>();
@@ -25,21 +26,32 @@ namespace livrableMVC.ControllerSpace
             langModel = new LanguageModel();
             langView = new LanguageView();
             saveView = new SaveView();
+            mainView = new MainView();
         }
         public void start()
         {
-            var res = new List<string>();
-            using (var exModel = new ExecuteModel(0, 4))
+            languageUsed = langView.Start(langModel.languages("eng"));
+            while(true)
             {
-                exModel.AddSaves(new string[3] { "test", "test2", "test3" });
-                res = exModel.Start();
+                int val = mainView.Start(0, 1, langModel.languages(languageUsed));
+                switch (val)
+                {
+                    case 0:
+                        var result = saveView.Start(0, 0);
+                        break;
+                    case 1:
+                        var res = new List<string>();
+                        using (var exModel = new ExecuteModel(0, 1))
+                        {
+                            exModel.AddSaves(new string[3] { "test", "test2", "test3" });
+                            res = exModel.Start();
+                        }
+                        break;
+                    case 2:
+                        Environment.Exit(0);
+                        break;
+                }
             }
-            Console.WriteLine("rép");
-            foreach(var val in res)
-            {
-                Console.WriteLine(val);
-            }
-            var result = saveView.Start(0, 8);
         }
 
         public void saveSetting()

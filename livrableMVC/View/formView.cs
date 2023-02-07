@@ -23,9 +23,9 @@ namespace livrableMVC.View
                 Console.WriteLine(model.questions[i]);
                 if (model.questions[i].Answers.Count == 0) 
                 {
-                    string? answer = "";
+                    string? answer = " ";
                     answer = Console.ReadLine();
-                    if (!string.IsNullOrEmpty(answer) )
+                    if (!string.IsNullOrEmpty(answer))
                     {
                         model.questions[i].Answer = answer;
                     }
@@ -38,7 +38,8 @@ namespace livrableMVC.View
                         {
                             menu.AddItem(Answer);
                         }
-                        model.questions[i].Answer = model.questions[i].Answers[menu.Start()];
+                        model.questions[i].valueChoosed = menu.Start();
+                        model.questions[i].Answer = model.questions[i].Answers[model.questions[i].valueChoosed];
                     }
                     Console.WriteLine(model.questions[i].Answer);
                 }

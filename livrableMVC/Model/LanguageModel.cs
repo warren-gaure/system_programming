@@ -10,13 +10,23 @@ namespace livrableMVC.Model
     {
         public LanguageModel() { }
         Dictionary<string, string> french = new Dictionary<string, string>
-        {
-            { "hello" , "Bonjour et bienvenue dans votre solution de sauvegarde." }
-        };
+    {
+        { "hello" , "Bonjour et bienvenue dans votre solution de sauvegarde !" },
+        {"exit", "Quitter"},
+        {"execute", "Executer"},
+        {"save","Enregistrer" },
+        {"english", "Anglais" },
+        {"french", "Francais" }
+    };
         Dictionary<string, string> english = new Dictionary<string, string>
-        {
-            { "hello" , "Hello, welcome in ur solution" }
-        };
+    {
+        { "hello" , "Hello, welcome to your save solution !" },
+        {"exit", "Exit"},
+        {"execute", "Execute"},
+        {"save","Save" },
+        {"english", "English" },
+        {"french", "French" }
+    };
 
 
         public Dictionary<string, string> languages(string lang)

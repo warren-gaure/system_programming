@@ -11,7 +11,7 @@ namespace livrableMVC.Model
         public string Text = "";
         public string Answer { get; set; } = "";
         public List<string> Answers = new List<string>();
-
+        public int valueChoosed = -1;
         public QuestionModel(string text) 
         {
             Text = text;
