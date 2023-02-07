@@ -24,7 +24,8 @@ namespace livrableMVC.Model
         {"complete", "complete"},
         {"diff", "différentiel" },
         {"changeLang", "Changer la langue" },
-            {"selectLang", "Sélectionner une langue" }
+        {"selectLang", "Sélectionner une langue" },
+        {"noSaveFound", "Aucune sauvegarde trouvé" }
     };
         Dictionary<string, string> english = new Dictionary<string, string>
     {
@@ -41,7 +42,8 @@ namespace livrableMVC.Model
         {"complete", "complete"},
         {"diff", "différentiel" },
         {"changeLang", "Change the language" },
-        {"selectLang", "Select a language" }
+        {"selectLang", "Select a language" },
+        {"noSaveFound", "No save found" }
     };
 
 
