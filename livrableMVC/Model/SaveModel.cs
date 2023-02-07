@@ -130,6 +130,11 @@ namespace livrableMVC.Model
 
             string jsonString = JsonSerializer.Serialize(saves);
             string fileName = "..\\..\\..\\" + saveNameEntry + ".json";
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
         
             File.AppendAllText(fileName, jsonString);
            

@@ -33,7 +33,7 @@ namespace livrableMVC.ControllerSpace
         int fileDo = 0;
 
 
-        string repoSourceTest = "D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\test\\";
+        string repoSourceTest = "..\\..\\..\\test\\";
 
 
         public void languageSettings()
@@ -99,15 +99,15 @@ namespace livrableMVC.ControllerSpace
         }
         public void instantLogsFunction()
         {
-            progression = GlobalFileSize * 100 / curentTransfertFiles;
+            /*progression = GlobalFileSize * 100 / curentTransfertFiles;
             fileLeftToDo = filesNumber - fileDo;
             instantLogs.InstantLogsFunction("test", "test", "test", true, GlobalFileSize, 10, progression, DateTime.Now);
-            globalTime = 0;
+            globalTime = 0;*/
         }
 
         public void readSaves()
         {
-            saveModel.ReadSaveTemplate("D:\\cours\\CESI2022-2023\\ProgramationSystem\\programmation_systeme\\livrableMVC\\first.json");
+            saveModel.ReadSaveTemplate("..\\..\\..\\first.json");
         }
     }
 }
