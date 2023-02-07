@@ -16,6 +16,12 @@ namespace livrableMVC.ControllerSpace
     internal class Controller
     {
         string languageUsed = "";
+        public LanguageModel langModel { get; set; }
+        public SaveModel saveModel { get; set; }
+        public LanguageView langView { get; set; }
+        public MainView mainView { get; set; }
+        public SaveView saveView { get; set; }
+        public ExecuteView executeView { get; set; }
         LanguageModel lang = new LanguageModel();
         SaveModel saveModel = new SaveModel();
         FileModel filemodel= new FileModel();
@@ -39,24 +45,48 @@ namespace livrableMVC.ControllerSpace
         public void languageSettings()
         {
 
-            while (!languageUsed.Equals("eng") && !languageUsed.Equals("fr"))
-            {
-                Console.WriteLine("Welcome ! / Bienvenue !");
-                Console.WriteLine("Please select your prefered language / Merci d'indiquer votre langue souhaitée");
-                Console.WriteLine("eng = English / fr = Français");
-                languageUsed = Console.ReadLine();
-            }
-
-            sentences = lang.languages(languageUsed);
-            Console.WriteLine(sentences["hello"]);
+        public Controller()
+        {
+            saveModel = new SaveModel();
+            langModel = new LanguageModel();
+            langView = new LanguageView();
+            saveView = new SaveView();
+            mainView = new MainView();
+            executeView = new ExecuteView();
         }
 
-            public long saveSetting()
+        public long saveSetting()
         {
             timeCreate = saveModel.createNewSave("C:\\Users\\mallo\\OneDrive\\Bureau\\CESI 2022 - 2025\\Année 3 (1)\\Semestre 5\\Programmation système\\Projet\\TEST Source", "C:\\Users\\mallo\\OneDrive\\Bureau\\CESI 2022 - 2025\\Année 3 (1)\\Semestre 5\\Programmation système\\Projet\\TEST Destination", "COMPLETE", "first");
             globalTimeCreate();
             return timeCreate;
         }
+
+            //!attention
+            languageUsed = langView.Start(langModel.languages("eng"));
+            while (true)
+            {
+                Console.Clear();
+                int val = mainView.Start(0, 1, langModel.languages(languageUsed));
+                Console.Clear();
+                switch (val)
+                {
+                    case 1:
+                        var result = saveView.Start(langModel.languages(languageUsed), 0, 0);
+                        break;
+                    case 2:
+                        var res = new List<string>();
+                        res = executeView.Start(new List<string> { "t", "e", "s", "t"});
+                        break;
+                    case 3:
+                        languageUsed = langView.Start(langModel.languages(languageUsed));
+                        break;
+                    default:
+                        Environment.Exit(0);
+                        break;
+                }
+            }
+           
         public long execSaveSetting()
         {
             timeExec = saveModel.executeSave("first");
