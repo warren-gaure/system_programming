@@ -117,9 +117,7 @@ namespace livrableMVC.Model
             }
         }
 
-        public long createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
-            var sw = new Stopwatch();
-            sw.Start();
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
             var saves = new Saves()
             {
                 sourceTarget = sourceTargetEntry,
@@ -135,14 +133,8 @@ namespace livrableMVC.Model
             {
                 File.Delete(fileName);
             }
-        
-            File.AppendAllText(fileName, jsonString);
-           
-            Console.WriteLine(jsonString);
-            sw.Stop();
-            //Console.WriteLine(sw.ElapsedMilliseconds);
-            time = sw.ElapsedMilliseconds;
-            return time;
+            File.AppendAllText(fileName, jsonString); 
+            return true;
         }
 
         public Saves ReadSaveTemplate(string jsonPath)

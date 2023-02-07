@@ -29,6 +29,7 @@ namespace livrableMVC.ControllerSpace
         Dictionary<string, string> sentences = new Dictionary<string, string>();
         long timeExec;
         long timeCreate;
+        bool execValidate;
         long globalTime;
         long GlobalFileSize;
         long curentTransfertFiles;
@@ -40,11 +41,10 @@ namespace livrableMVC.ControllerSpace
 
         string repoSourceTest = "..\\..\\..\\test\\";
 
-        public long saveSetting()
+        public bool saveSetting(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry)
         {
-            timeCreate = saveModel.createNewSave("C:\\Users\\mallo\\OneDrive\\Bureau\\CESI 2022 - 2025\\Année 3 (1)\\Semestre 5\\Programmation système\\Projet\\TEST Source", "C:\\Users\\mallo\\OneDrive\\Bureau\\CESI 2022 - 2025\\Année 3 (1)\\Semestre 5\\Programmation système\\Projet\\TEST Destination", "COMPLETE", "first");
-            globalTimeCreate();
-            return timeCreate;
+            execValidate = saveModel.createNewSave(sourceTargetEntry, destinationTargetEntry, typeEntry, saveNameEntry);
+            return execValidate;
         }
         public void executeApplication()
         {
@@ -58,6 +58,7 @@ namespace livrableMVC.ControllerSpace
                 {
                     case 1:
                         var result = saveView.Start(langModel.languages(languageUsed), 0, 0);
+                        saveSetting(result[1], result[2], result[3], result[0]);
                         break;
                     case 2:
                         var res = new List<string>();
