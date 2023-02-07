@@ -40,7 +40,7 @@ namespace livrableMVC.Model
         {"target", "Target" },
         {"type", "Type" },
         {"complete", "complete"},
-        {"diff", "différentiel" },
+        {"diff", "differential" },
         {"changeLang", "Change the language" },
         {"selectLang", "Select a language" },
         {"noSaveFound", "No save found" }

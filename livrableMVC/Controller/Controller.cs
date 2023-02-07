@@ -107,7 +107,7 @@ namespace livrableMVC.ControllerSpace
         }
         
         /// <summary>
-        /// 
+        /// Add timeExec to globalTime and return globalTime
         /// </summary>
         /// <returns></returns>
         public long globalTimeExec()
@@ -117,7 +117,7 @@ namespace livrableMVC.ControllerSpace
         }
 
         /// <summary>
-        /// 
+        /// Add timeExec to globalTime and return globalTime
         /// </summary>
         /// <returns></returns>
         public long globalTimeCreate()
@@ -127,7 +127,7 @@ namespace livrableMVC.ControllerSpace
         }
 
         /// <summary>
-        /// 
+        /// return result of fileModel.getSaves
         /// </summary>
         /// <returns></returns>
         public List<string> getAllSaves()
@@ -138,7 +138,7 @@ namespace livrableMVC.ControllerSpace
         }
 
         /// <summary>
-        /// 
+        /// return the progression of transfert
         /// </summary>
         /// <returns></returns>
         public long progressionFunction ()
@@ -178,7 +178,7 @@ namespace livrableMVC.ControllerSpace
         }
 
         /// <summary>
-        /// 
+        /// call saveModel.ReadSaveTemplate
         /// </summary>
         public void readSaves()
         {

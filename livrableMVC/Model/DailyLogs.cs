@@ -20,7 +20,15 @@ namespace livrableMVC.Model
 
     public class DailyLogs
     {
-        
+        /// <summary>
+        /// Create a DailyLogsModel, serialize it, create a json file, write the serialized object to the file and write the serialized object
+        /// </summary>
+        /// <param name="saveNameEntry"></param>
+        /// <param name="sourceTargetEntry"></param>
+        /// <param name="destinationTargetEntry"></param>
+        /// <param name="saveSizeEntry"></param>
+        /// <param name="saveTimeEntry"></param>
+        /// <param name="dateEntry"></param>
         public void DailyLogsFunction(string saveNameEntry, string sourceTargetEntry, string destinationTargetEntry, string saveSizeEntry, long saveTimeEntry, DateTime dateEntry) {
             var dailyLogs = new DailyLogsModel()
             {
