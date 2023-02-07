@@ -91,13 +91,6 @@ namespace livrableMVC.ControllerSpace
                 }
             }
         }
-           
-        public long execSaveSetting()
-        {
-            timeExec = saveModel.executeSave("first");
-            globalTimeExec();
-            return timeExec;
-        }
 
         public long globalTimeExec()
         {
