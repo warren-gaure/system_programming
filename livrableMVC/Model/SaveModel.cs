@@ -69,8 +69,6 @@ namespace livrableMVC.Model
 
             }
 
-
-
             System.Threading.Thread.Sleep(5000);
             sw.Stop();
             //Console.WriteLine(sw.ElapsedMilliseconds);
@@ -129,7 +127,7 @@ namespace livrableMVC.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "..\\..\\..\\" + saveNameEntry + ".json";
+            string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
 
             if (File.Exists(fileName))
             {

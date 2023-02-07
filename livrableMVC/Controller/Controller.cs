@@ -23,7 +23,7 @@ namespace livrableMVC.ControllerSpace
         ExecuteView executeView = new ExecuteView();
         LanguageModel langModel = new LanguageModel();
         SaveModel saveModel = new SaveModel();
-        FileModel filemodel= new FileModel();
+        FileModel fileModel= new FileModel();
         DailyLogs dailyLogs = new DailyLogs(); 
         InstantLogs instantLogs = new InstantLogs();
         Dictionary<string, string> sentences = new Dictionary<string, string>();
@@ -60,8 +60,7 @@ namespace livrableMVC.ControllerSpace
                         var result = saveView.Start(langModel.languages(languageUsed), 0, 0);
                         break;
                     case 2:
-                        var res = new List<string>();
-                        res = executeView.Start(new List<string> { "t", "e", "s", "t" });
+                        var res = executeView.Start(fileModel.getSaves());
                         break;
                     case 3:
                         languageUsed = langView.Start(langModel.languages(languageUsed));
@@ -92,10 +91,16 @@ namespace livrableMVC.ControllerSpace
             return globalTime;
         }
 
+        public List<string> getAllSaves()
+        {
+            List<string> saves = fileModel.getSaves();
+
+            return saves;
+        }
         public long progressionFunction ()
         {
             List<String> files = new List<String>();
-            files = filemodel.FileList(repoSourceTest);
+            files = fileModel.FileList(repoSourceTest);
 
             foreach (String file in files)
             {
