@@ -36,14 +36,12 @@ namespace livrableMVC.Model
     {
 
         long time;
-        public long executeSave(string saveName)
+        long filesDone = 0;
+        public Saves executeSave(string saveName)
         {
-            var sw = new Stopwatch();
-            sw.Start();
             string save = "";
-            string fileName = "..\\..\\..\\"+ saveName + ".json";
+            string fileName = "..\\..\\..\\repoSaves\\" + saveName;
             save = System.IO.File.ReadAllText(fileName);
-            //Console.WriteLine(save);
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
 
             try
@@ -68,17 +66,11 @@ namespace livrableMVC.Model
             {
 
             }
-
-
-
-            System.Threading.Thread.Sleep(5000);
-            sw.Stop();
-            //Console.WriteLine(sw.ElapsedMilliseconds);
-            time = sw.ElapsedMilliseconds;
-            return time ;
+            
+            return saveFromFile;
         }
 
-        private void CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
+        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -86,14 +78,18 @@ namespace livrableMVC.Model
 
             target.Create();
 
-            foreach (FileInfo file in source.GetFiles())
+            foreach (FileInfo file in source.GetFiles()) { 
                 file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+                filesDone++;
+            }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
                 CopyDirectoryComplete(subDirectory.FullName, Path.Combine(target.FullName, subDirectory.Name));
+
+            return filesDone;
         }
 
-        private void CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
+        private long CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -108,6 +104,7 @@ namespace livrableMVC.Model
                 {
                     file.CopyTo(targetFile.FullName, true);
                 }
+                filesDone++;
             }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
@@ -115,11 +112,10 @@ namespace livrableMVC.Model
                 DirectoryInfo targetSubDirectory = new DirectoryInfo(Path.Combine(target.FullName, subDirectory.Name));
                 CopyDirectoryDifferential(subDirectory.FullName, targetSubDirectory.FullName);
             }
+            return filesDone;
         }
 
-        public long createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
-            var sw = new Stopwatch();
-            sw.Start();
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
             var saves = new Saves()
             {
                 sourceTarget = sourceTargetEntry,
@@ -129,20 +125,14 @@ namespace livrableMVC.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "..\\..\\..\\" + saveNameEntry + ".json";
+            string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
 
             if (File.Exists(fileName))
             {
                 File.Delete(fileName);
             }
-        
             File.AppendAllText(fileName, jsonString);
-           
-            Console.WriteLine(jsonString);
-            sw.Stop();
-            //Console.WriteLine(sw.ElapsedMilliseconds);
-            time = sw.ElapsedMilliseconds;
-            return time;
+            return true;
         }
 
         public Saves ReadSaveTemplate(string jsonPath)

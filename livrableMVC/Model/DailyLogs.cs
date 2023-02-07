@@ -36,6 +36,8 @@ namespace livrableMVC.Model
             File.AppendAllText(fileName, jsonString);
             Console.WriteLine(jsonString);
         }
-       
+        
+
+
     }
 }
