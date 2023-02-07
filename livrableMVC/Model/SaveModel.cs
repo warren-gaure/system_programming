@@ -47,17 +47,8 @@ namespace livrableMVC.Model
 
                         break;
                     case "DIFFERENTIAL":
-                        Directory.GetFiles(saveFromFile.sourceTarget, "*.*", SearchOption.AllDirectories)
-                        .ToList()
-                        .ForEach(file =>
-                        {
-                            string targetFile = file.Replace(saveFromFile.sourceTarget, saveFromFile.destinationTarget);
-                            if (!File.Exists(targetFile) || File.GetLastWriteTime(file) > File.GetLastWriteTime(targetFile))
-                            {
-                                File.Copy(file, targetFile, true);
-                            }
-                        });
-                        Console.WriteLine("Backup type diff completed successfully.");
+                        CopyDirectoryDifferential(saveFromFile.sourceTarget, saveFromFile.destinationTarget);
+                        Console.WriteLine("Backup type complete differential successfully.");
                         break;
                     default: 
                         break;
