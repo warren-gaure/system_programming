@@ -24,7 +24,7 @@ namespace livrableMVC.ControllerSpace
 
         public void languageSettings()
         {
-           
+
             while (!languageUsed.Equals("eng") && !languageUsed.Equals("fr"))
             {
                 Console.WriteLine("Please unter your language :");
@@ -32,12 +32,14 @@ namespace livrableMVC.ControllerSpace
                 Console.WriteLine("eng = Engish / fr = Français");
                 languageUsed = Console.ReadLine();
             }
-            Console.WriteLine(sentences["hello"]);
-            sentences = lang.languages(languageUsed);
 
-        public long saveSetting()
+            sentences = lang.languages(languageUsed);
+            Console.WriteLine(sentences["hello"]);
+        }
+
+            public long saveSetting()
         {
-            timeCreate = saveModel.createNewSave("C:/", "D:/", "COMPLETE", "first");
+            timeCreate = saveModel.createNewSave("C:\\Users\\mallo\\OneDrive\\Bureau\\CESI 2022 - 2025\\Année 3 (1)\\Semestre 5\\Programmation système\\Projet\\TEST Source", "C:\\Users\\mallo\\OneDrive\\Bureau\\CESI 2022 - 2025\\Année 3 (1)\\Semestre 5\\Programmation système\\Projet\\TEST Destination", "COMPLETE", "first");
             globalTimeCreate();
             return timeCreate;
         }
@@ -48,13 +50,21 @@ namespace livrableMVC.ControllerSpace
             return timeExec;
         }
 
-        public void saveSetting()
+        
+        public long globalTimeExec()
         {
-            saveModel.createNewSave("C:/", "D:/", "COMPLETE", "first");
+            globalTime += timeExec;
+            return globalTime;
         }
-        public void execSaveSetting()
+        public long globalTimeCreate()
         {
-            saveModel.executeSave("first");
+            globalTime += timeCreate;
+            return globalTime;
+        }
+        public void dailyLogsFunction()
+        {
+            dailyLogs.DailyLogsFunction("test", "test", "test", "test", globalTime, DateTime.Now);
+            globalTime = 0;
         }
     }
 }
