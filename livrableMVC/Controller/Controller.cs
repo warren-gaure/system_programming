@@ -41,9 +41,6 @@ namespace livrableMVC.ControllerSpace
         int fileLeftToDo = 0;
         int fileDo = 0;
 
-
-        string repoSourceTest = "..\\..\\..\\test\\";
-
         /// <summary>
         /// function to call savemodel createNewSave
         /// </summary>
@@ -112,20 +109,23 @@ namespace livrableMVC.ControllerSpace
 
             return saves;
         }
-        public long progressionFunction ()
+        public List<long> progressionFunction(string directoryPath)
         {
-            List<String> files = new List<String>();
-            files = fileModel.FileList(repoSourceTest);
-
-            foreach (String file in files)
+            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
+            // Add file sizes.
+            FileInfo[] fis = directoryInfo.GetFiles();
+            foreach (FileInfo fi in fis)
             {
-                FileInfo fileinfo = new FileInfo(repoSourceTest+ file);
-                Console.WriteLine(fileinfo.Length);
-                GlobalFileSize += fileinfo.Length;
+                GlobalFileSize += fi.Length;
                 filesNumber++;
             }
-            Console.WriteLine(GlobalFileSize);
-            return GlobalFileSize;
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = directoryInfo.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                GlobalFileSize += progressionFunction(di.FullName)[0];
+            }
+            return new List<long> { GlobalFileSize, filesNumber };
         }
         public void instantLogsFunction()
         {

@@ -36,6 +36,7 @@ namespace livrableMVC.Model
     {
 
         long time;
+        long filesDone = 0;
         public Saves executeSave(string saveName)
         {
             string save = "";
@@ -68,7 +69,7 @@ namespace livrableMVC.Model
             return saveFromFile;
         }
 
-        private void CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
+        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -76,14 +77,18 @@ namespace livrableMVC.Model
 
             target.Create();
 
-            foreach (FileInfo file in source.GetFiles())
+            foreach (FileInfo file in source.GetFiles()) { 
                 file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+                filesDone++;
+            }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
                 CopyDirectoryComplete(subDirectory.FullName, Path.Combine(target.FullName, subDirectory.Name));
+
+            return filesDone;
         }
 
-        private void CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
+        private long CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -98,6 +103,7 @@ namespace livrableMVC.Model
                 {
                     file.CopyTo(targetFile.FullName, true);
                 }
+                filesDone++;
             }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
@@ -105,6 +111,7 @@ namespace livrableMVC.Model
                 DirectoryInfo targetSubDirectory = new DirectoryInfo(Path.Combine(target.FullName, subDirectory.Name));
                 CopyDirectoryDifferential(subDirectory.FullName, targetSubDirectory.FullName);
             }
+            return filesDone;
         }
 
         public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
