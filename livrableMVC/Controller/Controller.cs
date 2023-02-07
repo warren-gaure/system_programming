@@ -77,16 +77,15 @@ namespace livrableMVC.ControllerSpace
                         var res = executeView.Start(fileModel.getSaves(), langModel.languages(languageUsed));
                         foreach (var save in res)
                         {
-                            Thread instantLogs = new Thread(instantLogsFunction(save, false));
-                            instantLogs.Start();
+                            
                             var sw = new Stopwatch();
                             sw.Start();
                             savesModel = saveModel.executeSave(save);
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
                             dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, savesModel.type, time, DateTime.Now); 
-                            instantLogs.Abort();
-                            instantLogsFunction(save, true);
+                            
+                            
                         }
                         break;
                     case 3:
