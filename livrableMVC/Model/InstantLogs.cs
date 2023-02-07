@@ -22,6 +22,8 @@ namespace livrableMVC.Model
 
     public class InstantLogs
     {
+        long GlobalFileSize;
+        int filesNumber = 0;
         public void InstantLogsFunction(string NameEntry, string FileSourceEntry, string destinationTargetEntry, Boolean stateEntry, long TotalFilesSizeEntry,int NbFilesLeftToDoEntry, long progressionEntry, DateTime dateEntry)
         {
             var instantLogs = new InstantLogsModel()
