@@ -12,6 +12,16 @@ using System.Threading.Tasks;
 
 namespace livrableMVC.Model
 {
+    public class SaveModels
+    {
+        public string source { get; set; }
+        public string destination { get; set; }
+        public string saveName { get; set; }
+        public long Size { get; set; }
+        public DateTime Time { get; set; }
+        public Boolean state { get; set; }
+    }
+
 
     public class Saves
     {
@@ -120,19 +130,24 @@ namespace livrableMVC.Model
 
             string jsonString = JsonSerializer.Serialize(saves);
             string fileName = "..\\..\\..\\" + saveNameEntry + ".json";
-            if (!File.Exists(fileName))
-            {
-                File.AppendAllText(fileName, jsonString);
-            }
-            else
-            {
-
-            }
-            //Console.WriteLine(jsonString);
+        
+            File.AppendAllText(fileName, jsonString);
+           
+            Console.WriteLine(jsonString);
             sw.Stop();
             //Console.WriteLine(sw.ElapsedMilliseconds);
             time = sw.ElapsedMilliseconds;
             return time;
+        }
+
+        public Saves ReadSaveTemplate(string jsonPath)
+        {
+            var JsonFile = System.IO.File.ReadAllText(jsonPath);
+            Saves save =
+                JsonSerializer.Deserialize<Saves>(JsonFile);
+
+            return save;
+           
         }
     }
 }
