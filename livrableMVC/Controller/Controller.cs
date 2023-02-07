@@ -77,11 +77,11 @@ namespace livrableMVC.ControllerSpace
                         
                         var res = executeView.Start(fileModel.getSaves(), langModel.languages(languageUsed));
                         Thread instantLogs = new Thread(() => { Console.WriteLine("test"); });
+                        instantLogs.Start();
                         foreach (var save in res)
                         {
                             var sw = new Stopwatch();
                             sw.Start();
-                            instantLogs.Start();
                             savesModel = saveModel.executeSave(save);
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
