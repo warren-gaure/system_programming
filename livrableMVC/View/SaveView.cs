@@ -23,7 +23,7 @@ namespace livrableMVC.View
             result.Add(Console.ReadLine());
             Console.WriteLine(sentences["type"] + " (COMPLETE / DIFFERENTIAL)" );
             var type = "";
-            while(type != "COMPLETE" || type != "DIFFERENTIAL")
+            while(type != "COMPLETE" && type != "DIFFERENTIAL")
             {
                 type = Console.ReadLine();
             }
