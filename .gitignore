@@ -14,9 +14,11 @@
 *.pdb
 # Ignorer tous les fichiers .json
 *.json
-# Ignorer tous le dossier bin
+# Ignorer tout le dossier bin
 bin/
-# Ignorer tous le dossier .vs
+# Ignorer tout le dossier .vs
 .vs/
-# Ignorer tous le dossier obj
-obj/
+# Ignorer tout le dossier obj
+[Oo]bj/
+# Ignore tout le dossier bin 
+[Bb]in/
