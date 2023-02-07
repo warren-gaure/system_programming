@@ -79,15 +79,18 @@ namespace livrableMVC.ControllerSpace
                     case 2:
                         
                         var res = executeView.Start(fileModel.getSaves(), langModel.languages(languageUsed));
-                        foreach(var save in res)
+                        Thread instantLogs = new Thread(() => { Console.WriteLine("test"); });
+                        foreach (var save in res)
                         {
                             var sw = new Stopwatch();
                             sw.Start();
+                            instantLogs.Start();
                             savesModel = saveModel.executeSave(save);
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
-                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, savesModel.type, time, DateTime.Now);
+                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, savesModel.type, time, DateTime.Now); 
                         }
+                        instantLogs.Abort();
                         break;
                     case 3:
                         languageUsed = langView.Start(langModel.languages(languageUsed));
