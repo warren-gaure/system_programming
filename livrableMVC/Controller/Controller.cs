@@ -60,6 +60,7 @@ namespace livrableMVC.ControllerSpace
                         var result = saveView.Start(langModel.languages(languageUsed), 0, 0);
                         saveSetting(result[1], result[2], result[3], result[0]);
 
+
                         break;
                     case 2:
                         var res = executeView.Start(fileModel.getSaves());
@@ -76,13 +77,6 @@ namespace livrableMVC.ControllerSpace
                         break;
                 }
             }
-        }
-           
-        public long execSaveSetting()
-        {
-            timeExec = saveModel.executeSave("first");
-            globalTimeExec();
-            return timeExec;
         }
 
         public long globalTimeExec()
