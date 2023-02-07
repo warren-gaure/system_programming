@@ -131,7 +131,7 @@ namespace livrableMVC.Model
             {
                 File.Delete(fileName);
             }
-            File.AppendAllText(fileName, jsonString); 
+            File.AppendAllText(fileName, jsonString);
             return true;
         }
 
