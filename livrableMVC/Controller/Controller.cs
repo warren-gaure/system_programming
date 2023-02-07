@@ -136,27 +136,6 @@ namespace livrableMVC.ControllerSpace
 
             return saves;
         }
-        /// <summary>
-        /// return the progression of transfert
-        /// </summary>
-        /// <returns></returns>
-        public void instantLogsFunction(string save, bool state)
-        {
-            progression = 0;
-            string saveM = "";
-            string fileName = "..\\..\\..\\repoSaves\\" + save;
-            saveM = System.IO.File.ReadAllText(fileName);
-            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(saveM);
-            while (progression < 100)
-            {
-                FileInfo fileinfo = new FileInfo(repoSourceTest+ file);
-                Console.WriteLine(fileinfo.Length);
-                GlobalFileSize += fileinfo.Length;
-                filesNumber++;
-            }
-            Console.WriteLine(GlobalFileSize);
-            return GlobalFileSize;
-        }
 
         /// <summary>
         /// 
