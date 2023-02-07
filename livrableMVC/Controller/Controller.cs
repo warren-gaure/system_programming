@@ -38,7 +38,6 @@ namespace livrableMVC.ControllerSpace
         int fileLeftToDo = 0;
         int fileDo = 0;
 
-
         string repoSourceTest = "..\\..\\..\\test\\";
 
         /// <summary>
@@ -54,10 +53,16 @@ namespace livrableMVC.ControllerSpace
             execValidate = saveModel.createNewSave(sourceTargetEntry, destinationTargetEntry, typeEntry, saveNameEntry);
             return execValidate;
         }
+
         /// <summary>
         /// function main
         /// it's called by Program Main
         /// Call language view to get the language
+        /// Call main View to get the function to do
+        /// 1 => Create a new Save => Call save View and create a save with values returned by the view
+        /// 2 => Execute Save(s) => Call execute View and execute saves returned
+        /// 3 => Change language => Call language view and change languageUsed
+        /// 4 => exit application
         /// </summary>
         public void executeApplication()
         {
@@ -65,7 +70,7 @@ namespace livrableMVC.ControllerSpace
             while (true)
             {
                 Console.Clear();
-                int val = mainView.Start(0, 1, langModel.languages(languageUsed));
+                int val = mainView.Start(langModel.languages(languageUsed));
                 Console.Clear();
                 switch (val)
                 {
@@ -91,25 +96,42 @@ namespace livrableMVC.ControllerSpace
                 }
             }
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public long globalTimeExec()
         {
             globalTime += timeExec;
             return globalTime;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public long globalTimeCreate()
         {
             globalTime += timeCreate;
             return globalTime;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<string> getAllSaves()
         {
             List<string> saves = fileModel.getSaves();
 
             return saves;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public long progressionFunction ()
         {
             List<String> files = new List<String>();
@@ -125,11 +147,19 @@ namespace livrableMVC.ControllerSpace
             Console.WriteLine(GlobalFileSize);
             return GlobalFileSize;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void dailyLogsFunction()
         {
             dailyLogs.DailyLogsFunction("test", "test", "test", "test", globalTime, DateTime.Now);
             globalTime = 0;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void instantLogsFunction()
         {
             /*progression = GlobalFileSize * 100 / curentTransfertFiles;
@@ -138,6 +168,9 @@ namespace livrableMVC.ControllerSpace
             globalTime = 0;*/
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void readSaves()
         {
             saveModel.ReadSaveTemplate("..\\..\\..\\first.json");

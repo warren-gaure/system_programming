@@ -12,6 +12,11 @@ namespace livrableMVC.View
         LanguageModel lang = new LanguageModel();
         public LanguageView() { }
         
+        /// <summary>
+        /// Display the banner, display languages and return language selected
+        /// </summary>
+        /// <param name="sentences"></param>
+        /// <returns></returns>
         public string Start(Dictionary<string, string> sentences)
         {
             Console.WriteLine("         \r\n██████╗ ██████╗  ██████╗ ███████╗ ██████╗ ███████╗████████╗\r\n██╔══██╗██╔══██╗██╔═══██╗██╔════╝██╔═══██╗██╔════╝╚══██╔══╝\r\n██████╔╝██████╔╝██║   ██║███████╗██║   ██║█████╗     ██║   \r\n██╔═══╝ ██╔══██╗██║   ██║╚════██║██║   ██║██╔══╝     ██║   \r\n██║     ██║  ██║╚██████╔╝███████║╚██████╔╝██║        ██║   \r\n╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝        ╚═╝   ");

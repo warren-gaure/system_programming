@@ -46,7 +46,11 @@ namespace livrableMVC.Model
         {"noSaveFound", "No save found" }
     };
 
-
+        /// <summary>
+        /// return the dictinnary of the language asked
+        /// </summary>
+        /// <param name="lang"></param>
+        /// <returns></returns>
         public Dictionary<string, string> languages(string lang)
         {
             if (lang.Equals("eng"))

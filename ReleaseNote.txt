@@ -1,0 +1,16 @@
+EasySave v1.0 By ProSoft
+
+-> Create Save
+You can create a save with the 1st function of the main menu
+Enter a Name, a source path, a target path and a type to create a save
+the type is complete or differential, complete is a full save of every files while differential only save new or modified files
+
+-> Execute Save
+Enter the index of the save to execute (you can enter multiple index with commmas)
+
+-> Multiple language
+At the start of the application you can choose the language between english and french 
+You can change it with the 3rd function of the main menu
+
+-> Exit
+leave the application
