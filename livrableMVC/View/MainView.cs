@@ -13,13 +13,13 @@ namespace livrableMVC.View
 
         public int Start(int left, int top, Dictionary<string, string> sentences)
         {
-            var menu = new List<QuestionModel>();
-            using (var menuForm = new formModel(left, top))
-            {
-                menuForm.AddQuestion(new QuestionModel("Menu", new string[3] { sentences["save"], sentences["execute"], sentences["exit"] }));
-                menu = menuForm.Start();
-            }
-            return menu[0].valueChoosed;
+            var result = 0;
+            Console.WriteLine("1- " + sentences["save"]);
+            Console.WriteLine("2- " + sentences["execute"]);
+            Console.WriteLine("3- " + sentences["changeLang"]);
+            Console.WriteLine("4- " + sentences["exit"]);
+            int.TryParse(Console.ReadLine(), out result);
+            return result;
         }
     }
 }

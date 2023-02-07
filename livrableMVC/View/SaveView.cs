@@ -12,18 +12,18 @@ namespace livrableMVC.View
     {
         public SaveView() { }
 
-        public List<string> Start(int left = 0, int top = 0)
+        public List<string> Start(Dictionary<string, string> sentences, int left = 0, int top = 0)
         {
-            var answer = new List<QuestionModel>();
-            using (var form = new formModel(left, top))
-            {
-                form.AddQuestion("Name");
-                form.AddQuestion("Src");
-                form.AddQuestion("Tgt");
-                form.AddQuestion(new QuestionModel("Type", new string[2] { "complet", "partiel" }));
-                answer = form.Start();
-            }
-            return new List<string> { answer[0].Answer, answer[1].Answer, answer[2].Answer, answer[3].Answer };
+            var result = new List<string>();
+            Console.WriteLine(sentences["name"]);
+            result.Add(Console.ReadLine());
+            Console.WriteLine(sentences["source"]);
+            result.Add(Console.ReadLine());
+            Console.WriteLine(sentences["target"]);
+            result.Add(Console.ReadLine());
+            Console.WriteLine(sentences["type"]);
+            result.Add(Console.ReadLine());
+            return result;
         }
 
     }

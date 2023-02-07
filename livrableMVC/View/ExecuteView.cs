@@ -7,84 +7,36 @@ using System.Threading.Tasks;
 
 namespace livrableMVC.View
 {
-    internal class ExecuteView : IDisposable
+    internal class ExecuteView
     {
-        ExecuteModel model;
-        public ExecuteView(ExecuteModel model) 
+        public ExecuteView() {}
+
+        public List<string> Start(List<string> saves)
         {
-            this.model = model;
-        }
-        public void Dispose()
-        {
-            var buffer = " ";
-            for (int i = 0; i < model.saves.Count; i++)
+            for(int i = 1; i <= saves.Count(); i++)
             {
-                Console.SetCursorPosition(model.left, model.top + i);
-                for (int j = 0; j < model.saves[i].Length + 4; j++)
-                {
-                    buffer += " ";
-                }
-                Console.Write(buffer);
+                Console.WriteLine(i + "- " + saves[i-1]);
             }
-            Console.SetCursorPosition(model.left, model.top);
-        }
-        public void Render()
-        {
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Gray;
-            if (model.saves != null && model.saves.Count != 0)
+            var res = Console.ReadLine();
+            var result = new List<string>();
+            if (!string.IsNullOrEmpty(res))
             {
-                for (int i = 0; i < model.saves.Count; i++)
+                string[] val = res.Split(",");
+                foreach (string s in val)
                 {
-                    Console.SetCursorPosition(model.left, model.top + i);
-                    if (i == model.Selected)
+                    int temp = -1;
+                    if (int.TryParse(s, out temp))
                     {
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Black;
+                        try
+                        {
+                            result.Add(saves[temp-1]);
+                        }
+                        catch { }
                     }
-                    Console.WriteLine("[ ] " + model.saves[i]);
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
-            }
-            Console.SetCursorPosition(model.left, model.top);
+            }            
+            return result;
         }
-
-        public void Select(int index, ConsoleColor foregroundColor, ConsoleColor BackgroundColor)
-        {
-            Console.ForegroundColor = foregroundColor;
-            Console.BackgroundColor = BackgroundColor;
-            Console.SetCursorPosition(model.left + 1, model.top + index);
-            Console.Write("*");
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-        public void UnSelect(int index, ConsoleColor foregroundColor, ConsoleColor BackgroundColor)
-        {
-            Console.ForegroundColor = foregroundColor;
-            Console.BackgroundColor = BackgroundColor;
-            Console.SetCursorPosition(model.left + 1, model.top + index);
-            Console.Write(" ");
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-        public void RenderSelected(int Before, int After)
-        {
-            Console.SetCursorPosition(model.left, model.top + Before);
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Gray;
-            if (model.SavesSelected.Contains(Before)) Console.Write("[*] " + model.saves[Before]);
-            else Console.Write("[ ] " + model.saves[Before]);
-            Console.SetCursorPosition(model.left, model.top + After);
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            if(model.SavesSelected.Contains(After)) Console.Write("[*] " + model.saves[After]);
-            else Console.Write("[ ] " + model.saves[After]);
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
+        
     }
 }

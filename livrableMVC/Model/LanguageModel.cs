@@ -16,7 +16,15 @@ namespace livrableMVC.Model
         {"execute", "Executer"},
         {"save","Enregistrer" },
         {"english", "Anglais" },
-        {"french", "Francais" }
+        {"french", "Francais" },
+        {"name", "Nom" },
+        {"source", "Source" },
+        {"target", "Cible" },
+        {"type", "Type" },
+        {"complete", "complete"},
+        {"diff", "différentiel" },
+        {"changeLang", "Changer la langue" },
+            {"selectLang", "Sélectionner une langue" }
     };
         Dictionary<string, string> english = new Dictionary<string, string>
     {
@@ -25,7 +33,15 @@ namespace livrableMVC.Model
         {"execute", "Execute"},
         {"save","Save" },
         {"english", "English" },
-        {"french", "French" }
+        {"french", "French" },
+        {"name", "Name" },
+        {"source", "Source" },
+        {"target", "Target" },
+        {"type", "Type" },
+        {"complete", "complete"},
+        {"diff", "différentiel" },
+        {"changeLang", "Change the language" },
+        {"selectLang", "Select a language" }
     };
 
 

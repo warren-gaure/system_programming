@@ -17,6 +17,7 @@ namespace livrableMVC.ControllerSpace
         public LanguageView langView { get; set; }
         public MainView mainView { get; set; }
         public SaveView saveView { get; set; }
+        public ExecuteView executeView { get; set; }
 
         Dictionary<string, string> sentences = new Dictionary<string, string>();
 
@@ -27,27 +28,29 @@ namespace livrableMVC.ControllerSpace
             langView = new LanguageView();
             saveView = new SaveView();
             mainView = new MainView();
+            executeView = new ExecuteView();
         }
         public void start()
         {
             languageUsed = langView.Start(langModel.languages("eng"));
-            while(true)
+            while (true)
             {
+                Console.Clear();
                 int val = mainView.Start(0, 1, langModel.languages(languageUsed));
+                Console.Clear();
                 switch (val)
                 {
-                    case 0:
-                        var result = saveView.Start(0, 0);
-                        break;
                     case 1:
-                        var res = new List<string>();
-                        using (var exModel = new ExecuteModel(0, 1))
-                        {
-                            exModel.AddSaves(new string[3] { "test", "test2", "test3" });
-                            res = exModel.Start();
-                        }
+                        var result = saveView.Start(langModel.languages(languageUsed), 0, 0);
                         break;
                     case 2:
+                        var res = new List<string>();
+                        res = executeView.Start(new List<string> { "t", "e", "s", "t"});
+                        break;
+                    case 3:
+                        languageUsed = langView.Start(langModel.languages(languageUsed));
+                        break;
+                    default:
                         Environment.Exit(0);
                         break;
                 }

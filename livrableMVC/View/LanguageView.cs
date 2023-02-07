@@ -15,13 +15,12 @@ namespace livrableMVC.View
         public string Start(Dictionary<string, string> sentences)
         {
             Console.WriteLine("         \r\n██████╗ ██████╗  ██████╗ ███████╗ ██████╗ ███████╗████████╗\r\n██╔══██╗██╔══██╗██╔═══██╗██╔════╝██╔═══██╗██╔════╝╚══██╔══╝\r\n██████╔╝██████╔╝██║   ██║███████╗██║   ██║█████╗     ██║   \r\n██╔═══╝ ██╔══██╗██║   ██║╚════██║██║   ██║██╔══╝     ██║   \r\n██║     ██║  ██║╚██████╔╝███████║╚██████╔╝██║        ██║   \r\n╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝        ╚═╝   ");
-            var langRes = new List<QuestionModel>();
-            using (var lngform = new formModel(0, 7))
-            {
-                lngform.AddQuestion(new QuestionModel("Select language", new string[2] { sentences["english"], sentences["french"] }));
-                langRes = lngform.Start();
-            }
-            if(langRes[0].valueChoosed == 1) { return "fr"; }
+            Console.WriteLine(sentences["selectLang"]);
+            var result = 0;
+            Console.WriteLine("1- " + sentences["english"]);
+            Console.WriteLine("2- " + sentences["french"]);
+            int.TryParse(Console.ReadLine(), out result);
+            if(result == 2) { return "fr"; }
             else { return "eng"; }
         }
     }
