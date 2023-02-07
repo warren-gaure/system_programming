@@ -11,7 +11,12 @@ namespace livrableMVC.View
     {
         public MainView() { }
 
-        public int Start(int left, int top, Dictionary<string, string> sentences)
+        /// <summary>
+        /// Display functions and return the int entered by the user
+        /// </summary>
+        /// <param name="sentences"></param>
+        /// <returns></returns>
+        public int Start(Dictionary<string, string> sentences)
         {
             var result = 0;
             Console.WriteLine("1- " + sentences["save"]);

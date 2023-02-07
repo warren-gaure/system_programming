@@ -24,6 +24,17 @@ namespace livrableMVC.Model
     {
         long GlobalFileSize;
         int filesNumber = 0;
+        /// <summary>
+        /// Create a InstantLogsModel serialize it, create a file in instantLogs, write the serialized object in the file and write the serialized object
+        /// </summary>
+        /// <param name="NameEntry"></param>
+        /// <param name="FileSourceEntry"></param>
+        /// <param name="destinationTargetEntry"></param>
+        /// <param name="stateEntry"></param>
+        /// <param name="TotalFilesSizeEntry"></param>
+        /// <param name="NbFilesLeftToDoEntry"></param>
+        /// <param name="progressionEntry"></param>
+        /// <param name="dateEntry"></param>
         public void InstantLogsFunction(string NameEntry, string FileSourceEntry, string destinationTargetEntry, Boolean stateEntry, long TotalFilesSizeEntry,int NbFilesLeftToDoEntry, long progressionEntry, DateTime dateEntry)
         {
             var instantLogs = new InstantLogsModel()

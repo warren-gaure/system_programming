@@ -37,6 +37,11 @@ namespace livrableMVC.Model
 
         long time;
         long filesDone = 0;
+        /// <summary>
+        /// take the save's name, get the save from the file, if the save is complete call CopyDirectoryComplete if the save is differential call CopyDirectoryDifferential
+        /// </summary>
+        /// <param name="saveName"></param>
+        /// <returns></returns>
         public Saves executeSave(string saveName)
         {
             string save = "";
@@ -69,7 +74,11 @@ namespace livrableMVC.Model
             
             return saveFromFile;
         }
-
+        /// <summary>
+        /// Copy all file from sourceDirectory to targetDirectory
+        /// </summary>
+        /// <param name="sourceDirectory"></param>
+        /// <param name="targetDirectory"></param>
         private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
@@ -88,7 +97,11 @@ namespace livrableMVC.Model
 
             return filesDone;
         }
-
+        /// <summary>
+        /// Copy all modified file or new file from sourceDirectory to targetDirectory
+        /// </summary>
+        /// <param name="sourceDirectory"></param>
+        /// <param name="targetDirectory"></param>
         private long CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
@@ -115,6 +128,14 @@ namespace livrableMVC.Model
             return filesDone;
         }
 
+        /// <summary>
+        /// create a new saves, serialize it, create json file (if already exist delete it) and write serialized object in the file
+        /// </summary>
+        /// <param name="sourceTargetEntry"></param>
+        /// <param name="destinationTargetEntry"></param>
+        /// <param name="typeEntry"></param>
+        /// <param name="saveNameEntry"></param>
+        /// <returns></returns>
         public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
             var saves = new Saves()
             {
@@ -134,7 +155,12 @@ namespace livrableMVC.Model
             File.AppendAllText(fileName, jsonString);
             return true;
         }
-
+        
+        /// <summary>
+        /// deserialize a save from jsonpath
+        /// </summary>
+        /// <param name="jsonPath"></param>
+        /// <returns></returns>
         public Saves ReadSaveTemplate(string jsonPath)
         {
             var JsonFile = System.IO.File.ReadAllText(jsonPath);

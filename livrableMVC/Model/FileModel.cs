@@ -12,6 +12,11 @@ namespace livrableMVC.Model
         public FileInfo[] FileInFolder;
         public string repoSaves = "../../../repoSaves";
 
+        /// <summary>
+        /// return list of file in RepoSource
+        /// </summary>
+        /// <param name="RepoSource"></param>
+        /// <returns></returns>
         public List<string> FileList(string RepoSource)
         {
             DirectoryInfo dir = new DirectoryInfo(RepoSource);
@@ -24,6 +29,10 @@ namespace livrableMVC.Model
             return fileList;
         }
 
+        /// <summary>
+        /// return list of saves in repoSaves
+        /// </summary>
+        /// <returns></returns>
         public List<string> getSaves()
         {
             fileList = new List<string>();

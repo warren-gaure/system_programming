@@ -11,6 +11,13 @@ namespace livrableMVC.View
     {
         public ExecuteView() {}
 
+        /// <summary>
+        /// Display saves and return list of saves selected by user (index of save separated by ',')
+        /// if there is no save display a message for 3 seconds
+        /// </summary>
+        /// <param name="saves"></param>
+        /// <param name="sentences"></param>
+        /// <returns></returns>
         public List<string> Start(List<string> saves, Dictionary<string, string> sentences)
         {
             var result = new List<string>();
