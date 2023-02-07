@@ -78,7 +78,7 @@ namespace livrableMVC.Model
             return time ;
         }
 
-        private void CopyDirectoryComplete(string sourceDirectory, string targetDirectory)
+        private void CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
