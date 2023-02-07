@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -34,14 +35,10 @@ namespace livrableMVC.ControllerSpace
         long timeCreate;
         bool execValidate;
         long globalTime;
-        long GlobalFileSize;
         long curentTransfertFiles;
         long progression;
-        int filesNumber = 0;
-        int fileLeftToDo = 0;
+        long fileLeftToDo = 0;
         int fileDo = 0;
-
-        string repoSourceTest = "..\\..\\..\\test\\";
 
         /// <summary>
         /// function to call savemodel createNewSave
@@ -84,14 +81,17 @@ namespace livrableMVC.ControllerSpace
                     case 2:
                         
                         var res = executeView.Start(fileModel.getSaves(), langModel.languages(languageUsed));
-                        foreach(var save in res)
+                        foreach (var save in res)
                         {
+                            
                             var sw = new Stopwatch();
                             sw.Start();
                             savesModel = saveModel.executeSave(save);
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
-                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, savesModel.type, time, DateTime.Now);
+                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, savesModel.type, time, DateTime.Now); 
+                            
+                            
                         }
                         break;
                     case 3:
@@ -136,17 +136,18 @@ namespace livrableMVC.ControllerSpace
 
             return saves;
         }
-
         /// <summary>
         /// return the progression of transfert
         /// </summary>
         /// <returns></returns>
-        public long progressionFunction ()
+        public void instantLogsFunction(string save, bool state)
         {
-            List<String> files = new List<String>();
-            files = fileModel.FileList(repoSourceTest);
-
-            foreach (String file in files)
+            progression = 0;
+            string saveM = "";
+            string fileName = "..\\..\\..\\repoSaves\\" + save;
+            saveM = System.IO.File.ReadAllText(fileName);
+            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(saveM);
+            while (progression < 100)
             {
                 FileInfo fileinfo = new FileInfo(repoSourceTest+ file);
                 Console.WriteLine(fileinfo.Length);
@@ -169,12 +170,41 @@ namespace livrableMVC.ControllerSpace
         /// <summary>
         /// 
         /// </summary>
-        public void instantLogsFunction()
+        public void instantLogsFunction(string save, bool state)
         {
-            /*progression = GlobalFileSize * 100 / curentTransfertFiles;
-            fileLeftToDo = filesNumber - fileDo;
-            instantLogs.InstantLogsFunction("test", "test", "test", true, GlobalFileSize, 10, progression, DateTime.Now);
-            globalTime = 0;*/
+            progression = 0;
+            string saveM = "";
+            string fileName = "..\\..\\..\\repoSaves\\" + save;
+            saveM = System.IO.File.ReadAllText(fileName);
+            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(saveM);
+            while (progression < 100)
+            {
+                progression = instantLogs.progressionFunction(save)[0] * 100 / curentTransfertFiles;
+                fileLeftToDo = instantLogs.progressionFunction(save)[1] - fileDo;
+                instantLogs.InstantLogsFunction(saveFromFile.saveName,
+                    saveFromFile.sourceTarget,
+                    saveFromFile.destinationTarget,
+                    state,
+                    instantLogs.progressionFunction(save)[0],
+                    (int)fileLeftToDo,
+                    progression,
+                    DateTime.Now);
+
+                globalTime = 0;
+            }
+            if (progression == 100)
+            {
+                progression = instantLogs.progressionFunction(save)[0] * 100 / curentTransfertFiles;
+                fileLeftToDo = instantLogs.progressionFunction(save)[1] - fileDo;
+                instantLogs.InstantLogsFunction(saveFromFile.saveName,
+                    saveFromFile.sourceTarget,
+                    saveFromFile.destinationTarget,
+                    state,
+                    instantLogs.progressionFunction(save)[0],
+                    (int)fileLeftToDo,
+                    progression,
+                    DateTime.Now);
+            }
         }
 
         /// <summary>

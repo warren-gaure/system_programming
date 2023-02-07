@@ -36,6 +36,7 @@ namespace livrableMVC.Model
     {
 
         long time;
+        long filesDone = 0;
         /// <summary>
         /// take the save's name, get the save from the file, if the save is complete call CopyDirectoryComplete if the save is differential call CopyDirectoryDifferential
         /// </summary>
@@ -70,6 +71,7 @@ namespace livrableMVC.Model
             {
 
             }
+            
             return saveFromFile;
         }
         /// <summary>
@@ -77,7 +79,7 @@ namespace livrableMVC.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
+        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -85,19 +87,22 @@ namespace livrableMVC.Model
 
             target.Create();
 
-            foreach (FileInfo file in source.GetFiles())
+            foreach (FileInfo file in source.GetFiles()) { 
                 file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+                filesDone++;
+            }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
                 CopyDirectoryComplete(subDirectory.FullName, Path.Combine(target.FullName, subDirectory.Name));
-        }
 
+            return filesDone;
+        }
         /// <summary>
         /// Copy all modified file or new file from sourceDirectory to targetDirectory
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
+        private long CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -112,6 +117,7 @@ namespace livrableMVC.Model
                 {
                     file.CopyTo(targetFile.FullName, true);
                 }
+                filesDone++;
             }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
@@ -119,6 +125,7 @@ namespace livrableMVC.Model
                 DirectoryInfo targetSubDirectory = new DirectoryInfo(Path.Combine(target.FullName, subDirectory.Name));
                 CopyDirectoryDifferential(subDirectory.FullName, targetSubDirectory.FullName);
             }
+            return filesDone;
         }
 
         /// <summary>
