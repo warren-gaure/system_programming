@@ -41,6 +41,11 @@ namespace livrableMVC.Model
             var sw = new Stopwatch();
             sw.Start();
             string save = "";
+            string dir = @"..\\..\\..\\repoSaves"; // If directory does not exist, create it.
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
             string fileName = "..\\..\\..\\repoSaves\\" + saveName;
             save = System.IO.File.ReadAllText(fileName);
             //Console.WriteLine(save);
@@ -69,9 +74,8 @@ namespace livrableMVC.Model
 
             }
 
-            System.Threading.Thread.Sleep(5000);
+            
             sw.Stop();
-            //Console.WriteLine(sw.ElapsedMilliseconds);
             time = sw.ElapsedMilliseconds;
             return time ;
         }
@@ -125,6 +129,12 @@ namespace livrableMVC.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
+            string dir = @"..\\..\\..\\repoSaves"; // If directory does not exist, create it.
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
             string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
 
             if (File.Exists(fileName))

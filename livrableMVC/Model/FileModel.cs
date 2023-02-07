@@ -26,6 +26,11 @@ namespace livrableMVC.Model
 
         public List<string> getSaves()
         {
+            string dirSaves = @"..\\..\\..\\repoSaves"; // If directory does not exist, create it.
+            if (!Directory.Exists(dirSaves))
+            {
+                Directory.CreateDirectory(dirSaves);
+            }
             DirectoryInfo dir = new DirectoryInfo(repoSaves);
             FileInFolder = dir.GetFiles();
             foreach (var file in FileInFolder)
