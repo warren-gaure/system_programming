@@ -16,6 +16,9 @@ namespace livrableMVC
             controller.saveSetting();
             controller.execSaveSetting();
             controller.dailyLogsFunction();
+            controller.instantLogsFunction();
+            controller.progressionFunction();
+            controller.readSaves();
         }
     }
 }

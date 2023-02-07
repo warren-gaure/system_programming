@@ -20,6 +20,7 @@ namespace livrableMVC.Model
 
     public class DailyLogs
     {
+        
         public void DailyLogsFunction(string saveNameEntry, string sourceTargetEntry, string destinationTargetEntry, string saveSizeEntry, long saveTimeEntry, DateTime dateEntry) {
             var dailyLogs = new DailyLogsModel()
             {
@@ -31,7 +32,7 @@ namespace livrableMVC.Model
                 date = dateEntry,
             };
             string jsonString = JsonSerializer.Serialize(dailyLogs);
-            string fileName = "..\\..\\..\\dailyLogs.json";
+            string fileName = "..\\..\\..\\dailyLogs"+ DateTime.Now.ToString("yyyyMMdd") + ".json";
             File.AppendAllText(fileName, jsonString);
             Console.WriteLine(jsonString);
         }

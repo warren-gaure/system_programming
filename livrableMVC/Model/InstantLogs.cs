@@ -13,28 +13,30 @@ namespace livrableMVC.Model
         public string FileSource { get; set; }
         public string FileTarget { get; set; }
         public Boolean state { get; set; }
-        public int TotalFilesSize { get; set; }
+        public long TotalFilesSize { get; set; }
         public int NbFilesLeftToDo { get; set; }
-        public int progression { get; set; }
+        public long progression { get; set; }
         public DateTime date { get; set; }
 
     }
 
     public class InstantLogs
     {
-        public void InstantLogsFunction(string saveNameEntry, string sourceTargetEntry, string destinationTargetEntry, string saveSizeEntry, long saveTimeEntry, DateTime dateEntry)
+        public void InstantLogsFunction(string NameEntry, string FileSourceEntry, string destinationTargetEntry, Boolean stateEntry, long TotalFilesSizeEntry,int NbFilesLeftToDoEntry, long progressionEntry, DateTime dateEntry)
         {
-            var dailyLogs = new DailyLogsModel()
+            var instantLogs = new InstantLogsModel()
             {
-                saveName = saveNameEntry,
-                sourceTarget = sourceTargetEntry,
-                destinationTarget = destinationTargetEntry,
-                saveSize = saveSizeEntry,
-                saveTime = saveTimeEntry,
+                Name = NameEntry,
+                FileSource = FileSourceEntry,
+                FileTarget = destinationTargetEntry,
+                state = stateEntry,
+                TotalFilesSize = TotalFilesSizeEntry,
+                NbFilesLeftToDo = NbFilesLeftToDoEntry,
+                progression = progressionEntry,
                 date = dateEntry,
             };
-            string jsonString = JsonSerializer.Serialize(dailyLogs);
-            string fileName = "..\\..\\..\\dailyLogs.json";
+            string jsonString = JsonSerializer.Serialize(instantLogs);
+            string fileName = "..\\..\\..\\instantLogs"+ DateTime.Now.ToString("yyyyMMdd") + ".json";
             File.AppendAllText(fileName, jsonString);
             Console.WriteLine(jsonString);
         }
