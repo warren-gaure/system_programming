@@ -59,9 +59,14 @@ namespace livrableMVC.ControllerSpace
                     case 1:
                         var result = saveView.Start(langModel.languages(languageUsed), 0, 0);
                         saveSetting(result[1], result[2], result[3], result[0]);
+
                         break;
                     case 2:
                         var res = executeView.Start(fileModel.getSaves());
+                        foreach(var save in res)
+                        {
+                            saveModel.executeSave(save);
+                        }
                         break;
                     case 3:
                         languageUsed = langView.Start(langModel.languages(languageUsed));

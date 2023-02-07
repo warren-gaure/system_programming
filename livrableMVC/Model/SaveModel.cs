@@ -41,7 +41,7 @@ namespace livrableMVC.Model
             var sw = new Stopwatch();
             sw.Start();
             string save = "";
-            string fileName = "..\\..\\..\\"+ saveName + ".json";
+            string fileName = "..\\..\\..\\repoSaves\\" + saveName;
             save = System.IO.File.ReadAllText(fileName);
             //Console.WriteLine(save);
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
