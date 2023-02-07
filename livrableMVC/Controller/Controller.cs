@@ -41,11 +41,24 @@ namespace livrableMVC.ControllerSpace
 
         string repoSourceTest = "..\\..\\..\\test\\";
 
+        /// <summary>
+        /// function to call savemodel createNewSave
+        /// </summary>
+        /// <param name="sourceTargetEntry"></param>
+        /// <param name="destinationTargetEntry"></param>
+        /// <param name="typeEntry"></param>
+        /// <param name="saveNameEntry"></param>
+        /// <returns></returns>
         public bool saveSetting(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry)
         {
             execValidate = saveModel.createNewSave(sourceTargetEntry, destinationTargetEntry, typeEntry, saveNameEntry);
             return execValidate;
         }
+        /// <summary>
+        /// function main
+        /// it's called by Program Main
+        /// Call language view to get the language
+        /// </summary>
         public void executeApplication()
         {
             languageUsed = langView.Start(langModel.languages("eng"));
@@ -59,10 +72,9 @@ namespace livrableMVC.ControllerSpace
                     case 1:
                         var result = saveView.Start(langModel.languages(languageUsed), 0, 0);
                         saveSetting(result[1], result[2], result[3], result[0]);
-
                         break;
                     case 2:
-                        var res = executeView.Start(fileModel.getSaves());
+                        var res = executeView.Start(fileModel.getSaves(), langModel.languages(languageUsed));
                         foreach(var save in res)
                         {
                             saveModel.executeSave(save);
@@ -71,8 +83,10 @@ namespace livrableMVC.ControllerSpace
                     case 3:
                         languageUsed = langView.Start(langModel.languages(languageUsed));
                         break;
-                    default:
+                    case 4:
                         Environment.Exit(0);
+                        break;
+                    default:
                         break;
                 }
             }
