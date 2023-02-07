@@ -41,9 +41,9 @@ namespace livrableMVC.ControllerSpace
 
             while (!languageUsed.Equals("eng") && !languageUsed.Equals("fr"))
             {
-                Console.WriteLine("Please unter your language :");
-                Console.WriteLine("Merci d'indiquer la langue souhaiter:");
-                Console.WriteLine("eng = Engish / fr = Français");
+                Console.WriteLine("Welcome ! / Bienvenue !");
+                Console.WriteLine("Please select your prefered language / Merci d'indiquer votre langue souhaitée");
+                Console.WriteLine("eng = English / fr = Français");
                 languageUsed = Console.ReadLine();
             }
 
