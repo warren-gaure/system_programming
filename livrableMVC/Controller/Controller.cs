@@ -76,7 +76,7 @@ namespace livrableMVC.ControllerSpace
                     case 2:
                         
                         var res = executeView.Start(fileModel.getSaves(), langModel.languages(languageUsed));
-                        Thread instantLogs = new Thread(() => { Console.WriteLine("test"); });
+                        Thread instantLogs = new Thread(instantLogsFunction);
                         foreach (var save in res)
                         {
                             var sw = new Stopwatch();
@@ -132,15 +132,11 @@ namespace livrableMVC.ControllerSpace
         }
         public void instantLogsFunction()
         {
+
             /*progression = GlobalFileSize * 100 / curentTransfertFiles;
             fileLeftToDo = filesNumber - fileDo;
             instantLogs.InstantLogsFunction("test", "test", "test", true, GlobalFileSize, 10, progression, DateTime.Now);
             globalTime = 0;*/
-        }
-
-        public void readSaves()
-        {
-            saveModel.ReadSaveTemplate("..\\..\\..\\first.json");
         }
     }
 }
