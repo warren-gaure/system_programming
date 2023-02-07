@@ -14,12 +14,6 @@ namespace livrableMVC
         {
             Controller controller = new Controller();
             controller.languageSettings();
-            controller.saveSetting();
-            controller.execSaveSetting();
-            controller.dailyLogsFunction();
-            controller.instantLogsFunction();
-            controller.progressionFunction();
-            controller.readSaves();
         }
     }
 }
