@@ -2,12 +2,14 @@
 using livrableMVC.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -27,6 +29,7 @@ namespace livrableMVC.ControllerSpace
         DailyLogs dailyLogs = new DailyLogs(); 
         InstantLogs instantLogs = new InstantLogs();
         Dictionary<string, string> sentences = new Dictionary<string, string>();
+        Saves savesModel = new Saves();
         long timeExec;
         long timeCreate;
         bool execValidate;
@@ -74,10 +77,16 @@ namespace livrableMVC.ControllerSpace
                         saveSetting(result[1], result[2], result[3], result[0]);
                         break;
                     case 2:
+                        
                         var res = executeView.Start(fileModel.getSaves(), langModel.languages(languageUsed));
                         foreach(var save in res)
                         {
-                            saveModel.executeSave(save);
+                            var sw = new Stopwatch();
+                            sw.Start();
+                            savesModel = saveModel.executeSave(save);
+                            sw.Stop();
+                            long time = sw.ElapsedMilliseconds;
+                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, savesModel.type, time, DateTime.Now);
                         }
                         break;
                     case 3:
@@ -97,13 +106,6 @@ namespace livrableMVC.ControllerSpace
             globalTime += timeExec;
             return globalTime;
         }
-
-        public long globalTimeCreate()
-        {
-            globalTime += timeCreate;
-            return globalTime;
-        }
-
         public List<string> getAllSaves()
         {
             List<string> saves = fileModel.getSaves();
@@ -124,11 +126,6 @@ namespace livrableMVC.ControllerSpace
             }
             Console.WriteLine(GlobalFileSize);
             return GlobalFileSize;
-        }
-        public void dailyLogsFunction()
-        {
-            dailyLogs.DailyLogsFunction("test", "test", "test", "test", globalTime, DateTime.Now);
-            globalTime = 0;
         }
         public void instantLogsFunction()
         {

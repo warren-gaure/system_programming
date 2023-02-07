@@ -36,19 +36,11 @@ namespace livrableMVC.Model
     {
 
         long time;
-        public long executeSave(string saveName)
+        public Saves executeSave(string saveName)
         {
-            var sw = new Stopwatch();
-            sw.Start();
             string save = "";
-            string dir = @"..\\..\\..\\repoSaves"; // If directory does not exist, create it.
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
             string fileName = "..\\..\\..\\repoSaves\\" + saveName;
             save = System.IO.File.ReadAllText(fileName);
-            //Console.WriteLine(save);
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
 
             try
@@ -73,11 +65,7 @@ namespace livrableMVC.Model
             {
 
             }
-
-            
-            sw.Stop();
-            time = sw.ElapsedMilliseconds;
-            return time ;
+            return saveFromFile;
         }
 
         private void CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
@@ -129,12 +117,6 @@ namespace livrableMVC.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string dir = @"..\\..\\..\\repoSaves"; // If directory does not exist, create it.
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
-
             string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
 
             if (File.Exists(fileName))
