@@ -50,27 +50,11 @@ namespace livrableMVC.Model
             };
             string jsonString = JsonSerializer.Serialize(instantLogs);
             string fileName = "..\\..\\..\\instantLogs"+ DateTime.Now.ToString("yyyyMMdd") + ".json";
+            jsonString += "\n";
             File.AppendAllText(fileName, jsonString);
             Console.WriteLine(jsonString);
         }
-        public List<long> progressionFunction(string directoryPath)
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
-            // Add file sizes.
-            FileInfo[] fis = directoryInfo.GetFiles();
-            foreach (FileInfo fi in fis)
-            {
-                GlobalFileSize += fi.Length;
-                filesNumber++;
-            }
-            // Add subdirectory sizes.
-            DirectoryInfo[] dis = directoryInfo.GetDirectories();
-            foreach (DirectoryInfo di in dis)
-            {
-                GlobalFileSize += progressionFunction(di.FullName)[0];
-            }
-            return new List<long> { GlobalFileSize, filesNumber };
-        }
+        
 
     }
 }

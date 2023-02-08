@@ -16,7 +16,7 @@ using System.Timers;
 
 namespace livrableMVC.ControllerSpace
 {
-    internal class Controller
+    internal class Controller : IObserver
     {
         string languageUsed = "";
 
@@ -69,6 +69,7 @@ namespace livrableMVC.ControllerSpace
             languageUsed = langView.Start(langModel.languages("eng"));
             while (true)
             {
+                saveModel.Attach(this);
                 Console.Clear();
                 int val = mainView.Start(langModel.languages(languageUsed));
                 Console.Clear();
@@ -89,7 +90,7 @@ namespace livrableMVC.ControllerSpace
                             savesModel = saveModel.executeSave(save);
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
-                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, savesModel.type, time, DateTime.Now); 
+                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now); 
                             
                             
                         }
@@ -146,45 +147,7 @@ namespace livrableMVC.ControllerSpace
             globalTime = 0;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void instantLogsFunction(string save, bool state)
-        {
-            progression = 0;
-            string saveM = "";
-            string fileName = "..\\..\\..\\repoSaves\\" + save;
-            saveM = System.IO.File.ReadAllText(fileName);
-            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(saveM);
-            while (progression < 100)
-            {
-                progression = instantLogs.progressionFunction(save)[0] * 100 / curentTransfertFiles;
-                fileLeftToDo = instantLogs.progressionFunction(save)[1] - fileDo;
-                instantLogs.InstantLogsFunction(saveFromFile.saveName,
-                    saveFromFile.sourceTarget,
-                    saveFromFile.destinationTarget,
-                    state,
-                    instantLogs.progressionFunction(save)[0],
-                    (int)fileLeftToDo,
-                    progression,
-                    DateTime.Now);
-
-                globalTime = 0;
-            }
-            if (progression == 100)
-            {
-                progression = instantLogs.progressionFunction(save)[0] * 100 / curentTransfertFiles;
-                fileLeftToDo = instantLogs.progressionFunction(save)[1] - fileDo;
-                instantLogs.InstantLogsFunction(saveFromFile.saveName,
-                    saveFromFile.sourceTarget,
-                    saveFromFile.destinationTarget,
-                    state,
-                    instantLogs.progressionFunction(save)[0],
-                    (int)fileLeftToDo,
-                    progression,
-                    DateTime.Now);
-            }
-        }
+       
 
         /// <summary>
         /// call saveModel.ReadSaveTemplate
@@ -192,6 +155,16 @@ namespace livrableMVC.ControllerSpace
         public void readSaves()
         {
             saveModel.ReadSaveTemplate("..\\..\\..\\first.json");
+        }
+
+        
+
+        void IObserver.Update(ISubject subject)
+        {
+
+            string[] temp = saveModel.GetData();
+            Console.WriteLine("Observer update data : {0}",temp);
+            instantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
         }
     }
 }

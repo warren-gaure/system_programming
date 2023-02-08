@@ -42,7 +42,9 @@ namespace livrableMVC.Model
             string jsonString = JsonSerializer.Serialize(dailyLogs);
             string fileName = "..\\..\\..\\dailyLogs"+ DateTime.Now.ToString("yyyyMMdd") + ".json";
             File.AppendAllText(fileName, jsonString);
+            jsonString += "\n";
             Console.WriteLine(jsonString);
+            Thread.Sleep(5000);
         }
         
 

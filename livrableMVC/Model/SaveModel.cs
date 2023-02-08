@@ -32,11 +32,25 @@ namespace livrableMVC.Model
     }
 
 
-    internal class SaveModel
+    internal class SaveModel : ISubject
     {
+        private List<IObserver> _observers = new List<IObserver>();
+        string name { get; set; }
+        string source { get; set; }
+        string dest { get; set; }
 
-        long time;
-        long filesDone = 0;
+        bool state { get; set; }
+        long totalFilesSize { get; set; }
+        long nbTotalFiles { get; set; }
+        int nbFIlesLeftToDo { get; set; }
+
+        int progresseion { get; set; }
+        int filesDone { get; set; }
+
+
+
+        long time { get; set; }
+
         /// <summary>
         /// take the save's name, get the save from the file, if the save is complete call CopyDirectoryComplete if the save is differential call CopyDirectoryDifferential
         /// </summary>
@@ -48,6 +62,16 @@ namespace livrableMVC.Model
             string fileName = "..\\..\\..\\repoSaves\\" + saveName;
             save = System.IO.File.ReadAllText(fileName);
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
+            name = saveFromFile.saveName;
+            source = saveFromFile.sourceTarget;
+            dest = saveFromFile.destinationTarget;
+            filesDone = 0;
+            nbFIlesLeftToDo = 0;
+            totalFilesSize= 0;
+            state = false;
+            List<long> temp = TotalFilesNumberAndSizeFunction(source);
+            totalFilesSize = temp[0];
+            nbTotalFiles = temp[1];
 
             try
             {
@@ -63,7 +87,7 @@ namespace livrableMVC.Model
                         CopyDirectoryDifferential(saveFromFile.sourceTarget, saveFromFile.destinationTarget);
                         Console.WriteLine("Backup type complete differential successfully.");
                         break;
-                    default: 
+                    default:
                         break;
                 }
             }
@@ -71,7 +95,7 @@ namespace livrableMVC.Model
             {
 
             }
-            
+
             return saveFromFile;
         }
         /// <summary>
@@ -79,7 +103,7 @@ namespace livrableMVC.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
+        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -87,9 +111,12 @@ namespace livrableMVC.Model
 
             target.Create();
 
-            foreach (FileInfo file in source.GetFiles()) { 
+            foreach (FileInfo file in source.GetFiles())
+            {
+                Notify();
                 file.CopyTo(Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
+                Notify();
             }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
@@ -112,12 +139,14 @@ namespace livrableMVC.Model
 
             foreach (FileInfo file in source.GetFiles())
             {
+                Notify();
                 FileInfo targetFile = new FileInfo(Path.Combine(target.FullName, file.Name));
                 if (!targetFile.Exists || file.LastWriteTime > targetFile.LastWriteTime)
                 {
                     file.CopyTo(targetFile.FullName, true);
                 }
                 filesDone++;
+                Notify();
             }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
@@ -136,7 +165,8 @@ namespace livrableMVC.Model
         /// <param name="typeEntry"></param>
         /// <param name="saveNameEntry"></param>
         /// <returns></returns>
-        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry)
+        {
             var saves = new Saves()
             {
                 sourceTarget = sourceTargetEntry,
@@ -152,10 +182,12 @@ namespace livrableMVC.Model
             {
                 File.Delete(fileName);
             }
+            jsonString += "\n";
+
             File.AppendAllText(fileName, jsonString);
             return true;
         }
-        
+
         /// <summary>
         /// deserialize a save from jsonpath
         /// </summary>
@@ -168,7 +200,61 @@ namespace livrableMVC.Model
                 JsonSerializer.Deserialize<Saves>(JsonFile);
 
             return save;
-           
+
+        }
+
+        public string[] GetData()
+        {
+            progresseion = filesDone * 100 / (int)nbTotalFiles;
+            nbFIlesLeftToDo = (int)nbTotalFiles - filesDone;
+            if (progresseion >= 100)
+            {
+                state = true;
+            }
+            string[] temp = { name, source, dest, state.ToString(), totalFilesSize.ToString(), nbFIlesLeftToDo.ToString(), progresseion.ToString() };
+
+            return temp;
+        }
+
+        public void Attach(IObserver observer)
+        {
+            Console.WriteLine("Subject: Attached an observer.");
+            this._observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            this._observers.Remove(observer);
+            Console.WriteLine("Subject: Detached an observer.");
+        }
+
+        public void Notify()
+        {
+
+            foreach (var observer in _observers)
+            {
+                observer.Update(this);
+            }
+
+        }
+        public List<long> TotalFilesNumberAndSizeFunction(string directoryPath)
+        {
+            
+            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
+            // Add file sizes.
+            FileInfo[] fis = directoryInfo.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                totalFilesSize += fi.Length;
+                nbTotalFiles++;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = directoryInfo.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                totalFilesSize += TotalFilesNumberAndSizeFunction(di.FullName)[0];
+            }
+            return new List<long> { totalFilesSize, nbTotalFiles };
         }
     }
 }
