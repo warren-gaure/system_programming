@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace livrableMVC.Model
 {
@@ -52,9 +53,26 @@ namespace livrableMVC.Model
             string fileName = "..\\..\\..\\instantLogs"+ DateTime.Now.ToString("yyyyMMdd") + ".json";
             jsonString += "\n";
             File.AppendAllText(fileName, jsonString);
-            Console.WriteLine(jsonString);
+            
         }
-        
+        public void stateLogToXML(string name, string source, string destination, bool state, long size, int filesLeft, long progression, DateTime date)
+        {
+            string fileName = "..\\..\\..\\instantLogs" + DateTime.Now.ToString("yyyyMMdd") + ".xml";
+            string xmlString =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>" +
+                "\n<StateLog>\n" +
+                    $"   <Name>{name}</Name>\n" +
+                    $"   <Source>{source}</Source>\n" +
+                    $"   <Destination>{destination}</Destination>\n" +
+                    $"   <State>{(state ? "Finished" : "Ongoing")}</State>\n" +
+                    $"   <Size>{size}</Size>\n" +
+                    $"   <FilesLeftToDo>{filesLeft}</FilesLeftToDo>\n" +
+                    $"   <Progression>{progression}</Progression>\n" +
+                    $"   <Date>{date}</Date>\n" +
+                "  </StateLog>\n";
+            File.AppendAllText(fileName, xmlString);
+
+        }
 
     }
 }

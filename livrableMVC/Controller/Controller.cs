@@ -31,14 +31,8 @@ namespace livrableMVC.ControllerSpace
         InstantLogs instantLogs = new InstantLogs();
         Dictionary<string, string> sentences = new Dictionary<string, string>();
         Saves savesModel = new Saves();
-        long timeExec;
-        long timeCreate;
         bool execValidate;
-        long globalTime;
-        long curentTransfertFiles;
-        long progression;
-        long fileLeftToDo = 0;
-        int fileDo = 0;
+       
 
         /// <summary>
         /// function to call savemodel createNewSave
@@ -90,9 +84,9 @@ namespace livrableMVC.ControllerSpace
                             savesModel = saveModel.executeSave(save);
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
-                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now); 
-                            
-                            
+                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now);
+                            dailyLogs.dailyLogToXML(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now);
+
                         }
                         break;
                     case 3:
@@ -107,25 +101,6 @@ namespace livrableMVC.ControllerSpace
             }
         }
         
-        /// <summary>
-        /// Add timeExec to globalTime and return globalTime
-        /// </summary>
-        /// <returns></returns>
-        public long globalTimeExec()
-        {
-            globalTime += timeExec;
-            return globalTime;
-        }
-
-        /// <summary>
-        /// Add timeExec to globalTime and return globalTime
-        /// </summary>
-        /// <returns></returns>
-        public long globalTimeCreate()
-        {
-            globalTime += timeCreate;
-            return globalTime;
-        }
 
         /// <summary>
         /// return result of fileModel.getSaves
@@ -138,24 +113,6 @@ namespace livrableMVC.ControllerSpace
             return saves;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void dailyLogsFunction()
-        {
-            dailyLogs.DailyLogsFunction("test", "test", "test", "test", globalTime, DateTime.Now);
-            globalTime = 0;
-        }
-
-       
-
-        /// <summary>
-        /// call saveModel.ReadSaveTemplate
-        /// </summary>
-        public void readSaves()
-        {
-            saveModel.ReadSaveTemplate("..\\..\\..\\first.json");
-        }
 
         
 
@@ -165,6 +122,7 @@ namespace livrableMVC.ControllerSpace
             string[] temp = saveModel.GetData();
             Console.WriteLine("Observer update data : {0}",temp);
             instantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+            instantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
         }
     }
 }

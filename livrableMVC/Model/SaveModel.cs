@@ -188,20 +188,6 @@ namespace livrableMVC.Model
             return true;
         }
 
-        /// <summary>
-        /// deserialize a save from jsonpath
-        /// </summary>
-        /// <param name="jsonPath"></param>
-        /// <returns></returns>
-        public Saves ReadSaveTemplate(string jsonPath)
-        {
-            var JsonFile = System.IO.File.ReadAllText(jsonPath);
-            Saves save =
-                JsonSerializer.Deserialize<Saves>(JsonFile);
-
-            return save;
-
-        }
 
         public string[] GetData()
         {
