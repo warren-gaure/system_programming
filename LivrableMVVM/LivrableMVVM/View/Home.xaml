@@ -13,9 +13,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <uc:Header Grid.Row="0"/>
         <TextBlock Margin="10" Grid.Row="2" Grid.RowSpan="3" TextAlignment="Center" FontSize="40">EasySave V2</TextBlock>
         <TextBlock Margin="10" Grid.Row="5" TextAlignment="Right">By ProSoft</TextBlock>
     </Grid>

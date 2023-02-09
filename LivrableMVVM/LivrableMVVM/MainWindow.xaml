@@ -10,8 +10,17 @@
     <Border Padding="20" CornerRadius="10">
 
         <Grid>
-            <controls:Home Visibility="Hidden"/>
-            <controls:Create Visibility="Visible"/>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <controls:Header />
+            <controls:Home Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
+            <controls:Create Grid.Row="1" Grid.RowSpan="5" Visibility="Visible"/>
         </Grid>
     </Border>
 </Window>

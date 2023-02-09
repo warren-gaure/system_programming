@@ -24,5 +24,11 @@ namespace LivrableMVVM.View
         {
             InitializeComponent();
         }
+
+        //public void OnHomeClick()
+        //{
+            
+        //}
+
     }
 }
