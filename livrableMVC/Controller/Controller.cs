@@ -31,14 +31,8 @@ namespace livrableMVC.ControllerSpace
         InstantLogs instantLogs = new InstantLogs();
         Dictionary<string, string> sentences = new Dictionary<string, string>();
         Saves savesModel = new Saves();
-        long timeExec;
-        long timeCreate;
         bool execValidate;
-        long globalTime;
-        long curentTransfertFiles;
-        long progression;
-        long fileLeftToDo = 0;
-        int fileDo = 0;
+       
 
         /// <summary>
         /// function to call savemodel createNewSave
@@ -107,25 +101,6 @@ namespace livrableMVC.ControllerSpace
             }
         }
         
-        /// <summary>
-        /// Add timeExec to globalTime and return globalTime
-        /// </summary>
-        /// <returns></returns>
-        public long globalTimeExec()
-        {
-            globalTime += timeExec;
-            return globalTime;
-        }
-
-        /// <summary>
-        /// Add timeExec to globalTime and return globalTime
-        /// </summary>
-        /// <returns></returns>
-        public long globalTimeCreate()
-        {
-            globalTime += timeCreate;
-            return globalTime;
-        }
 
         /// <summary>
         /// return result of fileModel.getSaves
@@ -138,24 +113,6 @@ namespace livrableMVC.ControllerSpace
             return saves;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void dailyLogsFunction()
-        {
-            dailyLogs.DailyLogsFunction("test", "test", "test", "test", globalTime, DateTime.Now);
-            globalTime = 0;
-        }
-
-       
-
-        /// <summary>
-        /// call saveModel.ReadSaveTemplate
-        /// </summary>
-        public void readSaves()
-        {
-            saveModel.ReadSaveTemplate("..\\..\\..\\first.json");
-        }
 
         
 
