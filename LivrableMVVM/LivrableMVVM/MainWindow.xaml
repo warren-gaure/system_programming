@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:LivrableMVVM.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Border Padding="20" CornerRadius="10">
+    <Border Padding="10" Background="AliceBlue"  CornerRadius="25">
 
         <Grid>
             <Grid.RowDefinitions>
