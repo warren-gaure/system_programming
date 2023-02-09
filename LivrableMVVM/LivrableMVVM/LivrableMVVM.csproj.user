@@ -10,10 +10,16 @@
     <Compile Update="View\Create.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Execute.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Header.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Home.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Options.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -24,10 +30,16 @@
     <Page Update="View\Create.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\Execute.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Header.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Home.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Options.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

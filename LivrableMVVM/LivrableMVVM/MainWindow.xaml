@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:LivrableMVVM.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Border Padding="20" CornerRadius="10">
+    <Border Padding="10" Background="AliceBlue"  CornerRadius="25">
 
         <Grid>
             <Grid.RowDefinitions>
@@ -18,9 +18,11 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <controls:Header HomeClicked="OnHomeClicked" CreateClicked="OnCreateClicked"/>
-            <controls:Home x:Name="Home" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
-            <controls:Create x:Name="Create" Grid.Row="1" Grid.RowSpan="5" Visibility="Visible"/>
+            <controls:Header HomeClicked="OnHomeClicked" CreateClicked="OnCreateClicked" ExecuteClicked="OnExecuteClicked" OptionClicked="OnOptionClicked"/>
+            <controls:Home x:Name="Home" Grid.Row="1" Grid.RowSpan="5" Visibility="visible"/>
+            <controls:Create x:Name="Create" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
+            <controls:Execute x:Name="Execute" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"></controls:Execute>
+            <controls:Options x:Name="Option" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"></controls:Options>
         </Grid>
     </Border>
 </Window>

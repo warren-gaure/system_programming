@@ -29,13 +29,32 @@ namespace LivrableMVVM
         {
             this.Home.Visibility = Visibility.Visible;
             this.Create.Visibility = Visibility.Hidden;
+            this.Execute.Visibility = Visibility.Hidden;
+            this.Option.Visibility = Visibility.Hidden;
         }
 
         private void OnCreateClicked(object sender, RoutedEventArgs e)
         {
             this.Home.Visibility = Visibility.Hidden;
             this.Create.Visibility = Visibility.Visible;
+            this.Execute.Visibility = Visibility.Hidden;
+            this.Option.Visibility = Visibility.Hidden;
         }
 
+        private void OnExecuteClicked(object sender, RoutedEventArgs e)
+        {
+            this.Home.Visibility = Visibility.Hidden;
+            this.Create.Visibility = Visibility.Hidden;
+            this.Execute.Visibility = Visibility.Visible;
+            this.Option.Visibility = Visibility.Hidden;
+        }
+
+        private void OnOptionClicked(object sender, RoutedEventArgs e)
+        {
+            this.Home.Visibility = Visibility.Hidden;
+            this.Create.Visibility = Visibility.Hidden;
+            this.Execute.Visibility = Visibility.Hidden;
+            this.Option.Visibility = Visibility.Visible;
+        }
     }
 }

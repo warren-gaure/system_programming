@@ -27,7 +27,9 @@ namespace LivrableMVVM.View
 
         public static readonly RoutedEvent HomeClickedEvent = EventManager.RegisterRoutedEvent("HomeClickedEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Header));
         public static readonly RoutedEvent CreateClickedEvent = EventManager.RegisterRoutedEvent("CreateClickedEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Header));
-        
+        public static readonly RoutedEvent ExecuteClickedEvent = EventManager.RegisterRoutedEvent("ExecuteClickedEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Header));
+        public static readonly RoutedEvent OptionClickedEvent = EventManager.RegisterRoutedEvent("OptionClickedEvent", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Header));
+
         public event RoutedEventHandler HomeClicked
         {
             add { AddHandler(HomeClickedEvent, value);  }
@@ -40,6 +42,18 @@ namespace LivrableMVVM.View
             remove { RemoveHandler(CreateClickedEvent, value); }
         }
 
+        public event RoutedEventHandler ExecuteClicked
+        {
+            add { AddHandler(ExecuteClickedEvent, value); }
+            remove { RemoveHandler(ExecuteClickedEvent, value); }
+        }
+
+        public event RoutedEventHandler OptionClicked
+        {
+            add { AddHandler(OptionClickedEvent, value); }
+            remove { RemoveHandler(OptionClickedEvent, value); }
+        }
+
         private void OnHomeClicked(object sender, RoutedEventArgs e)
         {
             RaiseEvent(new RoutedEventArgs(Header.HomeClickedEvent));
@@ -50,6 +64,15 @@ namespace LivrableMVVM.View
             RaiseEvent(new RoutedEventArgs(Header.CreateClickedEvent));
         }
 
+        private void OnExecuteClicked(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(Header.ExecuteClickedEvent));
+        }
+
+        private void OnOptionClicked(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(Header.OptionClickedEvent));
+        }
 
     }
 }
