@@ -24,5 +24,18 @@ namespace LivrableMVVM
         {
             InitializeComponent();
         }
+
+        private void OnHomeClicked(object sender, RoutedEventArgs e)
+        {
+            this.Home.Visibility = Visibility.Visible;
+            this.Create.Visibility = Visibility.Hidden;
+        }
+
+        private void OnCreateClicked(object sender, RoutedEventArgs e)
+        {
+            this.Home.Visibility = Visibility.Hidden;
+            this.Create.Visibility = Visibility.Visible;
+        }
+
     }
 }

@@ -18,9 +18,9 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <controls:Header />
-            <controls:Home Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
-            <controls:Create Grid.Row="1" Grid.RowSpan="5" Visibility="Visible"/>
+            <controls:Header HomeClicked="OnHomeClicked" CreateClicked="OnCreateClicked"/>
+            <controls:Home x:Name="Home" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
+            <controls:Create x:Name="Create" Grid.Row="1" Grid.RowSpan="5" Visibility="Visible"/>
         </Grid>
     </Border>
 </Window>

@@ -13,8 +13,8 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Name="Home"  Grid.Column="0" Margin="20" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="120">Home</Button>
-        <Button Name="Create" Grid.Column="1" Margin="20" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="120">Create</Button>
+        <Button Name="Home"  Grid.Column="0" Margin="20" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="120" Click="OnHomeClicked">Home</Button>
+        <Button Name="Create" Grid.Column="1" Margin="20" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="120" Click="OnCreateClicked">Create</Button>
         <Button Name="Execute" Grid.Column="2" Margin="20" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="120">Execute</Button>
         <Button Name="Option" Grid.Column="3" Margin="20" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="120">Option</Button>
     </Grid>
