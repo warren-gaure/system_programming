@@ -10,11 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Margin="10" Grid.Row="2" Grid.RowSpan="3" TextAlignment="Center" FontSize="40">EasySave V2</TextBlock>
-        <TextBlock Margin="10" Grid.Row="5" TextAlignment="Right">By ProSoft</TextBlock>
+        <TextBlock Margin="10" Grid.Row="0" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="40">EasySave V2</TextBlock>
+        <TextBlock Margin="10" Grid.Row="1" TextAlignment="Right" VerticalAlignment="Bottom">By ProSoft</TextBlock>
     </Grid>
 </UserControl>
