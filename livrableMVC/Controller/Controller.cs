@@ -84,9 +84,9 @@ namespace livrableMVC.ControllerSpace
                             savesModel = saveModel.executeSave(save);
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
-                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now); 
-                            
-                            
+                            dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now);
+                            dailyLogs.dailyLogToXML(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now);
+
                         }
                         break;
                     case 3:
@@ -122,6 +122,7 @@ namespace livrableMVC.ControllerSpace
             string[] temp = saveModel.GetData();
             Console.WriteLine("Observer update data : {0}",temp);
             instantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+            instantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
         }
     }
 }
