@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="LivrableMVVM.View.Create"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LivrableMVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <local:Header></local:Header>
+        <Grid Grid.Row="1" Grid.RowSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.ColumnSpan="2" TextAlignment="Center">Name : </TextBlock>
+            <TextBox Margin="10" Grid.Column="2" Grid.ColumnSpan="2" MaxHeight="40" MaxWidth="300"></TextBox>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Center">Source :</TextBlock>
+            <TextBox Margin="10" Grid.Column="2" Grid.Row="1" MaxHeight="40" MaxWidth="300"></TextBox>
+            <Button Grid.Column="3" Grid.Row="1" MaxHeight="30" MaxWidth="40">...</Button>
+            <TextBlock Grid.Row="2" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Center">Target :</TextBlock>
+            <TextBox Margin="10" Grid.Column="2" Grid.Row="2" MaxHeight="40" MaxWidth="300"></TextBox>
+            <Button Grid.Column="3" Grid.Row="2" MaxHeight="30" MaxWidth="40">...</Button>
+            <TextBlock Grid.Row="3"  Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Center">Type :</TextBlock>
+            <RadioButton Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">XML</RadioButton>
+            <RadioButton Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">JSON</RadioButton>
+            <Button Grid.Column="3" Grid.Row="4" Margin="10" MaxHeight="80" MaxWidth="120">Create</Button>
+        </Grid>
+    </Grid>
+</UserControl>
