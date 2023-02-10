@@ -13,7 +13,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -21,30 +21,34 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock TextAlignment="Center" VerticalAlignment="Center">Name :</TextBlock>
-        <TextBox Margin="10" Grid.Column="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
-        <TextBlock Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center">Source :</TextBlock>
-        <TextBox Name="Source" Grid.ColumnSpan="2" Margin="10" Grid.Column="1" Grid.Row="1" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
-        <Button Grid.Column="3" Grid.Row="1" MaxHeight="20" MaxWidth="45" Click="OnSourceClicked">
+        <StackPanel Margin="32, 0" VerticalAlignment="Center" Grid.ColumnSpan="4">
+            <TextBlock FontWeight="Bold" FontSize="20" Text="Create"></TextBlock>
+            <TextBlock Text="Enter informations to create a save" FontWeight="Medium" FontSize="18"/>
+        </StackPanel>
+        <TextBlock TextAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="18">Name :</TextBlock>
+        <TextBox Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Source :</TextBlock>
+        <TextBox Name="Source" Grid.ColumnSpan="2" Margin="10" Grid.Column="1" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <Button Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnSourceClicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> ...
         </Button>
-        <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center">Target :</TextBlock>
-        <TextBox Name="Target" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
-        <Button Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnTargetClicked">
+        <TextBlock Grid.Row="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Target :</TextBlock>
+        <TextBox Name="Target" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <Button Grid.Column="3" Grid.Row="3" MaxHeight="20" MaxWidth="45" Click="OnTargetClicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> ...
         </Button>
-        <TextBlock Grid.Row="3"  TextAlignment="Center" VerticalAlignment="Center">Type :</TextBlock>
-        <RadioButton Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True">XML</RadioButton>
-        <RadioButton Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">JSON</RadioButton>
-        <Button Grid.Column="3" Grid.Row="4" Margin="10" MaxHeight="60" MaxWidth="140">
+        <TextBlock Grid.Row="4"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Type :</TextBlock>
+        <RadioButton Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18">XML</RadioButton>
+        <RadioButton Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">JSON</RadioButton>
+        <Button Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

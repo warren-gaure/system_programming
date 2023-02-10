@@ -13,25 +13,25 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Name="Home"  Grid.Column="0" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" Click="OnHomeClicked">
+        <Button Name="Home"  Grid.Column="0" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnHomeClicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> Home</Button>
-        <Button Name="Create" Grid.Column="1" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" Click="OnCreateClicked">
+        <Button Name="Create" Grid.Column="1" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnCreateClicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> Create</Button>
-        <Button Name="Execute" Grid.Column="2" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" Click="OnExecuteClicked">
+        <Button Name="Execute" Grid.Column="2" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnExecuteClicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> Execute</Button>
-        <Button Name="Option" Grid.Column="3" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" Click="OnOptionClicked">
+        <Button Name="Option" Grid.Column="3" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnOptionClicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

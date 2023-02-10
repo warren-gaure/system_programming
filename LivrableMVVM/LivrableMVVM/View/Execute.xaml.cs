@@ -23,6 +23,24 @@ namespace LivrableMVVM.View
         public Execute()
         {
             InitializeComponent();
+            AddCheckbox(new string[24]{ "test", "test2", "test3", "test4", "test5", "test6", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test", "test" });
+        }
+
+        public void AddCheckbox(IEnumerable<string> Names)
+        {
+            foreach(var Name in Names)
+            {
+                var checkbox = new CheckBox();
+                checkbox.Content = Name;
+                this.Checkboxs.Children.Add(checkbox);
+            }
+        }
+
+        public void AddCheckbox(string Name)
+        {
+            var checkbox = new CheckBox();
+            checkbox.Content= Name;
+            this.Checkboxs.Children.Add(checkbox);
         }
     }
 }

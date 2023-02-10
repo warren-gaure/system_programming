@@ -6,44 +6,33 @@
              xmlns:local="clr-namespace:LivrableMVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                
-
             </Grid.ColumnDefinitions>
-            
-
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-
             </Grid.RowDefinitions>
-            <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20" Margin="3,10"><Run Language="fr-fr" Text="     Execute"/></TextBlock>
-                <TextBlock Grid.Column="4" Grid.Row="1" Text="        Please Select a save to Excute" FontWeight="Medium"  FontSize="15" Width="618"/>
+
+            <StackPanel Margin="32, 0" VerticalAlignment="Center" Grid.ColumnSpan="3">
+                <TextBlock FontWeight="Bold" FontSize="20" Text="Execute"></TextBlock>
+                <TextBlock Text="Please Select a save to Execute" FontWeight="Medium" FontSize="18"/>
             </StackPanel>
-            <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="32,10,358,24" Grid.RowSpan="4">
-                <CheckBox Content="Save1" ></CheckBox>
-                <CheckBox Content="Save2" ></CheckBox>
-                <CheckBox Content="Save3" />
-                <CheckBox Content="Save4" ></CheckBox>
-                <CheckBox Content="Save5" ></CheckBox>
-                <CheckBox Content="Save6" ></CheckBox>
-                <CheckBox Content="Save7" ></CheckBox>
-                <CheckBox Content="Save8" ></CheckBox>
-                <CheckBox Content="Save9" ></CheckBox>
-                <CheckBox Content="Save10" ></CheckBox>
-                <CheckBox Content="Save11" ></CheckBox>
-                <CheckBox Content="Save12" ></CheckBox>
-            </StackPanel>
-            <Button Grid.Column="3" Grid.Row="4" Margin="10" MaxHeight="60" MaxWidth="140">
+
+        <Border Padding="10" BorderBrush="Silver" BorderThickness="1" CornerRadius="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="32,0,0,10" Grid.RowSpan="4">
+                <ScrollViewer >
+                    <StackPanel Name="Checkboxs">
+                    </StackPanel>
+                </ScrollViewer >
+            </Border>
+
+        <Button Grid.Column="3" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -51,5 +40,4 @@
                 </Button.Resources> Create
             </Button>
         </Grid>
-    </ScrollViewer>
 </UserControl>
