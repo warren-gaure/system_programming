@@ -23,7 +23,14 @@ namespace LivrableMVVM
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+         
         }
+
+   
+    
+
+        
 
         private void OnHomeClicked(object sender, RoutedEventArgs e)
         {

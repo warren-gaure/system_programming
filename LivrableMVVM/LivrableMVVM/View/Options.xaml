@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LivrableMVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid RenderTransformOrigin="0.499,0.605">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -14,25 +14,26 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            
+
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions> 
-        <StackPanel Grid.Column="0" Margin="0,0,5,5">
-                    <TextBlock Text="Put your target path right here" FontWeight="Medium"  FontSize="15" Margin="3,0"/>
-                    <TextBox Padding="1"/>
-                </StackPanel>
 
-                <StackPanel Grid.Column="1" Margin="5,15,0,5">
-                    <TextBlock Text="Foalder Name" FontWeight="Medium"  FontSize="1" Margin="3,0" Width="209"/>
-            <TextBox IsReadOnly="True" Background="#eee" Padding="1" Width="208"/>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="0,0,5,5">
+            <TextBlock Text="Choose your basic folder:" FontWeight="Medium"  FontSize="15" Margin="3,0"/>
+            <TextBox Padding="1" Margin="5"/>
         </StackPanel>
 
-        <TextBlock Text="Basic Folder" Grid.Row="1" FontWeight="Bold" FontSize="15" Margin="6,0,0,0"/>
+        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+            <TextBlock Text="Foalder Name:" FontWeight="Medium"  FontSize="15" Margin="3,2"/>
+           
+            
+        </StackPanel>
+
+        <TextBlock Text="Language" Grid.Row="1" FontWeight="Medium" FontSize="15" Margin="3,0,0,0"/>
         <ComboBox Padding="1" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Margin="10,25,100,8">
             <ComboBox.RenderTransform>
                 <TransformGroup>
@@ -42,12 +43,21 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </ComboBox.RenderTransform>
-            <ComboBoxItem>choix1</ComboBoxItem>
-            <ComboBoxItem>choix432</ComboBoxItem>
+            <ComboBoxItem>Francais</ComboBoxItem>
+            <ComboBoxItem>English</ComboBoxItem>
 
-            <ComboBoxItem>choix13</ComboBoxItem>
         </ComboBox>
 
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Select your log's file type: " FontWeight="Medium"  FontSize="15"></TextBlock>
+        <RadioButton Content=".xml" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <RadioButton Content=".json" HorizontalAlignment="Left" Margin="10,38,0,0" Grid.Row="2" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+        <Button Grid.Column="1" Grid.Row="5" Margin="106,10,-86,10" MaxHeight="60" MaxWidth="140">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Create
+        </Button>
 
     </Grid>
 </UserControl>
