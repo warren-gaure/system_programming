@@ -7,12 +7,12 @@
         xmlns:controls="clr-namespace:LivrableMVVM.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-     <Window.Background>
+     <!--<Window.Background>
         <ImageBrush ImageSource="\Assets\asset.avif"  Stretch="None" />
-    </Window.Background>
-    <Border Padding="10"  CornerRadius="25">
+    </Window.Background>-->
+    <Border CornerRadius="25">
        
-        <Grid>
+        <Grid Background="#1E1E1E">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
