@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LivrableMVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid RenderTransformOrigin="0.499,0.605">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
