@@ -20,10 +20,10 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="32, 10" VerticalAlignment="Center" Grid.ColumnSpan="4">
-            <TextBlock FontWeight="Bold" FontSize="20" Text="Options"></TextBlock>
-            <TextBlock Text="Options of the application" FontWeight="Medium" FontSize="18"/>
+            <TextBlock FontWeight="Bold" FontSize="20" Text="Option" Foreground="White"></TextBlock>
+            <TextBlock Text="Options of the application" FontWeight="Medium" FontSize="18" Foreground="White"/>
         </StackPanel>
-        <TextBlock Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Basic Folder :</TextBlock>
+        <TextBlock Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Basic Folder :</TextBlock>
         <TextBox Name="Folder" Margin="10" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
         <Button Grid.Column="3" Grid.Row="1" MaxHeight="20" MaxWidth="45" Click="OnFolderClicked">
             <Button.Resources>
@@ -32,13 +32,13 @@
                 </Style>
             </Button.Resources> ...
         </Button>
-        <TextBlock Text="Language" Grid.Row="2" FontSize="18" TextAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Language" Grid.Row="2" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
         <ComboBox Grid.Row="2" Grid.Column="1" MaxHeight="30" Margin="10" Grid.ColumnSpan="2" SelectedIndex="0" FontSize="18" VerticalContentAlignment="Center">
             <ComboBoxItem Name="en">English</ComboBoxItem>
             <ComboBoxItem Name="fr">French</ComboBoxItem>
         </ComboBox>
-        <TextBlock Text="Log File Type" Grid.Row="3" VerticalAlignment="Center" TextAlignment="Center" FontSize="18"></TextBlock>
-        <RadioButton Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18">XML</RadioButton>
-        <RadioButton Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">JSON</RadioButton>
+        <TextBlock Text="Log File Type" Grid.Row="3" VerticalAlignment="Center" TextAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <RadioButton Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White">XML</RadioButton>
+        <RadioButton Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">JSON</RadioButton>
     </Grid>
 </UserControl>
