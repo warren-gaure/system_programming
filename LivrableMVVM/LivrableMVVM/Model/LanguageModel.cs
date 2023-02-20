@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace livrableMVC.Model
+namespace livrableMVVM.Model
 {
     internal class LanguageModel
     {

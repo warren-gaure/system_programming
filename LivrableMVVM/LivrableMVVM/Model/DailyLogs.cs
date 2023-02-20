@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace livrableMVC.Model
+namespace livrableMVVM.Model
 {
     public class DailyLogsModel
     {

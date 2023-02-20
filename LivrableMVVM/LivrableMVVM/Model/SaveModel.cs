@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 
 
-namespace livrableMVC.Model
+namespace livrableMVVM.Model
 {
     public class SaveModels
     {

@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace livrableMVC.Model
+namespace livrableMVVM.Model
 {
     internal class InstantLogsModel
     {
