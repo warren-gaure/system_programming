@@ -56,5 +56,10 @@ namespace LivrableMVVM
             this.Execute.Visibility = Visibility.Hidden;
             this.Option.Visibility = Visibility.Visible;
         }
+
+        private void Header_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -26,9 +26,9 @@
             <TextBlock Text="Enter informations to create a save" FontWeight="Medium" FontSize="18"/>
         </StackPanel>
         <TextBlock TextAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="18">Name :</TextBlock>
-        <TextBox Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Name}"></TextBox>
         <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Source :</TextBlock>
-        <TextBox Name="Source" Grid.ColumnSpan="2" Margin="10" Grid.Column="1" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Name="Source" Grid.ColumnSpan="2" Margin="10" Grid.Column="1" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Button Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnSourceClicked">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -37,7 +37,7 @@
             </Button.Resources> ...
         </Button>
         <TextBlock Grid.Row="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Target :</TextBlock>
-        <TextBox Name="Target" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Name="Target" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Button Grid.Column="3" Grid.Row="3" MaxHeight="20" MaxWidth="45" Click="OnTargetClicked">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -48,7 +48,7 @@
         <TextBlock Grid.Row="4"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Type :</TextBlock>
         <RadioButton Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18">XML</RadioButton>
         <RadioButton Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">JSON</RadioButton>
-        <Button Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18">
+        <Button Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
