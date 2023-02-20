@@ -21,8 +21,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel Margin="32, 0" VerticalAlignment="Center" Grid.ColumnSpan="3">
-                <TextBlock FontWeight="Bold" FontSize="20" Text="Execute"></TextBlock>
-                <TextBlock Text="Please Select a save to Execute" FontWeight="Medium" FontSize="18"/>
+            <TextBlock FontWeight="Bold" FontSize="20" Text="Execute" Foreground="White"></TextBlock>
+            <TextBlock Text="Please Select a save to Execute" FontWeight="Medium" FontSize="18" Foreground="White"/>
             </StackPanel>
 
         <Border Padding="10" BorderBrush="Silver" BorderThickness="1" CornerRadius="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="32,0,0,10" Grid.RowSpan="4">
