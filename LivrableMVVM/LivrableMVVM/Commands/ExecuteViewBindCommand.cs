@@ -16,7 +16,7 @@ namespace LivrableMVVM.Commands
         }
         public override void Execute(object? parameter)
         {
-            _mvm.CurrentViewModel = new ExecuteViewModel();
+            
         }
     }
 }

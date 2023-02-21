@@ -10,7 +10,10 @@ namespace LivrableMVVM.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public ViewModelBase? CurrentViewModel { get; set; }
+        public ViewModelBase? HomeViewModel { get; set; }
+        public ViewModelBase? CreateViewModel { get; set; }
+        public ViewModelBase? ExecuteViewModel { get; set; }
+        public ViewModelBase? OptionViewModel { get; set; }
 
         public ICommand HomeViewCommand { get; }
         public ICommand CreateViewCommand { get; }
@@ -22,7 +25,10 @@ namespace LivrableMVVM.ViewModel
             ExecuteViewCommand = new ExecuteViewBindCommand(this);
             OptionViewCommand = new OptionViewBindCommand(this);
 
-            CurrentViewModel = new ViewModelBase();
+            HomeViewModel = new ViewModelBase();
+            CreateViewModel = new CreateViewModel();
+            ExecuteViewModel = new ExecuteViewModel();
+            OptionViewModel = new OptionViewModel();
         }
 
         

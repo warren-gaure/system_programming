@@ -19,10 +19,10 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <controls:Header HomeClicked="OnHomeClicked" CreateClicked="OnCreateClicked" ExecuteClicked="OnExecuteClicked" OptionClicked="OnOptionClicked"  Loaded="Header_Loaded"/>
-            <controls:Home x:Name="Home" Grid.Row="1" Grid.RowSpan="5" Visibility="visible" DataContext="{Binding CurrentViewModel}" />
-            <controls:Create x:Name="Create" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
-            <controls:Execute x:Name="Execute" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
-            <controls:Options x:Name="Option" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden"/>
+            <controls:Home x:Name="Home" Grid.Row="1" Grid.RowSpan="5" Visibility="visible" DataContext="{Binding HomeViewModel}" />
+            <controls:Create x:Name="Create" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" DataContext="{Binding CreateViewModel}" />
+            <controls:Execute x:Name="Execute" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" DataContext="{Binding ExecuteViewModel}" />
+            <controls:Options x:Name="Option" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" DataContext="{Binding OptionViewModel}" />
         </Grid>
     </Border>
 </Window>
