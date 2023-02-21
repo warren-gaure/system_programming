@@ -21,9 +21,6 @@ namespace LivrableMVVM.ViewModel
         public ICommand OptionViewCommand { get; }
         public MainViewModel() 
         { 
-            CreateViewCommand = new CreateViewBindCommand(this);
-            ExecuteViewCommand = new ExecuteViewBindCommand(this);
-            OptionViewCommand = new OptionViewBindCommand(this);
 
             HomeViewModel = new ViewModelBase();
             CreateViewModel = new CreateViewModel();
