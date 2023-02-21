@@ -24,7 +24,8 @@ namespace livrableMVC.Model
         {"complete", "complete"},
         {"diff", "différentiel" },
         {"changeLang", "Changer la langue" },
-            {"selectLang", "Sélectionner une langue" }
+        {"selectLang", "Sélectionner une langue" },
+        {"noSaveFound", "Aucune sauvegarde trouvé" }
     };
         Dictionary<string, string> english = new Dictionary<string, string>
     {
@@ -39,12 +40,17 @@ namespace livrableMVC.Model
         {"target", "Target" },
         {"type", "Type" },
         {"complete", "complete"},
-        {"diff", "différentiel" },
+        {"diff", "differential" },
         {"changeLang", "Change the language" },
-        {"selectLang", "Select a language" }
+        {"selectLang", "Select a language" },
+        {"noSaveFound", "No save found" }
     };
 
-
+        /// <summary>
+        /// return the dictinnary of the language asked
+        /// </summary>
+        /// <param name="lang"></param>
+        /// <returns></returns>
         public Dictionary<string, string> languages(string lang)
         {
             if (lang.Equals("eng"))

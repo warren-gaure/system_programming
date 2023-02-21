@@ -11,30 +11,45 @@ namespace livrableMVC.View
     {
         public ExecuteView() {}
 
-        public List<string> Start(List<string> saves)
+        /// <summary>
+        /// Display saves and return list of saves selected by user (index of save separated by ',')
+        /// if there is no save display a message for 3 seconds
+        /// </summary>
+        /// <param name="saves"></param>
+        /// <param name="sentences"></param>
+        /// <returns></returns>
+        public List<string> Start(List<string> saves, Dictionary<string, string> sentences)
         {
-            for(int i = 1; i <= saves.Count(); i++)
-            {
-                Console.WriteLine(i + "- " + saves[i-1]);
-            }
-            var res = Console.ReadLine();
             var result = new List<string>();
-            if (!string.IsNullOrEmpty(res))
+            if (saves.Count > 0)
             {
-                string[] val = res.Split(",");
-                foreach (string s in val)
+                for (int i = 1; i <= saves.Count(); i++)
                 {
-                    int temp = -1;
-                    if (int.TryParse(s, out temp))
+                    Console.WriteLine(i + "- " + saves[i - 1]);
+                }
+                var res = Console.ReadLine();
+                if (!string.IsNullOrEmpty(res))
+                {
+                    string[] val = res.Split(",");
+                    foreach (string s in val)
                     {
-                        try
+                        int temp = -1;
+                        if (int.TryParse(s, out temp))
                         {
-                            result.Add(saves[temp-1]);
+                            try
+                            {
+                                result.Add(saves[temp - 1]);
+                            }
+                            catch { }
                         }
-                        catch { }
                     }
                 }
-            }            
+            }
+            else
+            {
+                Console.WriteLine(sentences["noSaveFound"]);
+                Thread.Sleep(3000);
+            }
             return result;
         }
         

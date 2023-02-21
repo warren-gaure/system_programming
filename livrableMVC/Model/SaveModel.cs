@@ -32,19 +32,46 @@ namespace livrableMVC.Model
     }
 
 
-    internal class SaveModel
+    internal class SaveModel : ISubject
     {
+        private List<IObserver> _observers = new List<IObserver>();
+        string name { get; set; }
+        string source { get; set; }
+        string dest { get; set; }
 
-        long time;
-        public long executeSave(string saveName)
+        bool state { get; set; }
+        long totalFilesSize { get; set; }
+        long nbTotalFiles { get; set; }
+        int nbFIlesLeftToDo { get; set; }
+
+        int progresseion { get; set; }
+        int filesDone { get; set; }
+
+
+
+        long time { get; set; }
+
+        /// <summary>
+        /// take the save's name, get the save from the file, if the save is complete call CopyDirectoryComplete if the save is differential call CopyDirectoryDifferential
+        /// </summary>
+        /// <param name="saveName"></param>
+        /// <returns></returns>
+        public Saves executeSave(string saveName)
         {
-            var sw = new Stopwatch();
-            sw.Start();
             string save = "";
-            string fileName = "..\\..\\..\\"+ saveName + ".json";
+            string fileName = "..\\..\\..\\repoSaves\\" + saveName;
             save = System.IO.File.ReadAllText(fileName);
-            //Console.WriteLine(save);
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
+            name = saveFromFile.saveName;
+            source = saveFromFile.sourceTarget;
+            dest = saveFromFile.destinationTarget;
+            filesDone = 0;
+            nbFIlesLeftToDo = 0;
+            totalFilesSize= 0;
+            state = false;
+            List<long> temp = TotalFilesNumberAndSizeFunction(source);
+            totalFilesSize = temp[0];
+            nbTotalFiles = temp[1];
 
             try
             {
@@ -60,7 +87,7 @@ namespace livrableMVC.Model
                         CopyDirectoryDifferential(saveFromFile.sourceTarget, saveFromFile.destinationTarget);
                         Console.WriteLine("Backup type complete differential successfully.");
                         break;
-                    default: 
+                    default:
                         break;
                 }
             }
@@ -69,16 +96,14 @@ namespace livrableMVC.Model
 
             }
 
-
-
-            System.Threading.Thread.Sleep(5000);
-            sw.Stop();
-            //Console.WriteLine(sw.ElapsedMilliseconds);
-            time = sw.ElapsedMilliseconds;
-            return time ;
+            return saveFromFile;
         }
-
-        private void CopyDirectoryComplete(string sourceDirectory, string targetDirectory) 
+        /// <summary>
+        /// Copy all file from sourceDirectory to targetDirectory
+        /// </summary>
+        /// <param name="sourceDirectory"></param>
+        /// <param name="targetDirectory"></param>
+        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -87,13 +112,24 @@ namespace livrableMVC.Model
             target.Create();
 
             foreach (FileInfo file in source.GetFiles())
+            {
+                Notify();
                 file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+                filesDone++;
+                Notify();
+            }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
                 CopyDirectoryComplete(subDirectory.FullName, Path.Combine(target.FullName, subDirectory.Name));
-        }
 
-        private void CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
+            return filesDone;
+        }
+        /// <summary>
+        /// Copy all modified file or new file from sourceDirectory to targetDirectory
+        /// </summary>
+        /// <param name="sourceDirectory"></param>
+        /// <param name="targetDirectory"></param>
+        private long CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
@@ -103,11 +139,14 @@ namespace livrableMVC.Model
 
             foreach (FileInfo file in source.GetFiles())
             {
+                Notify();
                 FileInfo targetFile = new FileInfo(Path.Combine(target.FullName, file.Name));
                 if (!targetFile.Exists || file.LastWriteTime > targetFile.LastWriteTime)
                 {
                     file.CopyTo(targetFile.FullName, true);
                 }
+                filesDone++;
+                Notify();
             }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
@@ -115,11 +154,19 @@ namespace livrableMVC.Model
                 DirectoryInfo targetSubDirectory = new DirectoryInfo(Path.Combine(target.FullName, subDirectory.Name));
                 CopyDirectoryDifferential(subDirectory.FullName, targetSubDirectory.FullName);
             }
+            return filesDone;
         }
 
-        public long createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry) {
-            var sw = new Stopwatch();
-            sw.Start();
+        /// <summary>
+        /// create a new saves, serialize it, create json file (if already exist delete it) and write serialized object in the file
+        /// </summary>
+        /// <param name="sourceTargetEntry"></param>
+        /// <param name="destinationTargetEntry"></param>
+        /// <param name="typeEntry"></param>
+        /// <param name="saveNameEntry"></param>
+        /// <returns></returns>
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry)
+        {
             var saves = new Saves()
             {
                 sourceTarget = sourceTargetEntry,
@@ -129,30 +176,71 @@ namespace livrableMVC.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "..\\..\\..\\" + saveNameEntry + ".json";
+            string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
 
             if (File.Exists(fileName))
             {
                 File.Delete(fileName);
             }
-        
+            jsonString += "\n";
+
             File.AppendAllText(fileName, jsonString);
-           
-            Console.WriteLine(jsonString);
-            sw.Stop();
-            //Console.WriteLine(sw.ElapsedMilliseconds);
-            time = sw.ElapsedMilliseconds;
-            return time;
+            return true;
         }
 
-        public Saves ReadSaveTemplate(string jsonPath)
-        {
-            var JsonFile = System.IO.File.ReadAllText(jsonPath);
-            Saves save =
-                JsonSerializer.Deserialize<Saves>(JsonFile);
 
-            return save;
-           
+        public string[] GetData()
+        {
+            progresseion = filesDone * 100 / (int)nbTotalFiles;
+            nbFIlesLeftToDo = (int)nbTotalFiles - filesDone;
+            if (progresseion >= 100)
+            {
+                state = true;
+            }
+            string[] temp = { name, source, dest, state.ToString(), totalFilesSize.ToString(), nbFIlesLeftToDo.ToString(), progresseion.ToString() };
+
+            return temp;
+        }
+
+        public void Attach(IObserver observer)
+        {
+            Console.WriteLine("Subject: Attached an observer.");
+            this._observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            this._observers.Remove(observer);
+            Console.WriteLine("Subject: Detached an observer.");
+        }
+
+        public void Notify()
+        {
+
+            foreach (var observer in _observers)
+            {
+                observer.Update(this);
+            }
+
+        }
+        public List<long> TotalFilesNumberAndSizeFunction(string directoryPath)
+        {
+            
+            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
+            // Add file sizes.
+            FileInfo[] fis = directoryInfo.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                totalFilesSize += fi.Length;
+                nbTotalFiles++;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = directoryInfo.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                totalFilesSize += TotalFilesNumberAndSizeFunction(di.FullName)[0];
+            }
+            return new List<long> { totalFilesSize, nbTotalFiles };
         }
     }
 }

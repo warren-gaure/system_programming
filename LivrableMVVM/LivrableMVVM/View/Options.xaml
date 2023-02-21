@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="LivrableMVVM.View.Options"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LivrableMVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="32, 10" VerticalAlignment="Center" Grid.ColumnSpan="4">
+            <TextBlock FontWeight="Bold" FontSize="20" Text="Option" Foreground="White"></TextBlock>
+            <TextBlock Text="Options of the application" FontWeight="Medium" FontSize="18" Foreground="White"/>
+        </StackPanel>
+
+        <TextBlock Text="Language" Grid.Row="1" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" MaxHeight="30" Margin="10" Grid.ColumnSpan="2" SelectedIndex="0" FontSize="18" VerticalContentAlignment="Center">
+            <ComboBoxItem Name="en" >English</ComboBoxItem>
+            <ComboBoxItem Name="fr" >French</ComboBoxItem>
+        </ComboBox>
+        <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Logiciel Metier</TextBlock>
+        <TextBox Background="#303030" Foreground="White" Name="Metier" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnFolderclicked">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> ...
+        </Button>
+        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Save
+        </Button>
+    </Grid>
+</UserControl>
