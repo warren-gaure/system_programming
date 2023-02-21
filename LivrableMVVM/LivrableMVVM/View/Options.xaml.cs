@@ -26,18 +26,18 @@ namespace LivrableMVVM.View
             InitializeComponent();
         }
 
-        //public void OnFolderClicked(object sender, RoutedEventArgs e)
-        //{
-        //    using (var fbd = new FolderBrowserDialog())
-        //    {
-        //        DialogResult result = fbd.ShowDialog();
+        public void OnFolderclicked(object sender, routedeventargs e)
+        {
+            using (var fbd = new folderbrowserdialog())
+            {
+                dialogresult result = fbd.showdialog();
 
-        //        if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-        //        {
-        //            this.Folder.Text = fbd.SelectedPath;
-        //        }
-        //    }
-        //}
+                if (result == dialogresult.ok && !string.isnullorwhitespace(fbd.selectedpath))
+                {
+                    this.folder.text = fbd.selectedpath;
+                }
+            }
+        }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
