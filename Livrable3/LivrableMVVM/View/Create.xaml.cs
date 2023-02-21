@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LivrableMVVM.View
+namespace Livrable3.View
 {
     /// <summary>
     /// Logique d'interaction pour Create.xaml

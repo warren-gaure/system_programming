@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LivrableMVVM.ViewModel
+namespace Livrable3.ViewModel
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

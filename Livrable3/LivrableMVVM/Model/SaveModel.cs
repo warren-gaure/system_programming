@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 
-namespace livrableMVVM.Model
+namespace Livrable3.Model
 {
     public class SaveModels
     {

@@ -1,11 +1,11 @@
-﻿using LivrableMVVM.ViewModel;
+﻿using Livrable3.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LivrableMVVM.Commands
+namespace Livrable3.Commands
 {
     internal class CreateViewBindCommand : CommandBase
     {

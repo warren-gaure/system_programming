@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrableMVVM", "LivrableMVVM\LivrableMVVM.csproj", "{04B40ABE-94BB-4155-9AAD-7818EEC8DA2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livrable3", "LivrableMVVM\Livrable3.csproj", "{04B40ABE-94BB-4155-9AAD-7818EEC8DA2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

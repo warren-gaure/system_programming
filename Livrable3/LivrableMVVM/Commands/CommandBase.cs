@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace LivrableMVVM.Commands
+namespace Livrable3.Commands
 {
     public abstract class CommandBase : ICommand
     {

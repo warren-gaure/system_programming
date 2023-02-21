@@ -6,7 +6,7 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace livrableMVVM.Model
+namespace Livrable3.Model
 {
     internal interface IObserver
     {
