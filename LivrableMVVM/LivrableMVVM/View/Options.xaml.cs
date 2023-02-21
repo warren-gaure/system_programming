@@ -26,15 +26,15 @@ namespace LivrableMVVM.View
             InitializeComponent();
         }
 
-        public void OnFolderClicked(object sender, RoutedEventArgs e)
+        public void OnFolderclicked(object sender, routedeventargs e)
         {
-            using (var fbd = new FolderBrowserDialog())
+            using (var fbd = new folderbrowserdialog())
             {
-                DialogResult result = fbd.ShowDialog();
+                dialogresult result = fbd.showdialog();
 
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                if (result == dialogresult.ok && !string.isnullorwhitespace(fbd.selectedpath))
                 {
-                    this.Folder.Text = fbd.SelectedPath;
+                    this.folder.text = fbd.selectedpath;
                 }
             }
         }
