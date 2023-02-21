@@ -31,6 +31,7 @@ namespace LivrableMVVM.View
             foreach(var Name in Names)
             {
                 var checkbox = new CheckBox();
+                checkbox.Foreground = (Brush)(new BrushConverter().ConvertFromString("#FFFFFF"));
                 checkbox.Content = Name;
                 this.Checkboxs.Children.Add(checkbox);
             }
@@ -39,6 +40,7 @@ namespace LivrableMVVM.View
         public void AddCheckbox(string Name)
         {
             var checkbox = new CheckBox();
+            checkbox.Foreground = (Brush)(new BrushConverter().ConvertFromString("#FFFFFF"));
             checkbox.Content= Name;
             this.Checkboxs.Children.Add(checkbox);
         }
