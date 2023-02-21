@@ -1,6 +1,8 @@
 ﻿using LivrableMVVM.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,21 +13,33 @@ namespace LivrableMVVM.ViewModel
 {
     internal class OptionViewModel : ViewModelBase
     {
-        private ComboBox _language;
+        public ObservableCollection<string> _languages;
 
-        private string languageChose { get; set; }
-        public ComboBox Language
+        public ObservableCollection<string> Languages
         {
             get
             {
-                return _language;
+                return _languages;
             }
             set
             {
-                _language = value;
-                
-                OnPropertyChanged(nameof(Language));
-                languageChose = _language.Text;
+                _languages = value;
+                OnPropertyChanged(nameof(Languages));
+            }
+        }
+
+        private string _selectedItem;
+
+        public string SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
@@ -48,6 +62,12 @@ namespace LivrableMVVM.ViewModel
         public OptionViewModel()
         {
             SaveConfigCommand = new SaveConfigCommand();
+
+            _languages= new ObservableCollection<string>();
+            _languages.Add(new string("English"));
+            _languages.Add(new string("Français"));
+            
+            
         }
 
     }

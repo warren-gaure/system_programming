@@ -26,10 +26,7 @@
         </StackPanel>
 
         <TextBlock Text="Language" Grid.Row="1" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" MaxHeight="30" Margin="10" Grid.ColumnSpan="2" SelectedIndex="0" FontSize="18" VerticalContentAlignment="Center" SelectedItem="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged}">
-            <ComboBoxItem Name="en" >English</ComboBoxItem>
-            <ComboBoxItem Name="fr" >French</ComboBoxItem>
-        </ComboBox>
+        <ComboBox Name="languageOfApp"  Grid.Row="1" Grid.Column="1" MaxHeight="30" Margin="10" Grid.ColumnSpan="2" SelectedIndex="0" FontSize="18" VerticalContentAlignment="Center" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedItem,Mode=TwoWay}"></ComboBox>
         <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Logiciel Metier</TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Metier" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding BusinessSoftware, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnFolderclicked">
