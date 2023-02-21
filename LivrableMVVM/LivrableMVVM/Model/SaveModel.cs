@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-
-
+using System.Windows.Navigation;
 
 namespace livrableMVVM.Model
 {
@@ -30,6 +30,12 @@ namespace livrableMVVM.Model
         public string destinationTarget { get; set; }
         public string type { get; set; }
         public string saveName { get; set; }
+    }
+
+    public class config
+    {
+        public string language { get; set; }
+        public string businessSoftware { get; set; }
     }
 
 
@@ -242,6 +248,41 @@ namespace livrableMVVM.Model
                 totalFilesSize += TotalFilesNumberAndSizeFunction(di.FullName)[0];
             }
             return new List<long> { totalFilesSize, nbTotalFiles };
+        }
+
+        public List<FileInfo> nav(string path)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            // Add file sizes.
+            FileInfo[] fileInformation = directoryInfo.GetFiles();
+            List<FileInfo> filesInfo = fileInformation.ToList();
+            DirectoryInfo[] dis = directoryInfo.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                filesInfo = nav(di.FullName);
+            }
+            return filesInfo;
+        }
+
+        public void didCrypto(string[] extension, string path, string destPath, int key)
+        {
+            
+            List<FileInfo> files = nav(path);
+            foreach(string ext  in extension)
+            {
+                foreach (FileInfo file in files)
+                {
+                    string fileExt = file.Name.Split('.').Last();
+                    if (ext.Equals(fileExt))
+                    {
+                        Process cryptoSoft = new Process();
+                        cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
+                        cryptoSoft.StartInfo.Arguments = "\"" + file.FullName + "\" " + "\"" + destPath + "\" " + "\"" + key + "\"";
+                        cryptoSoft.Start();
+                    }
+                }
+            }
+            
         }
     }
 }
