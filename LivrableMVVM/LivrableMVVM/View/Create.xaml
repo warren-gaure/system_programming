@@ -46,7 +46,7 @@
             </Button.Resources> ...
         </Button>
         <TextBlock Grid.Row="4"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Save Type :</TextBlock>
-        <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Extension, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -55,7 +55,7 @@
             </Button.Resources> Create
         </Button>
         <TextBlock Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Type :</TextBlock>
-        <RadioButton Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White">Complete</RadioButton>
-        <RadioButton Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Différentiel</RadioButton>
+        <RadioButton x:Name="complete" Content="Complete" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
+        <RadioButton x:Name="differential" Content="Différentiel"  Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
     </Grid>
 </UserControl>

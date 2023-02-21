@@ -57,6 +57,21 @@ namespace LivrableMVVM.ViewModel
             }
         }
 
+        private string _extension;
+
+        public string Extension
+        {
+            get
+            {
+                return _extension;
+            }
+            set
+            {
+                _extension = value;
+                OnPropertyChanged(nameof(Extension));
+            }
+        }
+
         private string _type;
 
         public string Type
@@ -73,11 +88,12 @@ namespace LivrableMVVM.ViewModel
         }
 
         public ICommand CreateCommand { get; }
+        public ICommand TypeCommand { get; set; }
 
         public CreateViewModel() 
         {
             CreateCommand = new CreateSaveCommand();
-        
+            TypeCommand = new TypeOfTheSaveCommand(this);
         }
 
     }
