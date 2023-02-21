@@ -9,7 +9,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Livrable3.Model
 {
@@ -282,7 +284,36 @@ namespace Livrable3.Model
                     }
                 }
             }
-            
+        }
+        public void ParamSend(string sourcePath, int fileSizeMax, string extensions)
+        {
+            List<FileInfo> files = nav(sourcePath);
+            List<FileInfo> fileToSend= new List<FileInfo>();
+            List<FileInfo> fileToSendFirst = new List<FileInfo>();
+            List<string> exts = extensions.Split(",").ToList();
+            foreach (FileInfo file in files)
+            {
+                if (file.Length > fileSizeMax)
+                {
+                    fileToSend.Add(file);
+                }
+            }
+            foreach(FileInfo file in fileToSend)
+            {
+                foreach(string ext in exts)
+                {
+                    string fileExt = file.Name.Split('.').Last();
+                    if (fileExt.Equals(ext))
+                    {
+                        fileToSendFirst.Add(file);
+                        fileToSend.Remove(file);
+                    }
+                }
+            }
+        }
+        public void threadPause()
+        {
+            //ici
         }
     }
 }
