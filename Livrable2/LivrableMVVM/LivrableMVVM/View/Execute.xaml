@@ -28,8 +28,10 @@
 
         <Border Padding="10" BorderBrush="Silver" BorderThickness="1" CornerRadius="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="32,0,0,10" Grid.RowSpan="4">
                 <ScrollViewer >
-                    <StackPanel Name="Checkboxs" >
-                    </StackPanel>
+                
+                    <ListBox Name="Checkboxs" ItemsSource="{Binding Saves}" SelectedItem="{Binding SelectedItems, UpdateSourceTrigger=PropertyChanged}"></ListBox>
+                
+
                 </ScrollViewer >
             </Border>
 

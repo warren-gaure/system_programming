@@ -33,7 +33,8 @@ namespace LivrableMVVM.View
                 var checkbox = new CheckBox();
                 checkbox.Foreground = (Brush)(new BrushConverter().ConvertFromString("#FFFFFF"));
                 checkbox.Content = Name;
-                this.Checkboxs.Children.Add(checkbox);
+                //this.Checkboxs.Children.Add(checkbox);
+                
             }
         }
 
@@ -42,7 +43,8 @@ namespace LivrableMVVM.View
             var checkbox = new CheckBox();
             checkbox.Foreground = (Brush)(new BrushConverter().ConvertFromString("#FFFFFF"));
             checkbox.Content= Name;
-            this.Checkboxs.Children.Add(checkbox);
+            //this.Checkboxs.Children.Add(checkbox);
+            
         }
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace LivrableMVVM.View
         public List<string> GetChecked()
         {
             var list = new List<string>();
-            foreach(var checkbox in this.Checkboxs.Children)
+            /*foreach(var checkbox in this.Checkboxs.Children)
             {
                 var property = checkbox.GetType().GetProperty("IsChecked");
                 if (property != null) 
@@ -75,7 +77,7 @@ namespace LivrableMVVM.View
                     }
                 }
 
-            }
+            }*/
             return list;
         }
 
