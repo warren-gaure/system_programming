@@ -18,6 +18,7 @@ namespace livrableMVVM.Model
         public string saveSize { get; set; }
         public long saveTime { get; set; }
         public DateTime date { get; set; }
+        public long encryptionTime { get; set; }
     }
 
     public class DailyLogs
@@ -31,7 +32,8 @@ namespace livrableMVVM.Model
         /// <param name="saveSizeEntry"></param>
         /// <param name="saveTimeEntry"></param>
         /// <param name="dateEntry"></param>
-        public void DailyLogsFunction(string saveNameEntry, string sourceTargetEntry, string destinationTargetEntry, string saveSizeEntry, long saveTimeEntry, DateTime dateEntry)
+        /// <param name="encryptionTime"></param>
+        public void DailyLogsFunction(string saveNameEntry, string sourceTargetEntry, string destinationTargetEntry, string saveSizeEntry, long saveTimeEntry, DateTime dateEntry, long encryptionTime)
         {
             var dailyLogs = new DailyLogsModel()
             {
@@ -41,6 +43,7 @@ namespace livrableMVVM.Model
                 saveSize = saveSizeEntry,
                 saveTime = saveTimeEntry,
                 date = dateEntry,
+                encryptionTime = encryptionTime
             };
             string jsonString = JsonSerializer.Serialize(dailyLogs);
             string fileName = "..\\..\\..\\dailyLogs" + DateTime.Now.ToString("yyyyMMdd") + ".json";
@@ -50,7 +53,17 @@ namespace livrableMVVM.Model
 
         }
 
-        public void dailyLogToXML(string name, string source, string destination, string size, long time, DateTime date)
+        /// <summary>
+        /// This method takes all attributes of a DailyLogs object and saves them in a newly created .XML file.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
+        /// <param name="size"></param>
+        /// <param name="time"></param>
+        /// <param name="date"></param>
+        /// <param name="encryption"></param>
+        public void dailyLogToXML(string name, string source, string destination, string size, long time, DateTime date, long encryption)
         {
             string fileName = "..\\..\\..\\dailyLogs" + DateTime.Now.ToString("yyyyMMdd") + ".xml";
             string xmlString =
@@ -62,6 +75,7 @@ namespace livrableMVVM.Model
                     $"<Size>{size}</Size>\n" +
                     $"<Time>{time}</Time>\n" +
                     $"<Date>{date}</Date>\n" +
+                    $"<EncryptionTime>{encryption}</Encryption>" +
                 "</DailyLog>\n";
             File.AppendAllText(fileName, xmlString);
         }
