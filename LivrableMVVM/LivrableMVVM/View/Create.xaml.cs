@@ -59,5 +59,9 @@ namespace LivrableMVVM.View
             System.Windows.MessageBox.Show("Save Created");
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
