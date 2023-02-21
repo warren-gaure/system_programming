@@ -27,13 +27,19 @@
             </StackPanel>
 
         <Border Padding="10" BorderBrush="Silver" BorderThickness="1" CornerRadius="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="32,0,0,10" Grid.RowSpan="4">
-                <ScrollViewer >
-                
-                    <ListBox Name="Checkboxs" ItemsSource="{Binding Saves}" SelectedItem="{Binding SelectedItems, UpdateSourceTrigger=PropertyChanged}"></ListBox>
-                
-
-                </ScrollViewer >
-            </Border>
+            <ScrollViewer>
+                <ListView ItemsSource="{Binding ListSaves}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  Header="Save Name" Width="80" DisplayMemberBinding="{Binding saveName}"  />
+                            <GridViewColumn  Header="Source target" Width="150" DisplayMemberBinding="{Binding sourceTarget}" />
+                            <GridViewColumn  Header="Destination target" Width="150" DisplayMemberBinding="{Binding destinationTarget}" />
+                            <GridViewColumn  Header="Type" Width="80" DisplayMemberBinding="{Binding type}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </Border>
 
         <Button Background="#00A4D1" Foreground="#1E1E1E" Click="onExecute" FontWeight="Bold" Grid.Column="3" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding ExecuteCommand}">
                 <Button.Resources>

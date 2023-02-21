@@ -30,6 +30,21 @@ namespace livrableMVVM.Model
         public string destinationTarget { get; set; }
         public string type { get; set; }
         public string saveName { get; set; }
+
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
+        {
+            this.sourceTarget = sourceTarget;
+            this.destinationTarget = destinationTarget;
+            this.type = type;
+            this.saveName = saveName;
+        }
+        public Saves()
+        {
+            this.sourceTarget = "SourceTest";
+            this.destinationTarget = "DestinationTest";
+            this.type = "COMPLETE";
+            this.saveName = "DefaultSave";
+        }
     }
 
     public class config
