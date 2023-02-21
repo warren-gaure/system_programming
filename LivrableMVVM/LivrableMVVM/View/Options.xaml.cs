@@ -26,15 +26,16 @@ namespace LivrableMVVM.View
             InitializeComponent();
         }
 
-        public void OnFolderclicked(object sender, routedeventargs e)
+        public void OnFolderclicked(object sender, RoutedEventArgs e)
         {
-            using (var fbd = new folderbrowserdialog())
+            using (var fbd = new OpenFileDialog())
             {
-                dialogresult result = fbd.showdialog();
+                fbd.Filter = "exe files (*.exe)|*.exe|All files (*.*)|*.*";
+                DialogResult result = fbd.ShowDialog();
 
-                if (result == dialogresult.ok && !string.isnullorwhitespace(fbd.selectedpath))
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName))
                 {
-                    this.folder.text = fbd.selectedpath;
+                    this.Metier.Text = fbd.FileName;
                 }
             }
         }

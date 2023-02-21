@@ -38,18 +38,15 @@
         </Button>
         <TextBlock Grid.Row="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Target :</TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Target" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
-        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="3" MaxHeight="20" MaxWidth="45" Click="onTargetClicked">
+        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="3" MaxHeight="20" MaxWidth="45" Click="OnTargetClicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> ...
         </Button>
-        <TextBlock Grid.Row="4"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Type :</TextBlock>
-        <TextBlock Text="Log File Type" Grid.Row="5" VerticalAlignment="Center" TextAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
-        <RadioButton Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White">XML</RadioButton>
-        <RadioButton Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">JSON</RadioButton>
-        <TextBox Background="#303030" Foreground="White" Name="type" Margin="10,7,10,13" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <TextBlock Grid.Row="4"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Save Type :</TextBlock>
+        <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
         <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -57,5 +54,8 @@
                 </Style>
             </Button.Resources> Create
         </Button>
+        <TextBlock Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Type :</TextBlock>
+        <RadioButton Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White">Complete</RadioButton>
+        <RadioButton Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Différentiel</RadioButton>
     </Grid>
 </UserControl>

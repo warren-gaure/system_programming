@@ -26,19 +26,25 @@
         </StackPanel>
 
         <TextBlock Text="Language" Grid.Row="1" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" MaxHeight="30" Margin="20,14,0,5" Grid.ColumnSpan="2" SelectedIndex="0" FontSize="18" VerticalContentAlignment="Center">
+        <ComboBox Grid.Row="1" Grid.Column="1" MaxHeight="30" Margin="10" Grid.ColumnSpan="2" SelectedIndex="0" FontSize="18" VerticalContentAlignment="Center">
             <ComboBoxItem Name="en" >English</ComboBoxItem>
             <ComboBoxItem Name="fr" >French</ComboBoxItem>
         </ComboBox>
         <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Logiciel Metier</TextBlock>
-        <TextBox Background="#303030" Foreground="White" Name="Metier" Margin="10,7,10,14" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
-        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="1" MaxHeight="20" MaxWidth="45" Click="OnFolderclicked" Margin="0,108,0,4" Grid.RowSpan="2">
+        <TextBox Background="#303030" Foreground="White" Name="Metier" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center"></TextBox>
+        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnFolderclicked">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> ...
         </Button>
-
+        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources> Save
+        </Button>
     </Grid>
 </UserControl>

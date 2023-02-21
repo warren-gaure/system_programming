@@ -18,6 +18,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
             <StackPanel Margin="32, 0" VerticalAlignment="Center" Grid.ColumnSpan="3">
@@ -39,5 +40,8 @@
                     </Style>
                 </Button.Resources> Create
             </Button>
-        </Grid>
+        <TextBlock Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Type :</TextBlock>
+        <RadioButton Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White">XML</RadioButton>
+        <RadioButton Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">JSON</RadioButton>
+    </Grid>
 </UserControl>
