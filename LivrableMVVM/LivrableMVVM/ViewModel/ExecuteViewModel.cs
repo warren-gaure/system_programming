@@ -24,6 +24,21 @@ namespace LivrableMVVM.ViewModel
                 OnPropertyChanged(nameof(TypeLog));
             }
         }
+
+        private string[] _saves;
+        public string[] Saves
+        {
+            get
+            {
+                return _saves;
+            }
+            set
+            {
+                _saves = value;
+                OnPropertyChanged(nameof(Saves));
+            }
+        }
+
         public ICommand ExecuteCommand { get; }
 
         public ICommand TypeLogCommand { get; set; }
