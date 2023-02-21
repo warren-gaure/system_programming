@@ -123,13 +123,13 @@ namespace Livrable3.Model
             foreach (FileInfo file in source.GetFiles())
             {
                 Notify();
-                file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+                file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
                 Notify();
             }
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
-                CopyDirectoryComplete(subDirectory.FullName, Path.Combine(target.FullName, subDirectory.Name));
+                CopyDirectoryComplete(subDirectory.FullName, System.IO.Path.Combine(target.FullName, subDirectory.Name));
 
             return filesDone;
         }
@@ -149,7 +149,7 @@ namespace Livrable3.Model
             foreach (FileInfo file in source.GetFiles())
             {
                 Notify();
-                FileInfo targetFile = new FileInfo(Path.Combine(target.FullName, file.Name));
+                FileInfo targetFile = new FileInfo(System.IO.Path.Combine(target.FullName, file.Name));
                 if (!targetFile.Exists || file.LastWriteTime > targetFile.LastWriteTime)
                 {
                     file.CopyTo(targetFile.FullName, true);
@@ -160,7 +160,7 @@ namespace Livrable3.Model
 
             foreach (DirectoryInfo subDirectory in source.GetDirectories())
             {
-                DirectoryInfo targetSubDirectory = new DirectoryInfo(Path.Combine(target.FullName, subDirectory.Name));
+                DirectoryInfo targetSubDirectory = new DirectoryInfo(System.IO.Path.Combine(target.FullName, subDirectory.Name));
                 CopyDirectoryDifferential(subDirectory.FullName, targetSubDirectory.FullName);
             }
             return filesDone;
