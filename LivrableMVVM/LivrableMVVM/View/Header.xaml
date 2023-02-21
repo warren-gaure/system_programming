@@ -6,32 +6,32 @@
              xmlns:local="clr-namespace:LivrableMVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="#303030">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Name="Home"  Grid.Column="0" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnHomeClicked" Command="{Binding HomeViewCommand}">
+        <Button Name="Home" Background="#00A4D1" Foreground="#303030" FontWeight="Bold" Grid.Column="0" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="60" MaxWidth="140" FontSize="18" Click="OnHomeClicked" Command="{Binding HomeViewCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> Home</Button>
-        <Button Name="Create" Grid.Column="1" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnCreateClicked" Command="{Binding CreateViewCommand}">
+        <Button Name="Create" Background="#00A4D1" Foreground="#303030" FontWeight="Bold" Grid.Column="1" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnCreateClicked" Command="{Binding CreateViewCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> Create</Button>
-        <Button Name="Execute" Grid.Column="2" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnExecuteClicked" Command="{Binding ExecuteViewCommand}">
+        <Button Name="Execute" Background="#00A4D1" Foreground="#303030" FontWeight="Bold" Grid.Column="2" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnExecuteClicked" Command="{Binding ExecuteViewCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources> Execute</Button>
-        <Button Name="Option" Grid.Column="3" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnOptionClicked" Command="{Binding OptionViewCommand}">
+        <Button Name="Option" Background="#00A4D1" Foreground="#303030" FontWeight="Bold" Grid.Column="3" Margin="15" MinHeight="10" MinWidth="20" MaxHeight="80" MaxWidth="140" FontSize="18" Click="OnOptionClicked" Command="{Binding OptionViewCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
