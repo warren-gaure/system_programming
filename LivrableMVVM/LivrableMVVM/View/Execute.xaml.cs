@@ -31,6 +31,7 @@ namespace LivrableMVVM.View
             foreach(var Name in Names)
             {
                 var checkbox = new CheckBox();
+                checkbox.Foreground = (Brush)(new BrushConverter().ConvertFromString("#FFFFFF"));
                 checkbox.Content = Name;
                 this.Checkboxs.Children.Add(checkbox);
             }
@@ -39,8 +40,49 @@ namespace LivrableMVVM.View
         public void AddCheckbox(string Name)
         {
             var checkbox = new CheckBox();
+            checkbox.Foreground = (Brush)(new BrushConverter().ConvertFromString("#FFFFFF"));
             checkbox.Content= Name;
             this.Checkboxs.Children.Add(checkbox);
         }
+
+        /// <summary>
+        /// En gros Checkboxs.Children return des objects donc je dois recupéré la propriété IsChecked puis ça valeur et si c'est bon je fais pareil pour le nom
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetChecked()
+        {
+            var list = new List<string>();
+            foreach(var checkbox in this.Checkboxs.Children)
+            {
+                var property = checkbox.GetType().GetProperty("IsChecked");
+                if (property != null) 
+                {
+                    var v = property.GetValue(checkbox);
+                    if (v != null && v.GetType() == typeof(bool))
+                    {
+                        if((bool)v)
+                        {
+                            var pName = checkbox.GetType().GetProperty("Content");
+                            if(pName != null)
+                            {
+                                var Name = pName.GetValue(checkbox);
+                                if(Name != null)
+                                {
+                                    list.Add((string)Name);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            return list;
+        }
+
+        public void onExecute(object sender, RoutedEventArgs e)
+        {
+            GetChecked();
+        }
+
     }
 }
