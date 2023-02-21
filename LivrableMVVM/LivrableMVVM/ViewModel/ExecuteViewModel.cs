@@ -10,11 +10,28 @@ namespace LivrableMVVM.ViewModel
 {
     public class ExecuteViewModel : ViewModelBase
     {
+        private string _typeLog;
+
+        public string TypeLog
+        {
+            get
+            {
+                return _typeLog;
+            }
+            set
+            {
+                _typeLog = value;
+                OnPropertyChanged(nameof(TypeLog));
+            }
+        }
         public ICommand ExecuteCommand { get; }
+
+        public ICommand TypeLogCommand { get; set; }
 
         public ExecuteViewModel ()
         { 
             ExecuteCommand = new ExecuteSavesCommand ();
+            TypeLogCommand = new TypeLogCommand(this);
         }
     }
 }
