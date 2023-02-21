@@ -19,7 +19,10 @@ namespace LivrableMVVM.ViewModel
         public MainViewModel() 
         { 
             CreateViewCommand = new CreateViewBindCommand(this);
-            CurrentViewModel= new ViewModelBase();
+            ExecuteViewCommand = new ExecuteViewBindCommand(this);
+            OptionViewCommand = new OptionViewBindCommand(this);
+
+            CurrentViewModel = new ViewModelBase();
         }
 
         

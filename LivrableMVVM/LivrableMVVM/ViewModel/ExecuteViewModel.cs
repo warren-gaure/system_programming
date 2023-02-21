@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrableMVVM.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace LivrableMVVM.ViewModel
 
         public ExecuteViewModel ()
         { 
-        
+            ExecuteCommand = new ExecuteSavesCommand ();
         }
     }
 }

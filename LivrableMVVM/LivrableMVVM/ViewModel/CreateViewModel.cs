@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrableMVVM.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -74,7 +75,8 @@ namespace LivrableMVVM.ViewModel
         public ICommand CreateCommand { get; }
 
         public CreateViewModel() 
-        { 
+        {
+            CreateCommand = new CreateSaveCommand();
         
         }
 

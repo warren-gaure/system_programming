@@ -37,7 +37,7 @@
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
-                </Button.Resources> Create
+                </Button.Resources> Execute
             </Button>
         </Grid>
 </UserControl>
