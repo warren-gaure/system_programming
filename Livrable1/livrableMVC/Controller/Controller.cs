@@ -85,8 +85,6 @@ namespace livrableMVC.ControllerSpace
                             sw.Stop();
                             long time = sw.ElapsedMilliseconds;
                             dailyLogs.DailyLogsFunction(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now);
-                            dailyLogs.dailyLogToXML(savesModel.saveName, savesModel.sourceTarget, savesModel.destinationTarget, saveModel.GetData()[4], time, DateTime.Now);
-
                         }
                         break;
                     case 3:

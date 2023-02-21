@@ -47,23 +47,5 @@ namespace livrableMVC.Model
             
             
         }
-
-        public void dailyLogToXML(string name, string source, string destination, string size, long time, DateTime date)
-        {
-            string fileName = "..\\..\\..\\dailyLogs" + DateTime.Now.ToString("yyyyMMdd") + ".xml";
-            string xmlString =
-                @"<?xml version=""1.0"" encoding=""utf-8""?>" +
-                "\n<DailyLog>\n" +
-                    $"<Name>{name}</Name>\n" +
-                    $"<Source>{source}</Source>\n" +
-                    $"<Destination>{destination}</Destination>\n" +
-                    $"<Size>{size}</Size>\n" +
-                    $"<Time>{time}</Time>\n" +
-                    $"<Date>{date}</Date>\n" +
-                "</DailyLog>\n";
-            File.AppendAllText(fileName, xmlString);
-        }
-
-
     }
 }
