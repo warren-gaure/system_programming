@@ -68,29 +68,16 @@ namespace LivrableMVVM.ViewModel
 
         public ICommand TypeLogCommand { get; set; }
 
+        SaveModel saveModel;
+
         public ExecuteViewModel ()
         { 
             ExecuteCommand = new ExecuteSavesCommand ();
             TypeLogCommand = new TypeLogCommand(this);
 
             //get all projectSaves and display them into the view
-            _saves= new ObservableCollection<Saves> ();
-            _saves.Add(new Saves()) ;
-            _saves.Add(new Saves("source","dest","DIFFERENTIAL","ProjectSave"));
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
-            _saves.Add(new Saves());
+            saveModel = new SaveModel();
+            _saves = saveModel.getSaves();
 
         }
     }
