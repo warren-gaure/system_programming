@@ -1,4 +1,5 @@
-﻿using LivrableMVVM.ViewModel;
+﻿using livrableMVVM.Model;
+using LivrableMVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,18 @@ namespace LivrableMVVM.Commands
 {
     internal class ExecuteSavesCommand : CommandBase
     {
-        
-        public ExecuteSavesCommand()
+        private ExecuteViewModel _evm;
+
+        public ExecuteSavesCommand(ExecuteViewModel evm)
         {
-            
+            _evm= evm;
         }
         public override void Execute(object? parameter)
         {
-           
+           SaveModel saveModel = new SaveModel();
+           DailyLogs dailyLogsModel= new DailyLogs();
+            //dailyLogsModel.DailyLogsFunction();
+           saveModel.executeSave(_evm.SelectedItem);
         }
     }
 }

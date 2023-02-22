@@ -52,6 +52,25 @@ namespace livrableMVVM.Model
 
 
         }
+        public void DailyLogsFunction(Saves save, string saveSizeEntry, long saveTimeEntry, DateTime dateEntry, long encryptionTime)
+        {
+            var dailyLogs = new DailyLogsModel()
+            {
+                saveName = save.saveName,
+                sourceTarget = save.sourceTarget,
+                destinationTarget = save.destinationTarget,
+                saveSize = saveSizeEntry,
+                saveTime = saveTimeEntry,
+                date = dateEntry,
+                encryptionTime = encryptionTime
+            };
+            string jsonString = JsonSerializer.Serialize(dailyLogs);
+            string fileName = "..\\..\\..\\dailyLogs" + DateTime.Now.ToString("yyyyMMdd") + ".json";
+            jsonString += "\n";
+            File.AppendAllText(fileName, jsonString);
+
+
+        }
 
         /// <summary>
         /// This method takes all attributes of a DailyLogs object and saves them in a newly created .XML file.
