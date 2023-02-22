@@ -24,7 +24,7 @@ namespace livrableMVVM.Model
         {"complete", "complete"},
         {"diff", "différentiel" },
         {"changeLang", "Changer la langue" },
-        {"selectLang", "Sélectionner une langue" },
+        {"selectLang", "Sélectionner une langue :" },
         {"noSaveFound", "Aucune sauvegarde trouvé" },
         {"createTitle","Création" },
         {"createDetails","Entrer les informations pour créer la sauvegarde" },
@@ -38,6 +38,7 @@ namespace livrableMVVM.Model
         {"optionDetails","Options de l'application" },
         {"language","Langage" },
         {"businessSoftware","Logiciel Metier :" },
+        {"homeTitle","Accueil" },
 
     };
         Dictionary<string, string> english = new Dictionary<string, string>
@@ -55,7 +56,7 @@ namespace livrableMVVM.Model
         {"complete", "complete"},
         {"diff", "differential" },
         {"changeLang", "Change the language" },
-        {"selectLang", "Select a language" },
+        {"selectLang", "Select a language :" },
         {"noSaveFound", "No save found" },
         {"createTitle","Creation" },
         {"createDetails","Enter informations to create a save" },
@@ -69,7 +70,8 @@ namespace livrableMVVM.Model
         {"optionDetails","Options of the application" },
         {"language","Language" },
         {"businessSoftware","Business Software :" },
-        
+        {"homeTitle","Home" },
+
     };
 
         /// <summary>

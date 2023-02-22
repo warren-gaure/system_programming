@@ -212,12 +212,23 @@ namespace LivrableMVVM.ViewModel
         public ICommand TypeCommand { get; set; }
 
         private LanguageModel _languageModel;
+        private SaveModel _saveModel;
 
 
         public CreateViewModel() 
         {
-            _languageModel= new LanguageModel();
-            dictionnary = _languageModel.languages("");
+            _saveModel = new SaveModel();
+            _languageModel = new LanguageModel();
+            var conf = _saveModel.GetConfig();
+            if (conf.language == "English")
+            {
+                dictionnary = _languageModel.languages("eng");
+            }
+            else
+            {
+                dictionnary = _languageModel.languages("");
+            }
+            
             CreateCommand = new CreateSaveCommand(this);
             TypeCommand = new TypeOfTheSaveCommand(this);
 

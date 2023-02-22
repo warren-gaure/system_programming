@@ -145,8 +145,16 @@ namespace LivrableMVVM.ViewModel
             //get all projectSaves and display them into the view
             _saveModel = new SaveModel();
             _languageModel = new LanguageModel();
-            dictionnary = _languageModel.languages("");
             var conf = _saveModel.GetConfig();
+ 
+            if (conf.language == "English")
+            {
+                dictionnary = _languageModel.languages("eng");
+            }
+            else
+            {
+                dictionnary = _languageModel.languages("");
+            }
             _saves = _saveModel.getSaves();
 
             //trad

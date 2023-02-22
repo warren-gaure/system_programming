@@ -15,6 +15,8 @@ namespace LivrableMVVM.ViewModel
         public ViewModelBase? ExecuteViewModel { get; set; }
         public ViewModelBase? OptionViewModel { get; set; }
 
+        public ViewModelBase? HeaderViewModel { get; set; }
+
         public ICommand HomeViewCommand { get; }
         public ICommand CreateViewCommand { get; }
         public ICommand ExecuteViewCommand { get; }
@@ -26,6 +28,8 @@ namespace LivrableMVVM.ViewModel
             CreateViewModel = new CreateViewModel();
             ExecuteViewModel = new ExecuteViewModel();
             OptionViewModel = new OptionViewModel();
+            HeaderViewModel = new HeaderViewModel();
+
             ExecuteViewCommand = new ExecuteViewBindCommand(this);
         }
 

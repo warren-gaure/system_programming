@@ -91,6 +91,33 @@ namespace LivrableMVVM.ViewModel
             }
         }
 
+        private string _languageTitle;
+        public string LanguageTitle
+        {
+            get
+            {
+                return _languageTitle;
+            }
+            set
+            {
+                _languageTitle = value;
+                OnPropertyChanged(nameof(LanguageTitle));
+            }
+        }
+
+        private string _businessTitle;
+        public string BusinessTitle
+        {
+            get
+            {
+                return _businessTitle;
+            }
+            set
+            {
+                _languageTitle = value;
+                OnPropertyChanged(nameof(BusinessTitle));
+            }
+        }
 
         private string _buttonTitle;
         public string ButtonTitle
@@ -103,6 +130,7 @@ namespace LivrableMVVM.ViewModel
             {
                 _buttonTitle = value;
                 OnPropertyChanged(nameof(ButtonTitle));
+
             }
         }
 
@@ -116,8 +144,15 @@ namespace LivrableMVVM.ViewModel
             SaveConfigCommand = new SaveConfigCommand(this);
             _saveModel = new SaveModel();
             _languageModel= new LanguageModel();
-            dictionnary = _languageModel.languages("");
             var conf = _saveModel.GetConfig();
+            if (conf.language == "English")
+            {
+                dictionnary = _languageModel.languages("eng");
+            }
+            else
+            {
+                dictionnary = _languageModel.languages("");
+            }
             _selectedItem = conf.language;
             _businessSoftware= conf.businessSoftware;
             _languages = new ObservableCollection<string>();
@@ -125,9 +160,10 @@ namespace LivrableMVVM.ViewModel
             _languages.Add(new string("Français"));
 
             //trad
-            _title = dictionnary["createTitle"];
-            _description = dictionnary["createDetails"];
-            
+            _title = dictionnary["optionTitle"];
+            _description = dictionnary["optionDetails"];
+            _languageTitle = dictionnary["selectLang"];
+            _businessTitle = dictionnary["businessSoftware"];
             _buttonTitle = dictionnary["save"];
 
 
