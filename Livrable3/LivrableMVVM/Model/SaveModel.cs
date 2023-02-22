@@ -59,7 +59,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="saveName"></param>
         /// <returns></returns>
-        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf)
+        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf, int filesizemax)
         {
             name = saveFromFile.saveName;
             dest = saveFromFile.destinationTarget;
@@ -75,6 +75,7 @@ namespace Livrable3.Model
             DirectoryInfo target = new DirectoryInfo(dest);
             try
             {
+
                 Directory.CreateDirectory(saveFromFile.destinationTarget);
                 switch (saveFromFile.type)
                 {
@@ -97,7 +98,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, filesizemax);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -112,15 +113,17 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory, int filesizemax)
         {
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
+                
                 Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
                 Notify();
+               
             }
         }
 
@@ -243,21 +246,13 @@ namespace Livrable3.Model
                 }
             }
         }
-        public List<FileInfo> ParamSend(string sourcePath, int fileSizeMax, string extensions)
+        public List<FileInfo> ParamSend(string sourcePath, string extensions)
         {
             List<FileInfo> files = nav(sourcePath);
-            List<FileInfo> fileToSend= new List<FileInfo>();
             List<FileInfo> fileToReturn = new List<FileInfo>();
             List<FileInfo> fileToSendFirst = new List<FileInfo>();
             List<string> exts = extensions.Split(",").ToList();
-            foreach (FileInfo file in files)
-            {
-                if (file.Length > fileSizeMax)
-                {
-                    fileToSend.Add(file);
-                }
-            }
-            foreach(FileInfo file in fileToSend)
+            foreach(FileInfo file in files)
             {
                 foreach(string ext in exts)
                 {
@@ -265,12 +260,12 @@ namespace Livrable3.Model
                     if (fileExt.Equals(ext))
                     {
                         fileToSendFirst.Add(file);
-                        fileToSend.Remove(file);
+                        files.Remove(file);
                     }
                 }
             }
             fileToReturn.AddRange(fileToSendFirst);
-            fileToReturn.AddRange(fileToSend);
+            fileToReturn.AddRange(files);
 
             return fileToReturn;
         }

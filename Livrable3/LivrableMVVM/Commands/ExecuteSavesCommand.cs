@@ -27,8 +27,7 @@ namespace Livrable3.Commands
             Thread newThread = new Thread(new ParameterizedThreadStart(modelSave.executeSave));
             newThread.Start(saves);*/
             string saves = "test";
-            string sourcePath;
-            int fileSizeMax; 
+            string sourcePath; 
             string extensions;
             SaveModel modelSave = new SaveModel();
             string fileName = "..\\..\\..\\repoSaves\\" + saveName;
@@ -36,7 +35,7 @@ namespace Livrable3.Commands
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
             Thread thread = new Thread(() =>
             {
-                List<FileInfo> fileInfos = modelSave.ParamSend(saveFromFile.sourceTarget, fileSizeMax, extensions);
+                List<FileInfo> fileInfos = modelSave.ParamSend(saveFromFile.sourceTarget, extensions);
                 Saves execSave = modelSave.executeSave(saveFromFile, fileInfos);
             });
 
