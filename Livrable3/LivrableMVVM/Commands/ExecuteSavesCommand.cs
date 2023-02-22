@@ -13,19 +13,18 @@ namespace Livrable3.Commands
 {
     internal class ExecuteSavesCommand : CommandBase
     {
-        
-        public ExecuteSavesCommand()
+
+        private ExecuteViewModel _evm;
+
+        public ExecuteSavesCommand(ExecuteViewModel evm)
         {
-            
+            _evm = evm;
         }
 
         public override void Execute(object? parameter)
         {
-/*            string saves = "test";
-            SaveModel modelSave = new SaveModel();
-            delExecSave del = modelSave.executeSave;
-            Thread newThread = new Thread(new ParameterizedThreadStart(modelSave.executeSave));
-            newThread.Start(saves);*/
+            SaveModel saveModel = new SaveModel();
+            DailyLogs dailyLogsModel = new DailyLogs();
             string saves = "test";
             string sourcePath;
             string saveName = "";
@@ -37,7 +36,7 @@ namespace Livrable3.Commands
             Thread thread = new Thread(() =>
             {
                 List<FileInfo> fileInfos = modelSave.ParamSend(saveFromFile.sourceTarget, extensions);
-                Saves execSave = modelSave.executeSave(saveFromFile, fileInfos);
+                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos);
             });
 
             thread.Start();
