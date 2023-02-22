@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +22,8 @@ namespace Livrable3
         {
             if (!mutex.WaitOne(0, false))
             {
-                MessageBox.Show("An instance is already running.");
+                MessageBox.Show("The application is already running.\nL'application est déjà en cours.");
+                Process.GetCurrentProcess().Kill();
                 return;
             }
 
