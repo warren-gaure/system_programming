@@ -11,7 +11,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Margin="10" Grid.Row="0" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="40">EasySave V2</TextBlock>
-        <TextBlock Margin="10" Grid.Row="1" TextAlignment="Right" VerticalAlignment="Bottom">By ProSoft</TextBlock>
+        <TextBlock  Margin="10,112,10,0" Grid.Row="0" TextAlignment="Center" Foreground="#00A4D1" VerticalAlignment="Top" FontSize="70" Height="264" Grid.RowSpan="2" Text="🅴🅰🆂🆈🆂🅰🆅🅴 🆅2"/>
+        <TextBlock Margin="10" Grid.Row="1" TextAlignment="Right" VerticalAlignment="Bottom" Foreground="#00A4D1">By ProSoft</TextBlock>
     </Grid>
 </UserControl>

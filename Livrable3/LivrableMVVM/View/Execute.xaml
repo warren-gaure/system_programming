@@ -18,26 +18,39 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
             <StackPanel Margin="32, 0" VerticalAlignment="Center" Grid.ColumnSpan="3">
-                <TextBlock FontWeight="Bold" FontSize="20" Text="Execute"></TextBlock>
-                <TextBlock Text="Please Select a save to Execute" FontWeight="Medium" FontSize="18"/>
+            <TextBlock FontWeight="Bold" FontSize="20" Text="{Binding Title}" Foreground="White"></TextBlock>
+            <TextBlock Text="{Binding Description}" FontWeight="Medium" FontSize="18" Foreground="White"/>
             </StackPanel>
 
         <Border Padding="10" BorderBrush="Silver" BorderThickness="1" CornerRadius="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="32,0,0,10" Grid.RowSpan="4">
-                <ScrollViewer >
-                    <StackPanel Name="Checkboxs" >
-                    </StackPanel>
-                </ScrollViewer >
-            </Border>
+            <ScrollViewer>
+                <ListView ItemsSource="{Binding ListSaves, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  Header="Save Name" Width="80" DisplayMemberBinding="{Binding saveName}"  />
+                            <GridViewColumn  Header="Source target" Width="150" DisplayMemberBinding="{Binding sourceTarget}" />
+                            <GridViewColumn  Header="Destination target" Width="150" DisplayMemberBinding="{Binding destinationTarget}" />
+                            <GridViewColumn  Header="Type" Width="80" DisplayMemberBinding="{Binding type}" />
+                            <GridViewColumn  Header="Cryptage" Width="100" DisplayMemberBinding="{Binding cryptage}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </Border>
 
-        <Button Grid.Column="3" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding ExecuteCommand}">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
-                </Button.Resources> Execute
-            </Button>
-        </Grid>
+        <Button Content="{Binding ButtonTitle}" Background="#00A4D1" Foreground="#1E1E1E" Click="onExecute" FontWeight="Bold" Grid.Column="3" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding ExecuteCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="{Binding TypeLogTitle}"  Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <RadioButton x:Name="XML" Content="XML" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeLogCommand}" CommandParameter="{Binding ElementName=XML, Path=Content}"></RadioButton>
+        <RadioButton x:Name="JSON" Content="JSON" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeLogCommand}" CommandParameter="{Binding ElementName=JSON, Path=Content}"></RadioButton>
+    </Grid>
 </UserControl>

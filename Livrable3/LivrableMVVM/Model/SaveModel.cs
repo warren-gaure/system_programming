@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -33,6 +34,30 @@ namespace Livrable3.Model
         public string destinationTarget { get; set; }
         public string type { get; set; }
         public string saveName { get; set; }
+        public string cryptage { get; set; }
+
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
+        {
+            this.sourceTarget = sourceTarget;
+            this.destinationTarget = destinationTarget;
+            this.type = type;
+            this.saveName = saveName;
+        }
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage)
+        {
+            this.sourceTarget = sourceTarget;
+            this.destinationTarget = destinationTarget;
+            this.type = type;
+            this.saveName = saveName;
+            this.cryptage = cryptage;
+        }
+        public Saves()
+        {
+            this.sourceTarget = "SourceTest";
+            this.destinationTarget = "DestinationTest";
+            this.type = "COMPLETE";
+            this.saveName = "DefaultSave";
+        }
     }
 
     internal class SaveModel : ISubject
@@ -41,17 +66,12 @@ namespace Livrable3.Model
         string name { get; set; }
         string source { get; set; }
         string dest { get; set; }
-
         bool state { get; set; }
         long totalFilesSize { get; set; }
         long nbTotalFiles { get; set; }
         int nbFIlesLeftToDo { get; set; }
-
         int progresseion { get; set; }
         int filesDone { get; set; }
-
-        
-
         long time { get; set; }
 
         /// <summary>
@@ -59,7 +79,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="saveName"></param>
         /// <returns></returns>
-        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf, int filesizemax)
+        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf)
         {
             name = saveFromFile.saveName;
             dest = saveFromFile.destinationTarget;
@@ -85,7 +105,7 @@ namespace Livrable3.Model
                         break;
                     case "DIFFERENTIAL":
                         fileTemp = filesToTransf;
-            
+
                         foreach (FileInfo file in fileTemp)
                         {
                             FileInfo targetFile = new FileInfo(System.IO.Path.Combine(target.FullName, file.Name));
@@ -98,7 +118,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, filesizemax);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -113,17 +133,17 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory, int filesizemax)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory)
         {
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
-                
+
                 Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
                 Notify();
-               
+
             }
         }
 
@@ -146,16 +166,51 @@ namespace Livrable3.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
 
             if (File.Exists(fileName))
             {
-                File.Delete(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
             }
-            jsonString += "\n";
+            else
+            {
+                File.Create(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
+            }
 
-            File.AppendAllText(fileName, jsonString);
-            return true;
+        }
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry, string crypt)
+        {
+            var saves = new Saves()
+            {
+                sourceTarget = sourceTargetEntry,
+                destinationTarget = destinationTargetEntry,
+                type = typeEntry,
+                saveName = saveNameEntry,
+                cryptage = crypt
+            };
+
+            string jsonString = JsonSerializer.Serialize(saves);
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
+
+            if (File.Exists(fileName))
+            {
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
+            }
+            else
+            {
+                File.Create(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
+            }
+
         }
 
 
@@ -229,9 +284,9 @@ namespace Livrable3.Model
 
         public void didCrypto(string[] extension, string path, string destPath, int key)
         {
-            
+
             List<FileInfo> files = nav(path);
-            foreach(string ext  in extension)
+            foreach (string ext in extension)
             {
                 foreach (FileInfo file in files)
                 {
@@ -252,9 +307,9 @@ namespace Livrable3.Model
             List<FileInfo> fileToReturn = new List<FileInfo>();
             List<FileInfo> fileToSendFirst = new List<FileInfo>();
             List<string> exts = extensions.Split(",").ToList();
-            foreach(FileInfo file in files)
+            foreach (FileInfo file in files)
             {
-                foreach(string ext in exts)
+                foreach (string ext in exts)
                 {
                     string fileExt = file.Name.Split('.').Last();
                     if (fileExt.Equals(ext))
@@ -287,8 +342,72 @@ namespace Livrable3.Model
             pause = true;
             ThreadSleep(thread);
         }
+        public ObservableCollection<Saves> getSaves()
+        {
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
+            ObservableCollection<Saves> allSaves = new ObservableCollection<Saves>();
+            if (File.Exists(fileName))
+            {
+                string jsonString = File.ReadAllText(fileName);
+                string[] lines = jsonString.Split('\n');
+                foreach (string line in lines)
+                {
+                    if (line != "")
+                    {
+                        Saves mySave = JsonSerializer.Deserialize<Saves>(line);
+                        allSaves.Add(mySave);
+                    }
+                }
 
+            }
+            else
+            {
+                File.Create(fileName);
+
+            }
+            return allSaves;
+        }
+        public configModel GetConfig()
+        {
+            string fileName = "..\\..\\..\\Saves\\Config.json";
+            configModel config = new configModel();
+            if (File.Exists(fileName))
+            {
+                string jsonString = File.ReadAllText(fileName);
+                if (jsonString != "")
+                {
+                    config = JsonSerializer.Deserialize<configModel>(jsonString);
+                }
+            }
+            else
+            {
+                File.Create(fileName);
+            }
+
+            return config;
+        }
+        public void SaveConfig(string language, string businessSoftware)
+        {
+            var config = new configModel()
+            {
+                language = language,
+                businessSoftware = businessSoftware
+            };
+
+            string jsonString = JsonSerializer.Serialize(config);
+            string fileName = "..\\..\\..\\Saves\\Config.json";
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+                File.AppendAllText(fileName, jsonString);
+
+            }
+            else
+            {
+                File.Create(fileName);
+                File.AppendAllText(fileName, jsonString);
+            }
+        }
     }
-
-
-    }
+}

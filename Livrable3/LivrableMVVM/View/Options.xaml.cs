@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Livrable3.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,18 +27,28 @@ namespace Livrable3.View
             InitializeComponent();
         }
 
-        public void OnFolderClicked(object sender, RoutedEventArgs e)
+        public void OnFolderclicked(object sender, RoutedEventArgs e)
         {
-            using (var fbd = new FolderBrowserDialog())
+            using (var fbd = new OpenFileDialog())
             {
+                fbd.Filter = "exe files (*.exe)|*.exe|All files (*.*)|*.*";
                 DialogResult result = fbd.ShowDialog();
 
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName))
                 {
-                    this.Folder.Text = fbd.SelectedPath;
+                    this.Metier.Text = fbd.FileName;
                 }
             }
         }
 
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void ReloadView(object sender, RoutedEventArgs e)
+        {
+            //this.DataContext = new OptionViewModel();
+        }
     }
 }
