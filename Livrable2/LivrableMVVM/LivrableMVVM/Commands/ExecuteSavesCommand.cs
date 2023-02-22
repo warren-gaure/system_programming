@@ -19,6 +19,8 @@ namespace LivrableMVVM.Commands
         public override void Execute(object? parameter)
         {
            SaveModel saveModel = new SaveModel();
+           DailyLogs dailyLogsModel= new DailyLogs();
+            //dailyLogsModel.DailyLogsFunction();
            saveModel.executeSave(_evm.SelectedItem);
         }
     }
