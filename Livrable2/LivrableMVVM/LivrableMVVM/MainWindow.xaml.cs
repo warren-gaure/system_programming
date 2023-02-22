@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrableMVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,7 @@ namespace LivrableMVVM
             this.Create.Visibility = Visibility.Hidden;
             this.Execute.Visibility = Visibility.Visible;
             this.Option.Visibility = Visibility.Hidden;
+            this.DataContext = new MainViewModel();
         }
 
         private void OnOptionClicked(object sender, RoutedEventArgs e)

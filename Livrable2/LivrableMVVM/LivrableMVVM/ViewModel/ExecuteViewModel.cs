@@ -30,6 +30,11 @@ namespace LivrableMVVM.ViewModel
                 OnPropertyChanged(nameof(ListSaves));
             }
         }
+        public void reloadList()
+        {
+            ListSaves = _saveModel.getSaves();
+        }
+
         private Saves selectedItem = new Saves();
 
         public Saves SelectedItem
@@ -68,7 +73,7 @@ namespace LivrableMVVM.ViewModel
 
         public ICommand TypeLogCommand { get; set; }
 
-        SaveModel saveModel;
+        private SaveModel _saveModel;
 
         public ExecuteViewModel ()
         { 
@@ -76,8 +81,8 @@ namespace LivrableMVVM.ViewModel
             TypeLogCommand = new TypeLogCommand(this);
 
             //get all projectSaves and display them into the view
-            saveModel = new SaveModel();
-            _saves = saveModel.getSaves();
+            _saveModel = new SaveModel();
+            _saves = _saveModel.getSaves();
 
         }
     }
