@@ -19,8 +19,8 @@ namespace Livrable3.ViewModel
         public ICommand CreateViewCommand { get; }
         public ICommand ExecuteViewCommand { get; }
         public ICommand OptionViewCommand { get; }
-        public MainViewModel() 
-        { 
+        public MainViewModel()
+        {
             CreateViewCommand = new CreateViewBindCommand(this);
             ExecuteViewCommand = new ExecuteViewBindCommand(this);
             OptionViewCommand = new OptionViewBindCommand(this);
@@ -31,6 +31,6 @@ namespace Livrable3.ViewModel
             OptionViewModel = new OptionViewModel();
         }
 
-        
+
     }
 }

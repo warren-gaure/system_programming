@@ -10,11 +10,43 @@ namespace Livrable3.ViewModel
 {
     public class ExecuteViewModel : ViewModelBase
     {
+        private string _typeLog;
+
+        public string TypeLog
+        {
+            get
+            {
+                return _typeLog;
+            }
+            set
+            {
+                _typeLog = value;
+                OnPropertyChanged(nameof(TypeLog));
+            }
+        }
+
+        private string[] _saves;
+        public string[] Saves
+        {
+            get
+            {
+                return _saves;
+            }
+            set
+            {
+                _saves = value;
+                OnPropertyChanged(nameof(Saves));
+            }
+        }
+
         public ICommand ExecuteCommand { get; }
 
-        public ExecuteViewModel ()
-        { 
-            ExecuteCommand = new ExecuteSavesCommand ();
+        public ICommand TypeLogCommand { get; set; }
+
+        public ExecuteViewModel()
+        {
+            ExecuteCommand = new ExecuteSavesCommand();
+            TypeLogCommand = new TypeLogCommand(this);
         }
     }
 }

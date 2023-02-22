@@ -13,17 +13,17 @@ namespace Livrable3.ViewModel
     {
         private string _name;
 
-        public string Name 
+        public string Name
         {
-            get 
-            { 
-                return _name; 
-            } 
-            set 
-            { 
-                _name = value; 
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
                 OnPropertyChanged(nameof(Name));
-            } 
+            }
         }
 
 
@@ -57,6 +57,21 @@ namespace Livrable3.ViewModel
             }
         }
 
+        private string _extension;
+
+        public string Extension
+        {
+            get
+            {
+                return _extension;
+            }
+            set
+            {
+                _extension = value;
+                OnPropertyChanged(nameof(Extension));
+            }
+        }
+
         private string _type;
 
         public string Type
@@ -73,12 +88,11 @@ namespace Livrable3.ViewModel
         }
 
         public ICommand CreateCommand { get; }
+        public ICommand TypeCommand { get; set; }
 
-        public CreateViewModel() 
+        public CreateViewModel()
         {
             CreateCommand = new CreateSaveCommand();
-        
+            TypeCommand = new TypeOfTheSaveCommand(this);
         }
-
     }
-}
