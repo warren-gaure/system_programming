@@ -59,14 +59,9 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="saveName"></param>
         /// <returns></returns>
-        public Saves executeSave(string saveName)
+        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf)
         {
-            string save = "";
-            string fileName = "..\\..\\..\\repoSaves\\" + saveName;
-            save = System.IO.File.ReadAllText(fileName);
-            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
             name = saveFromFile.saveName;
-            string source = saveFromFile.sourceTarget;
             dest = saveFromFile.destinationTarget;
             List<FileInfo> fileToCopy = new List<FileInfo>();
             List<FileInfo> fileTemp = new List<FileInfo>();
@@ -77,7 +72,6 @@ namespace Livrable3.Model
             List<long> temp = TotalFilesNumberAndSizeFunction(source);
             totalFilesSize = temp[0];
             nbTotalFiles = temp[1];
-            DirectoryInfo sourcetarget = new DirectoryInfo(source);
             DirectoryInfo target = new DirectoryInfo(dest);
             try
             {
@@ -85,12 +79,12 @@ namespace Livrable3.Model
                 switch (saveFromFile.type)
                 {
                     case "COMPLETE":
-                        fileToCopy = nav(source);
+                        fileToCopy = filesToTransf;
 
                         break;
                     case "DIFFERENTIAL":
-                        fileTemp = nav(source);
-
+                        fileTemp = filesToTransf;
+            
                         foreach (FileInfo file in fileTemp)
                         {
                             FileInfo targetFile = new FileInfo(System.IO.Path.Combine(target.FullName, file.Name));
