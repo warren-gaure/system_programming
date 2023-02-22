@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Navigation;
@@ -34,16 +35,9 @@ namespace Livrable3.Model
         public string saveName { get; set; }
     }
 
-    public class config
-    {
-        public string language { get; set; }
-        public string businessSoftware { get; set; }
-    }
-
-
     internal class SaveModel : ISubject
     {
-        private List<IObserver> _observers = new List<IObserver>();
+        public List<IObserver> _observers = new List<IObserver>();
         string name { get; set; }
         string source { get; set; }
         string dest { get; set; }
@@ -56,7 +50,7 @@ namespace Livrable3.Model
         int progresseion { get; set; }
         int filesDone { get; set; }
 
-
+        
 
         long time { get; set; }
 
@@ -72,8 +66,10 @@ namespace Livrable3.Model
             save = System.IO.File.ReadAllText(fileName);
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
             name = saveFromFile.saveName;
-            source = saveFromFile.sourceTarget;
+            string source = saveFromFile.sourceTarget;
             dest = saveFromFile.destinationTarget;
+            List<FileInfo> fileToCopy = new List<FileInfo>();
+            List<FileInfo> fileTemp = new List<FileInfo>();
             filesDone = 0;
             nbFIlesLeftToDo = 0;
             totalFilesSize = 0;
@@ -81,24 +77,34 @@ namespace Livrable3.Model
             List<long> temp = TotalFilesNumberAndSizeFunction(source);
             totalFilesSize = temp[0];
             nbTotalFiles = temp[1];
-
+            DirectoryInfo sourcetarget = new DirectoryInfo(source);
+            DirectoryInfo target = new DirectoryInfo(dest);
             try
             {
                 Directory.CreateDirectory(saveFromFile.destinationTarget);
                 switch (saveFromFile.type)
                 {
                     case "COMPLETE":
-                        CopyDirectoryComplete(saveFromFile.sourceTarget, saveFromFile.destinationTarget);
-                        Console.WriteLine("Backup type complete completed successfully.");
+                        fileToCopy = nav(source);
 
                         break;
                     case "DIFFERENTIAL":
-                        CopyDirectoryDifferential(saveFromFile.sourceTarget, saveFromFile.destinationTarget);
-                        Console.WriteLine("Backup type complete differential successfully.");
+                        fileTemp = nav(source);
+
+                        foreach (FileInfo file in fileTemp)
+                        {
+                            FileInfo targetFile = new FileInfo(System.IO.Path.Combine(target.FullName, file.Name));
+                            if (!targetFile.Exists || file.LastWriteTime > targetFile.LastWriteTime)
+                            {
+                                fileToCopy.Add(file);
+                            }
+                        }
                         break;
                     default:
                         break;
                 }
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget);
+                Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
             {
@@ -108,62 +114,20 @@ namespace Livrable3.Model
             return saveFromFile;
         }
         /// <summary>
-        /// Copy all file from sourceDirectory to targetDirectory
+        /// Copy all modified file or new file from sourceDirectory to targetDirectory
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory)
         {
-            DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
-            if (target.Exists) target.Delete(true);
-
-            target.Create();
-
-            foreach (FileInfo file in source.GetFiles())
+            foreach (FileInfo file in files)
             {
                 Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
                 Notify();
             }
-
-            foreach (DirectoryInfo subDirectory in source.GetDirectories())
-                CopyDirectoryComplete(subDirectory.FullName, System.IO.Path.Combine(target.FullName, subDirectory.Name));
-
-            return filesDone;
-        }
-        /// <summary>
-        /// Copy all modified file or new file from sourceDirectory to targetDirectory
-        /// </summary>
-        /// <param name="sourceDirectory"></param>
-        /// <param name="targetDirectory"></param>
-        private long CopyDirectoryDifferential(string sourceDirectory, string targetDirectory)
-        {
-            DirectoryInfo source = new DirectoryInfo(sourceDirectory);
-            DirectoryInfo target = new DirectoryInfo(targetDirectory);
-
-            if (!target.Exists)
-                target.Create();
-
-            foreach (FileInfo file in source.GetFiles())
-            {
-                Notify();
-                FileInfo targetFile = new FileInfo(System.IO.Path.Combine(target.FullName, file.Name));
-                if (!targetFile.Exists || file.LastWriteTime > targetFile.LastWriteTime)
-                {
-                    file.CopyTo(targetFile.FullName, true);
-                }
-                filesDone++;
-                Notify();
-            }
-
-            foreach (DirectoryInfo subDirectory in source.GetDirectories())
-            {
-                DirectoryInfo targetSubDirectory = new DirectoryInfo(System.IO.Path.Combine(target.FullName, subDirectory.Name));
-                CopyDirectoryDifferential(subDirectory.FullName, targetSubDirectory.FullName);
-            }
-            return filesDone;
         }
 
         /// <summary>
@@ -285,10 +249,11 @@ namespace Livrable3.Model
                 }
             }
         }
-        public void ParamSend(string sourcePath, int fileSizeMax, string extensions)
+        public List<FileInfo> ParamSend(string sourcePath, int fileSizeMax, string extensions)
         {
             List<FileInfo> files = nav(sourcePath);
             List<FileInfo> fileToSend= new List<FileInfo>();
+            List<FileInfo> fileToReturn = new List<FileInfo>();
             List<FileInfo> fileToSendFirst = new List<FileInfo>();
             List<string> exts = extensions.Split(",").ToList();
             foreach (FileInfo file in files)
@@ -310,6 +275,10 @@ namespace Livrable3.Model
                     }
                 }
             }
+            fileToReturn.AddRange(fileToSendFirst);
+            fileToReturn.AddRange(fileToSend);
+
+            return fileToReturn;
         }
         public void threadPause()
         {
