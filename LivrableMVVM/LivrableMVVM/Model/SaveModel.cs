@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -30,6 +32,21 @@ namespace livrableMVVM.Model
         public string destinationTarget { get; set; }
         public string type { get; set; }
         public string saveName { get; set; }
+
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
+        {
+            this.sourceTarget = sourceTarget;
+            this.destinationTarget = destinationTarget;
+            this.type = type;
+            this.saveName = saveName;
+        }
+        public Saves()
+        {
+            this.sourceTarget = "SourceTest";
+            this.destinationTarget = "DestinationTest";
+            this.type = "COMPLETE";
+            this.saveName = "DefaultSave";
+        }
     }
 
     public class config
@@ -283,6 +300,26 @@ namespace livrableMVVM.Model
                 }
             }
             
+        }
+        public ObservableCollection<Saves> getSaves()
+        {
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
+            ObservableCollection<Saves> allSaves = new ObservableCollection<Saves>();
+            if (File.Exists(fileName))
+            {
+                string jsonString = File.ReadAllText(fileName);
+                string[] lines = jsonString.Split('\n');
+                foreach (string line in lines)
+                {
+                    Saves mySave = JsonSerializer.Deserialize<Saves>(line);
+                    allSaves.Add(mySave);
+                }
+                return allSaves;
+            } else
+            {
+                File.Create(fileName);
+                return allSaves;
+            }            
         }
     }
 }
