@@ -20,12 +20,13 @@ namespace LivrableMVVM.ViewModel
         public ICommand ExecuteViewCommand { get; }
         public ICommand OptionViewCommand { get; }
         public MainViewModel() 
-        { 
-
+        {
+            
             HomeViewModel = new ViewModelBase();
             CreateViewModel = new CreateViewModel();
             ExecuteViewModel = new ExecuteViewModel();
             OptionViewModel = new OptionViewModel();
+            ExecuteViewCommand = new ExecuteViewBindCommand(this);
         }
 
         

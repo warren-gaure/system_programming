@@ -28,7 +28,7 @@
 
         <Border Padding="10" BorderBrush="Silver" BorderThickness="1" CornerRadius="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="32,0,0,10" Grid.RowSpan="4">
             <ScrollViewer>
-                <ListView ItemsSource="{Binding ListSaves}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
+                <ListView ItemsSource="{Binding ListSaves, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn  Header="Save Name" Width="80" DisplayMemberBinding="{Binding saveName}"  />

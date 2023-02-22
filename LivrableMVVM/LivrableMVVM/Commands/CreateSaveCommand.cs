@@ -1,4 +1,6 @@
-﻿using System;
+﻿using livrableMVVM.Model;
+using LivrableMVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +10,15 @@ namespace LivrableMVVM.Commands
 {
     internal class CreateSaveCommand : CommandBase
     {
-        public CreateSaveCommand()
+        CreateViewModel _cvm;
+        public CreateSaveCommand(CreateViewModel cvm)
         {
-
+            _cvm = cvm;
         }
         public override void Execute(object? parameter)
         {
-
+            SaveModel temp = new SaveModel();
+            temp.createNewSave(_cvm.Source,_cvm.Target,_cvm.Type,_cvm.Name);
         }
 
     }

@@ -200,16 +200,21 @@ namespace livrableMVVM.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
 
             if (File.Exists(fileName))
             {
-                File.Delete(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;          
+            } else
+            {
+                File.Create(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
             }
-            jsonString += "\n";
-
-            File.AppendAllText(fileName, jsonString);
-            return true;
+            
         }
 
 
@@ -311,8 +316,11 @@ namespace livrableMVVM.Model
                 string[] lines = jsonString.Split('\n');
                 foreach (string line in lines)
                 {
-                    Saves mySave = JsonSerializer.Deserialize<Saves>(line);
-                    allSaves.Add(mySave);
+                    if (line != "")
+                    {
+                        Saves mySave = JsonSerializer.Deserialize<Saves>(line);
+                        allSaves.Add(mySave);
+                    }
                 }
                 return allSaves;
             } else

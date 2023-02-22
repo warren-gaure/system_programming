@@ -55,7 +55,7 @@
             </Button.Resources> Create
         </Button>
         <TextBlock Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Type :</TextBlock>
-        <RadioButton x:Name="complete" Content="Complete" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
-        <RadioButton x:Name="differential" Content="Différentiel"  Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
+        <RadioButton x:Name="complete" Content="COMPLETE" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
+        <RadioButton x:Name="differential" Content="DIFFERENTIAL" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
     </Grid>
 </UserControl>
