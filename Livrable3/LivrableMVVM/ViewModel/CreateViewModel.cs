@@ -96,3 +96,4 @@ namespace Livrable3.ViewModel
             TypeCommand = new TypeOfTheSaveCommand(this);
         }
     }
+}
