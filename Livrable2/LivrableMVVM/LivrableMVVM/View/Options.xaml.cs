@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrableMVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,12 @@ namespace LivrableMVVM.View
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+        }
 
+        private void ReloadView(object sender, RoutedEventArgs e)
+        {
+            //this.DataContext = new OptionViewModel();
         }
     }
 }

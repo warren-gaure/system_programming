@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
+    <Folder Include="Saves\" />
   </ItemGroup>
 
   <ItemGroup>

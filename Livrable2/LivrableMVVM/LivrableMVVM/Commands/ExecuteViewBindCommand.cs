@@ -9,10 +9,10 @@ namespace LivrableMVVM.Commands
 {
     internal class ExecuteViewBindCommand : CommandBase
     {
-        MainViewModel _mvm;
-        public ExecuteViewBindCommand(MainViewModel mvm)
+        MainViewModel _evm;
+        public ExecuteViewBindCommand(MainViewModel evm)
         {
-            _mvm = mvm;
+            _evm = evm;
         }
         public override void Execute(object? parameter)
         {
