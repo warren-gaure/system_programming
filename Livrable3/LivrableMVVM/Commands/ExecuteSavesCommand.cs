@@ -27,8 +27,9 @@ namespace Livrable3.Commands
             Thread newThread = new Thread(new ParameterizedThreadStart(modelSave.executeSave));
             newThread.Start(saves);*/
             string saves = "test";
-            string sourcePath; 
-            string extensions;
+            string sourcePath;
+            string saveName = "";
+            string extensions = "";
             SaveModel modelSave = new SaveModel();
             string fileName = "..\\..\\..\\repoSaves\\" + saveName;
             var save = System.IO.File.ReadAllText(fileName);

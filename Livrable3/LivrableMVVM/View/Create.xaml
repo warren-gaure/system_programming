@@ -22,12 +22,12 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="32, 0" VerticalAlignment="Center" Grid.ColumnSpan="4">
-            <TextBlock FontWeight="Bold" FontSize="20" Text="Create" Foreground="White"></TextBlock>
-            <TextBlock Text="Enter informations to create a save" FontWeight="Medium" FontSize="18"  Foreground="White"/>
+            <TextBlock FontWeight="Bold" FontSize="20" Text="{Binding Title}" Foreground="White"></TextBlock>
+            <TextBlock Text="{Binding Description}" FontWeight="Medium" FontSize="18"  Foreground="White"/>
         </StackPanel>
-        <TextBlock TextAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="18" Foreground="White">Name :</TextBlock>
+        <TextBlock Text="{Binding SaveName}" TextAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" FontWeight="Bold" Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Source :</TextBlock>
+        <TextBlock Text="{Binding SourceTitle}" Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Source" Grid.ColumnSpan="2" Margin="10" Grid.Column="1" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnSourceClicked">
             <Button.Resources>
@@ -36,7 +36,7 @@
                 </Style>
             </Button.Resources> ...
         </Button>
-        <TextBlock Grid.Row="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Target :</TextBlock>
+        <TextBlock Text="{Binding DestinationTitle}" Grid.Row="3" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Target" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="3" MaxHeight="20" MaxWidth="45" Click="OnTargetClicked">
             <Button.Resources>
@@ -45,18 +45,17 @@
                 </Style>
             </Button.Resources> ...
         </Button>
-        <TextBlock Grid.Row="4"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Save Type :</TextBlock>
+        <TextBlock Grid.Row="4" Text="{Binding CryptTitle}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Extension, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
+        <Button Content="{Binding ButtonTitle}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
-            </Button.Resources> Create
+            </Button.Resources>
         </Button>
-        <TextBlock Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Type :</TextBlock>
-        <RadioButton x:Name="complete" Content="Complete" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
-        <RadioButton x:Name="differential" Content="Différentiel"  Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
+        <TextBlock Text="{Binding TypeSaveTitle}" Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <RadioButton x:Name="complete" Content="COMPLETE" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
+        <RadioButton x:Name="differential" Content="DIFFERENTIAL" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
     </Grid>
 </UserControl>
-
