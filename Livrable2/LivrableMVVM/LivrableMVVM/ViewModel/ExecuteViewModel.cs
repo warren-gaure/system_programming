@@ -130,7 +130,7 @@ namespace LivrableMVVM.ViewModel
 
 
 
-        public ICommand ExecuteCommand { get; }
+        public ICommand ExecuteCommand { get; set; }
 
         public ICommand TypeLogCommand { get; set; }
 
@@ -139,7 +139,7 @@ namespace LivrableMVVM.ViewModel
 
         public ExecuteViewModel ()
         { 
-            ExecuteCommand = new ExecuteSavesCommand ();
+            
             TypeLogCommand = new TypeLogCommand(this);
 
             //get all projectSaves and display them into the view
@@ -162,7 +162,7 @@ namespace LivrableMVVM.ViewModel
             _description = dictionnary["executeDetails"];
             _typeLogTitle = dictionnary["typeOfLog"];
             _buttonTitle = dictionnary["execute"];
-
+            ExecuteCommand = new ExecuteSavesCommand(this);
 
         }
     }

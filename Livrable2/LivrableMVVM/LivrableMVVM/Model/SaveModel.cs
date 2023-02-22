@@ -131,12 +131,50 @@ namespace livrableMVVM.Model
 
             return saveFromFile;
         }
-        /// <summary>
-        /// Copy all file from sourceDirectory to targetDirectory
-        /// </summary>
-        /// <param name="sourceDirectory"></param>
-        /// <param name="targetDirectory"></param>
-        private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory)
+        public Saves executeSave(Saves saveToExecute)
+        {
+            name = saveToExecute.saveName;
+            source = saveToExecute.sourceTarget;
+            dest = saveToExecute.destinationTarget;
+            filesDone = 0;
+            nbFIlesLeftToDo = 0;
+            totalFilesSize = 0;
+            state = false;
+            List<long> temp = TotalFilesNumberAndSizeFunction(source);
+            totalFilesSize = temp[0];
+            nbTotalFiles = temp[1];
+
+            try
+            {
+                Directory.CreateDirectory(saveToExecute.destinationTarget);
+                switch (saveToExecute.type)
+                {
+                    case "COMPLETE":
+                        CopyDirectoryComplete(saveToExecute.sourceTarget, saveToExecute.destinationTarget);
+                        //Console.WriteLine("Backup type complete completed successfully.");
+
+                        break;
+                    case "DIFFERENTIAL":
+                        CopyDirectoryDifferential(saveToExecute.sourceTarget, saveToExecute.destinationTarget);
+                        //Console.WriteLine("Backup type complete differential successfully.");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return saveToExecute;
+        }
+            /// <summary>
+            /// Copy all file from sourceDirectory to targetDirectory
+            /// </summary>
+            /// <param name="sourceDirectory"></param>
+            /// <param name="targetDirectory"></param>
+            private long CopyDirectoryComplete(string sourceDirectory, string targetDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
