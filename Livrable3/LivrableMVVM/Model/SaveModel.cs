@@ -73,6 +73,16 @@ namespace Livrable3.Model
             totalFilesSize = temp[0];
             nbTotalFiles = temp[1];
             DirectoryInfo target = new DirectoryInfo(dest);
+
+            /* ----------------------------- */
+            // Business Software Handling
+            //Process businessSoftware = new Process();
+            //businessSoftware.StartInfo.FileName = "calc.exe";
+            //foreach(Process process in Process.GetProcesses())
+            //{
+            //    if (process.
+            //}
+
             try
             {
                 Directory.CreateDirectory(saveFromFile.destinationTarget);
