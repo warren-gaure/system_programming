@@ -58,7 +58,7 @@ namespace livrableMVVM.Model
         }
     }
 
-    public class config
+    public class Config
     {
         public string language { get; set; }
         public string businessSoftware { get; set; }
@@ -360,12 +360,54 @@ namespace livrableMVVM.Model
                         allSaves.Add(mySave);
                     }
                 }
-                return allSaves;
+                
             } else
             {
                 File.Create(fileName);
-                return allSaves;
-            }            
+                
+            }
+            return allSaves;
+        }
+        public Config GetConfig()
+        {
+            string fileName = "..\\..\\..\\Saves\\Config.json";
+            Config config= new Config();
+            if (File.Exists(fileName))
+            {
+                string jsonString = File.ReadAllText(fileName);
+                if (jsonString != "")
+                {
+                    config = JsonSerializer.Deserialize<Config>(jsonString);
+                }
+            } else
+            {
+                File.Create(fileName);
+            }
+
+            return config;
+        }
+        public void SaveConfig(string language,string businessSoftware)
+        {
+            var config = new Config()
+            {
+                language = language,
+                businessSoftware = businessSoftware
+            };
+
+            string jsonString = JsonSerializer.Serialize(config);
+            string fileName = "..\\..\\..\\Saves\\Config.json";
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+                File.AppendAllText(fileName, jsonString);
+                
+            }
+            else
+            {
+                File.Create(fileName);
+                File.AppendAllText(fileName, jsonString);   
+            }
         }
     }
 }

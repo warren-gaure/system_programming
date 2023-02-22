@@ -1,4 +1,5 @@
-﻿using LivrableMVVM.Commands;
+﻿using livrableMVVM.Model;
+using LivrableMVVM.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -59,11 +60,16 @@ namespace LivrableMVVM.ViewModel
         }
         public ICommand SaveConfigCommand { get; }
 
+        private SaveModel _saveModel;
+
         public OptionViewModel()
         {
-            SaveConfigCommand = new SaveConfigCommand();
-
-            _languages= new ObservableCollection<string>();
+            SaveConfigCommand = new SaveConfigCommand(this);
+            _saveModel = new SaveModel();
+            var conf = _saveModel.GetConfig();
+            _selectedItem = conf.language;
+            _businessSoftware= conf.businessSoftware;
+            _languages = new ObservableCollection<string>();
             _languages.Add(new string("English"));
             _languages.Add(new string("Français"));
             
