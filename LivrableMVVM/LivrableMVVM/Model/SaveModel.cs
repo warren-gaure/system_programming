@@ -32,6 +32,7 @@ namespace livrableMVVM.Model
         public string destinationTarget { get; set; }
         public string type { get; set; }
         public string saveName { get; set; }
+        public string cryptage { get; set; }
 
         public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
         {
@@ -39,6 +40,14 @@ namespace livrableMVVM.Model
             this.destinationTarget = destinationTarget;
             this.type = type;
             this.saveName = saveName;
+        }
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage)
+        {
+            this.sourceTarget = sourceTarget;
+            this.destinationTarget = destinationTarget;
+            this.type = type;
+            this.saveName = saveName;
+            this.cryptage = cryptage;
         }
         public Saves()
         {
@@ -215,6 +224,35 @@ namespace livrableMVVM.Model
                 return true;
             }
             
+        }
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry,string crypt)
+        {
+            var saves = new Saves()
+            {
+                sourceTarget = sourceTargetEntry,
+                destinationTarget = destinationTargetEntry,
+                type = typeEntry,
+                saveName = saveNameEntry,
+                cryptage = crypt
+            };
+
+            string jsonString = JsonSerializer.Serialize(saves);
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
+
+            if (File.Exists(fileName))
+            {
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
+            }
+            else
+            {
+                File.Create(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
+            }
+
         }
 
 

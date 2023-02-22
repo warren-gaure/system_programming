@@ -35,6 +35,7 @@
                             <GridViewColumn  Header="Source target" Width="150" DisplayMemberBinding="{Binding sourceTarget}" />
                             <GridViewColumn  Header="Destination target" Width="150" DisplayMemberBinding="{Binding destinationTarget}" />
                             <GridViewColumn  Header="Type" Width="80" DisplayMemberBinding="{Binding type}" />
+                            <GridViewColumn  Header="Type" Width="100" DisplayMemberBinding="{Binding cryptage}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
