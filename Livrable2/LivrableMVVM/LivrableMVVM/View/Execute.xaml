@@ -41,7 +41,7 @@
                 </Button.Resources> Execute
             </Button>
         <TextBlock Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">Type :</TextBlock>
-        <RadioButton Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White">XML</RadioButton>
-        <RadioButton Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White">JSON</RadioButton>
+        <RadioButton x:Name="XML" Content="XML" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeLogCommand}" CommandParameter="{Binding ElementName=XML, Path=Content}"></RadioButton>
+        <RadioButton x:Name="JSON" Content="JSON" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeLogCommand}" CommandParameter="{Binding ElementName=JSON, Path=Content}"></RadioButton>
     </Grid>
 </UserControl>
