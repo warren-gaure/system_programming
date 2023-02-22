@@ -56,7 +56,7 @@ namespace LivrableMVVM
             this.Create.Visibility = Visibility.Hidden;
             this.Execute.Visibility = Visibility.Visible;
             this.Option.Visibility = Visibility.Hidden;
-            this.DataContext = new MainViewModel();
+            this.DataContext = new MainViewModel(); //to reload list view in executeView
         }
 
         private void OnOptionClicked(object sender, RoutedEventArgs e)

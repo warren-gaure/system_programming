@@ -18,7 +18,7 @@ namespace LivrableMVVM.Commands
         public override void Execute(object? parameter)
         {
             SaveModel temp = new SaveModel();
-            temp.createNewSave(_cvm.Source,_cvm.Target,_cvm.Type,_cvm.Name);
+            temp.createNewSave(_cvm.Source,_cvm.Target,_cvm.Type,_cvm.Name, _cvm.Extension);
         }
 
     }
