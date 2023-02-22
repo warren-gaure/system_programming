@@ -25,7 +25,7 @@
             <TextBlock FontWeight="Bold" FontSize="20" Text="Create"></TextBlock>
             <TextBlock Text="Enter informations to create a save" FontWeight="Medium" FontSize="18"/>
         </StackPanel>
-        <TextBlock TextAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="18">Name :</TextBlock>
+        <TextBlock Text="{Binding Name}" TextAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="18"></TextBlock>
         <TextBox Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <TextBlock Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18">Source :</TextBlock>
         <TextBox Name="Source" Grid.ColumnSpan="2" Margin="10" Grid.Column="1" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}"></TextBox>

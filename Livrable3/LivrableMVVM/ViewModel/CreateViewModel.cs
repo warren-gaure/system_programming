@@ -11,6 +11,9 @@ namespace Livrable3.ViewModel
 {
     public class CreateViewModel : ViewModelBase
     {
+        /// <summary>
+        /// name's save proprety 
+        /// </summary>
         private string _name;
 
         public string Name 
