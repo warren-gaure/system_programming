@@ -1,4 +1,6 @@
-﻿using System;
+﻿using livrableMVVM.Model;
+using LivrableMVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +10,15 @@ namespace LivrableMVVM.Commands
 {
     internal class SaveConfigCommand : CommandBase
     {
-        public SaveConfigCommand()
+        OptionViewModel _ovm;
+        public SaveConfigCommand(OptionViewModel ovm)
         {
-
+            _ovm = ovm;
         }
         public override void Execute(object? parameter)
         {
-
+            SaveModel temp = new SaveModel();
+            temp.SaveConfig(_ovm.SelectedItem, _ovm.BusinessSoftware);
         }
     }
 }
