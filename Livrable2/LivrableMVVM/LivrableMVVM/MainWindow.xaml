@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LivrableMVVM" 
         xmlns:controls="clr-namespace:LivrableMVVM.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="EasySave" Height="450" Width="850">
      <!--<Window.Background>
         <ImageBrush ImageSource="\Assets\asset.avif"  Stretch="None" />
     </Window.Background>-->
@@ -21,7 +21,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <controls:Header HomeClicked="OnHomeClicked" CreateClicked="OnCreateClicked" ExecuteClicked="OnExecuteClicked" OptionClicked="OnOptionClicked"  Loaded="Header_Loaded"/>
+            <controls:Header HomeClicked="OnHomeClicked" CreateClicked="OnCreateClicked" ExecuteClicked="OnExecuteClicked" OptionClicked="OnOptionClicked"  Loaded="Header_Loaded" DataContext="{Binding HeaderViewModel}"/>
             <controls:Home x:Name="Home" Grid.Row="1" Grid.RowSpan="5" Visibility="visible" DataContext="{Binding HomeViewModel}" />
             <controls:Create x:Name="Create" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" DataContext="{Binding CreateViewModel}" />
             <controls:Execute x:Name="Execute" Grid.Row="1" Grid.RowSpan="5" Visibility="Hidden" DataContext="{Binding ExecuteViewModel}" />

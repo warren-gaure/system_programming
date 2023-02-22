@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -30,9 +32,33 @@ namespace livrableMVVM.Model
         public string destinationTarget { get; set; }
         public string type { get; set; }
         public string saveName { get; set; }
+        public string cryptage { get; set; }
+
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
+        {
+            this.sourceTarget = sourceTarget;
+            this.destinationTarget = destinationTarget;
+            this.type = type;
+            this.saveName = saveName;
+        }
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage)
+        {
+            this.sourceTarget = sourceTarget;
+            this.destinationTarget = destinationTarget;
+            this.type = type;
+            this.saveName = saveName;
+            this.cryptage = cryptage;
+        }
+        public Saves()
+        {
+            this.sourceTarget = "SourceTest";
+            this.destinationTarget = "DestinationTest";
+            this.type = "COMPLETE";
+            this.saveName = "DefaultSave";
+        }
     }
 
-    public class config
+    public class Config
     {
         public string language { get; set; }
         public string businessSoftware { get; set; }
@@ -183,16 +209,50 @@ namespace livrableMVVM.Model
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
-            string fileName = "..\\..\\..\\repoSaves\\" + saveNameEntry + ".json";
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
 
             if (File.Exists(fileName))
             {
-                File.Delete(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;          
+            } else
+            {
+                File.Create(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
             }
-            jsonString += "\n";
+            
+        }
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry,string crypt)
+        {
+            var saves = new Saves()
+            {
+                sourceTarget = sourceTargetEntry,
+                destinationTarget = destinationTargetEntry,
+                type = typeEntry,
+                saveName = saveNameEntry,
+                cryptage = crypt
+            };
 
-            File.AppendAllText(fileName, jsonString);
-            return true;
+            string jsonString = JsonSerializer.Serialize(saves);
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
+
+            if (File.Exists(fileName))
+            {
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
+            }
+            else
+            {
+                File.Create(fileName);
+                jsonString += "\n";
+                File.AppendAllText(fileName, jsonString);
+                return true;
+            }
+
         }
 
 
@@ -283,6 +343,71 @@ namespace livrableMVVM.Model
                 }
             }
             
+        }
+        public ObservableCollection<Saves> getSaves()
+        {
+            string fileName = "..\\..\\..\\Saves\\AllSaves.json";
+            ObservableCollection<Saves> allSaves = new ObservableCollection<Saves>();
+            if (File.Exists(fileName))
+            {
+                string jsonString = File.ReadAllText(fileName);
+                string[] lines = jsonString.Split('\n');
+                foreach (string line in lines)
+                {
+                    if (line != "")
+                    {
+                        Saves mySave = JsonSerializer.Deserialize<Saves>(line);
+                        allSaves.Add(mySave);
+                    }
+                }
+                
+            } else
+            {
+                File.Create(fileName);
+                
+            }
+            return allSaves;
+        }
+        public Config GetConfig()
+        {
+            string fileName = "..\\..\\..\\Saves\\Config.json";
+            Config config= new Config();
+            if (File.Exists(fileName))
+            {
+                string jsonString = File.ReadAllText(fileName);
+                if (jsonString != "")
+                {
+                    config = JsonSerializer.Deserialize<Config>(jsonString);
+                }
+            } else
+            {
+                File.Create(fileName);
+            }
+
+            return config;
+        }
+        public void SaveConfig(string language,string businessSoftware)
+        {
+            var config = new Config()
+            {
+                language = language,
+                businessSoftware = businessSoftware
+            };
+
+            string jsonString = JsonSerializer.Serialize(config);
+            string fileName = "..\\..\\..\\Saves\\Config.json";
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+                File.AppendAllText(fileName, jsonString);
+                
+            }
+            else
+            {
+                File.Create(fileName);
+                File.AppendAllText(fileName, jsonString);   
+            }
         }
     }
 }
