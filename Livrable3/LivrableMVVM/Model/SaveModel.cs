@@ -274,9 +274,26 @@ namespace Livrable3.Model
 
             return fileToReturn;
         }
-        public void threadPause()
+
+        bool pause;
+        public void ThreadSleep(Thread thread)
         {
-            //ici
+
+            while (pause)
+            {
+                Thread.Sleep(2000);
+
+            }
+
         }
+
+        public void ThreadPause(Thread thread)
+        {
+            pause = true;
+            ThreadSleep(thread);
+        }
+
     }
-}
+
+
+    }
