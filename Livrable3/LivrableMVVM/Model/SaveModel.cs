@@ -120,19 +120,30 @@ namespace Livrable3.Model
             return saveFromFile;
         }
         /// <summary>
-        /// Copy all modified file or new file from sourceDirectory to targetDirectory
+        /// Copy all modified files or new files from sourceDirectory to targetDirectory
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
         private void CopyDirectory(List<FileInfo> files, string targetDirectory)
         {
+            // Mutex used to execute the foreach loop in more secure way
+            Mutex mutex = new Mutex();
+
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
+                // Blocking the con
+                mutex.WaitOne();
+
+                /* ------------- CRITICAL SECTION ------------- */
                 Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
                 Notify();
+                /* -------------------------------------------- */
+                
+                // Releasing the mutex
+                mutex.ReleaseMutex();
             }
         }
 
@@ -289,6 +300,24 @@ namespace Livrable3.Model
         public void threadPause()
         {
             //ici
+        }
+
+        // TODO : Mallory - Modifier la méthode pour qu'elle prenne en compte le logiciel métier indiqué par l'utilisateur (changer le if)
+        /// <summary>
+        /// detectBusinessSoftware is a method used by the application to detect if the business software indicated by the user in the options...
+        /// is currently running or not. If it is, the thread executing detectBusinessSoftware will be put to sleep for 1 second.
+        /// </summary>
+        public void detectBusinessSoftware()
+        {
+            foreach (Process process in Process.GetProcesses())
+            {
+                if (process.ProcessName == "CalculatorApp")
+                {
+                    Thread.Sleep(1000);
+                    // Recursively calling the method to make sure if the business software is still running or not
+                    detectBusinessSoftware();
+                }
+            }
         }
     }
 }
