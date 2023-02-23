@@ -132,7 +132,7 @@ namespace Livrable3.Model
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
-                // Blocking the con
+                // Blocking access to the critical section to one thread at the time
                 mutex.WaitOne();
 
                 /* ------------- CRITICAL SECTION ------------- */
