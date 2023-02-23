@@ -83,6 +83,7 @@ namespace Livrable3.Model
         {
             name = saveFromFile.saveName;
             dest = saveFromFile.destinationTarget;
+            source = saveFromFile.sourceTarget;
             List<FileInfo> fileToCopy = new List<FileInfo>();
             List<FileInfo> fileTemp = new List<FileInfo>();
             filesDone = 0;
@@ -171,14 +172,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
 
@@ -200,14 +201,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
 
@@ -349,7 +350,7 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 string jsonString = File.ReadAllText(fileName);
-                string[] lines = jsonString.Split(',');
+                string[] lines = jsonString.Split('\n');
                 foreach (string line in lines)
                 {
                     if (line != "")

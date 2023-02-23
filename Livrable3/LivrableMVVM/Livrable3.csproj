@@ -9,7 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="repoSaves\" />
+    <Compile Remove="repoSaves\**" />
+    <EmbeddedResource Remove="repoSaves\**" />
+    <None Remove="repoSaves\**" />
+    <Page Remove="repoSaves\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Saves\" />
   </ItemGroup>
 
 </Project>

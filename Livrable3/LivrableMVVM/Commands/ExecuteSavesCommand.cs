@@ -25,17 +25,12 @@ namespace Livrable3.Commands
         {
             SaveModel saveModel = new SaveModel();
             DailyLogs dailyLogsModel = new DailyLogs();
-            string saves = "AllSaves.json";
-            string sourcePath;
-            string saveName = "";
-            string extensions = "";
             SaveModel modelSave = new SaveModel();
-            string fileName = "..\\..\\..\\Saves\\" + saves;
-            var save = System.IO.File.ReadAllText(fileName);
-            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
+            string extensions = "";
+           
             Thread thread = new Thread(() =>
             {
-                List<FileInfo> fileInfos = modelSave.ParamSend(saveFromFile.sourceTarget, extensions);
+                List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, extensions);
                 Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos);
             });
 
