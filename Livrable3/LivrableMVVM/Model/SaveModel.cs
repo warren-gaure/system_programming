@@ -145,6 +145,7 @@ namespace Livrable3.Model
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
+                detectBusinessSoftware();
                 // Blocking access to the critical section to one thread at the time
                 mutex.WaitOne();
 
@@ -419,6 +420,24 @@ namespace Livrable3.Model
             {
                 File.Create(fileName);
                 File.AppendAllText(fileName, jsonString);
+            }
+        }
+
+        // TODO : Mallory - Modifier la méthode pour qu'elle prenne en compte le logiciel métier indiqué par l'utilisateur (changer le if)
+        /// <summary>
+        /// detectBusinessSoftware is a method used by the application to detect if the business software indicated by the user in the options...
+        /// is currently running or not. If it is, the thread executing detectBusinessSoftware will be put to sleep for 1 second.
+        /// </summary>
+        public void detectBusinessSoftware()
+        {
+            foreach (Process process in Process.GetProcesses())
+            {
+                if (process.ProcessName == "CalculatorApp")
+                {
+                    Thread.Sleep(1000);
+                    // Recursively calling the method to make sure if the business software is still running or not
+                    detectBusinessSoftware();
+                }
             }
         }
     }
