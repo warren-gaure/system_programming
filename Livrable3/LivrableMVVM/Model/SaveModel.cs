@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
+using System.Windows.Shapes;
 
 namespace Livrable3.Model
 {
@@ -319,22 +320,24 @@ namespace Livrable3.Model
 
         public void didCrypto(string[] extension, string sourcePath, int key)
         {
+            string dest = "..\\..\\..\\Saves\\temp\\";
+            DirectoryInfo dirTemp = new DirectoryInfo(dest);
             List<FileInfo> files = nav(sourcePath);
             foreach (string ext in extension)
             {
                 foreach (FileInfo file in files)
                 {
                     string fileExt = file.Name.Split('.').Last();
-                    string dest = file.FullName.Replace(file.Name, "");
-                    dest = dest + file.Name.Split('.')[0]+"crypt"+fileExt;
                     if (ext.Equals(fileExt))
                     {
                         Process cryptoSoft = new Process();
                         cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
-                        cryptoSoft.StartInfo.Arguments = "\"" + file.FullName + "\" " + "\"" + dest + "\" " + "\"" + key + "\"";
+                        cryptoSoft.StartInfo.Arguments = file.FullName + " " + file.FullName + ".CRYPTED" + " " + key;
                         cryptoSoft.Start();
+                        cryptoSoft.WaitForExit();
                         file.Delete();
                     }
+
                 }
             }
         }
