@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="ExternalConsole.View.View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ExternalConsole.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.ColumnSpan="5" Grid.RowSpan="4">
+            <ListView ItemsSource="{Binding ListSaves, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn  Header="Save Name" Width="80" DisplayMemberBinding="{Binding saveName}"  />
+                        <GridViewColumn Header="Percent" Width="80" DisplayMemberBinding="{Binding percent}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
+        <Button Content="{Binding ButtonPlay}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="1" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PlayCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="{Binding ButtonPause}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PauseCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="{Binding ButtonStop}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="3" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding StopCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</UserControl>

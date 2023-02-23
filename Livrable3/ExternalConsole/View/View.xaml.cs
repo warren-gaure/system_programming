@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Livrable3.View
+namespace ExternalConsole.View
 {
     /// <summary>
-    /// Logique d'interaction pour Execute.xaml
+    /// Logique d'interaction pour View.xaml
     /// </summary>
-    public partial class Execute : UserControl
+    public partial class View : UserControl
     {
-        public Execute()
+        public View()
         {
             InitializeComponent();
         }
-
     }
 }
