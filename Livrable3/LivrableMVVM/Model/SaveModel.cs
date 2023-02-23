@@ -76,8 +76,6 @@ namespace Livrable3.Model
 
             /* ----------------------------- */
             // Business Software Handling
-            Process businessSoftware = new Process();
-            businessSoftware.StartInfo.FileName = "calc.exe";
             foreach (Process process in Process.GetProcesses())
             {
                 if (process.ProcessName == "CalculatorApp")
