@@ -14,6 +14,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -47,15 +48,17 @@
         </Button>
         <TextBlock Grid.Row="4" Text="{Binding CryptTitle}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Extension, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button Content="{Binding ButtonTitle}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
+        <TextBlock Grid.Row="5" Text="Extensions de priorités: " TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <TextBox Background="#303030" Foreground="White" Name="Extension" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" ></TextBox>
+        <Button Content="{Binding ButtonTitle}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="6" Margin="10,10,10,10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Text="{Binding TypeSaveTitle}" Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
-        <RadioButton x:Name="complete" Content="COMPLETE" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
-        <RadioButton x:Name="differential" Content="DIFFERENTIAL" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
+        <TextBlock Text="{Binding TypeSaveTitle}" Grid.Row="6"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <RadioButton x:Name="complete" Content="COMPLETE" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
+        <RadioButton x:Name="differentiel" Content="DIFFERENTIEL" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
     </Grid>
 </UserControl>
