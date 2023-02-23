@@ -86,6 +86,8 @@ namespace Livrable3.Model
             totalFilesSize = temp[0];
             nbTotalFiles = temp[1];
             DirectoryInfo target = new DirectoryInfo(dest);
+            
+            
 
             /* ----------------------------- */
             // Business Software Handling
@@ -315,21 +317,23 @@ namespace Livrable3.Model
             return filesInfo;
         }
 
-        public void didCrypto(string[] extension, string path, string destPath, int key)
+        public void didCrypto(string[] extension, string sourcePath, int key)
         {
-
-            List<FileInfo> files = nav(path);
+            List<FileInfo> files = nav(sourcePath);
             foreach (string ext in extension)
             {
                 foreach (FileInfo file in files)
                 {
                     string fileExt = file.Name.Split('.').Last();
+                    string dest = file.FullName.Replace(file.Name, "");
+                    dest = dest + file.Name.Split('.')[0]+"crypt"+fileExt;
                     if (ext.Equals(fileExt))
                     {
                         Process cryptoSoft = new Process();
                         cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
-                        cryptoSoft.StartInfo.Arguments = "\"" + file.FullName + "\" " + "\"" + destPath + "\" " + "\"" + key + "\"";
+                        cryptoSoft.StartInfo.Arguments = "\"" + file.FullName + "\" " + "\"" + dest + "\" " + "\"" + key + "\"";
                         cryptoSoft.Start();
+                        file.Delete();
                     }
                 }
             }

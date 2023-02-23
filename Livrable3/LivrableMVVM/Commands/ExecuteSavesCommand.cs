@@ -28,7 +28,6 @@ namespace Livrable3.Commands
         {
             if (_evm.SelectedItem != null) { 
             DailyLogs dailyLogsModel = new DailyLogs();
-            //InstantLogs instantLogsModel = new InstantLogs();
             SaveModel modelSave = new SaveModel();
             modelSave.detectBusinessSoftware(bSoft);
             string extensions = "";
@@ -38,6 +37,8 @@ namespace Livrable3.Commands
                 
                 var sw = new Stopwatch();
                 sw.Start();
+                string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
+                modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
                 List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, extensions);
                 Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
                 sw.Stop();
