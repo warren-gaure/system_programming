@@ -15,4 +15,8 @@
     <Page Remove="repoSaves\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Saves\" />
+  </ItemGroup>
+
 </Project>

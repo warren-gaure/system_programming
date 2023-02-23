@@ -71,10 +71,11 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="saveName"></param>
         /// <returns></returns>
-        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf)
+        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf,string typeOfLog)
         {
             name = saveFromFile.saveName;
             dest = saveFromFile.destinationTarget;
+            source = saveFromFile.sourceTarget;
             List<FileInfo> fileToCopy = new List<FileInfo>();
             List<FileInfo> fileTemp = new List<FileInfo>();
             filesDone = 0;
@@ -122,7 +123,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -137,7 +138,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType)
         {
             // Mutex used to execute the foreach loop in more secure way
             Mutex mutex = new Mutex();
@@ -149,10 +150,31 @@ namespace Livrable3.Model
                 // Blocking access to the critical section to one thread at the time
                 mutex.WaitOne();
 
+                if (logType == "JSON")
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                else
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
                 /* ------------- CRITICAL SECTION ------------- */
                 Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
+                if (logType == "JSON")
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                else
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+
                 Notify();
                 /* -------------------------------------------- */
                 

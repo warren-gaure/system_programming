@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Livrable3.Model;
 using System.IO;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace Livrable3.Commands
 {
@@ -23,23 +24,38 @@ namespace Livrable3.Commands
 
         public override void Execute(object? parameter)
         {
-            SaveModel saveModel = new SaveModel();
+            if (_evm.SelectedItem != null) { 
             DailyLogs dailyLogsModel = new DailyLogs();
-            string saves = "AllSaves.json";
-            string sourcePath;
-            string saveName = "";
-            string extensions = "";
+            //InstantLogs instantLogsModel = new InstantLogs();
             SaveModel modelSave = new SaveModel();
-            string fileName = "..\\..\\..\\Saves\\" + saves;
-            var save = System.IO.File.ReadAllText(fileName);
-            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
+            string extensions = "";
+           
             Thread thread = new Thread(() =>
             {
-                List<FileInfo> fileInfos = modelSave.ParamSend(saveFromFile.sourceTarget, extensions);
-                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos);
+                
+                var sw = new Stopwatch();
+                sw.Start();
+                List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, extensions);
+                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog);
+                sw.Stop();
+                long time = sw.ElapsedMilliseconds;
+                if (_evm.TypeLog == "JSON")
+                {
+                    dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+
+                }
+                else
+                {
+                    dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+
+                }
+
+
             });
 
             thread.Start();
+
+            }
         }
     }
 }
