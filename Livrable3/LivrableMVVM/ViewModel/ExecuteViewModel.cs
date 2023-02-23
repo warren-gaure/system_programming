@@ -159,9 +159,9 @@ namespace Livrable3.ViewModel
         }
 
 
-
-
         public ICommand ExecuteCommand { get; set; }
+        public ICommand PauseCommand { get; set; }
+        public ICommand StopCommand { get; set; }
 
         public ICommand TypeLogCommand { get; set; }
 
@@ -196,7 +196,8 @@ namespace Livrable3.ViewModel
             _buttonPause = dictionnary["pause"];
             _buttonStop = dictionnary["stop"];
             ExecuteCommand = new ExecuteSavesCommand(this);
-
+            PauseCommand = new PauseSavesCommand(this);
+            StopCommand = new StopSavesCommand(this);
         }
     }
 }

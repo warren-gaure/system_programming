@@ -94,7 +94,7 @@ namespace livrableMVVM.Model
                     $"<Size>{size}</Size>\n" +
                     $"<Time>{time}</Time>\n" +
                     $"<Date>{date}</Date>\n" +
-                    $"<EncryptionTime>{encryption}</Encryption>" +
+                    $"<EncryptionTime>{encryption}</EncryptionTime>\n" +
                 "</DailyLog>\n";
             File.AppendAllText(fileName, xmlString);
         }

@@ -63,6 +63,20 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Button Content="{Binding ButtonPause}" Background="#00A4D1" Foreground="#1E1E1E" Click="onExecute" FontWeight="Bold" Grid.Column="3" Grid.Row="3" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PauseCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="{Binding ButtonStop}" Background="#00A4D1" Foreground="#1E1E1E" Click="onExecute" FontWeight="Bold" Grid.Column="3" Grid.Row="4" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding StopCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <TextBlock Text="{Binding TypeLogTitle}"  Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <RadioButton x:Name="XML" Content="XML" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeLogCommand}" CommandParameter="{Binding ElementName=XML, Path=Content}"></RadioButton>
         <RadioButton x:Name="JSON" Content="JSON" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeLogCommand}" CommandParameter="{Binding ElementName=JSON, Path=Content}"></RadioButton>
