@@ -93,6 +93,18 @@ namespace Livrable3.Model
             totalFilesSize = temp[0];
             nbTotalFiles = temp[1];
             DirectoryInfo target = new DirectoryInfo(dest);
+
+            /* ----------------------------- */
+            // Business Software Handling
+            foreach (Process process in Process.GetProcesses())
+            {
+                if (process.ProcessName == "CalculatorApp")
+                {
+                    process.WaitForExit();
+                }
+            }
+            /* ----------------------------- */
+
             try
             {
 
@@ -129,21 +141,30 @@ namespace Livrable3.Model
             return saveFromFile;
         }
         /// <summary>
-        /// Copy all modified file or new file from sourceDirectory to targetDirectory
+        /// Copy all modified files or new files from sourceDirectory to targetDirectory
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
         private void CopyDirectory(List<FileInfo> files, string targetDirectory)
         {
+            // Mutex used to execute the foreach loop in more secure way
+            Mutex mutex = new Mutex();
+
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
+                // Blocking access to the critical section to one thread at the time
+                mutex.WaitOne();
 
+                /* ------------- CRITICAL SECTION ------------- */
                 Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
                 Notify();
-
+                /* -------------------------------------------- */
+                
+                // Releasing the mutex
+                mutex.ReleaseMutex();
             }
         }
 
