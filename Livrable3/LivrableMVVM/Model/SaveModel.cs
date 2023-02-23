@@ -27,6 +27,7 @@ namespace Livrable3.Model
         public string type { get; set; }
         public string saveName { get; set; }
         public string cryptage { get; set; }
+        public string prioFiles { get; set; }
 
         public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
         {
@@ -35,13 +36,14 @@ namespace Livrable3.Model
             this.type = type;
             this.saveName = saveName;
         }
-        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage)
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage, string prioFiles)
         {
             this.sourceTarget = sourceTarget;
             this.destinationTarget = destinationTarget;
             this.type = type;
             this.saveName = saveName;
             this.cryptage = cryptage;
+            this.prioFiles = prioFiles;
         }
         public Saves()
         {
@@ -218,7 +220,7 @@ namespace Livrable3.Model
             }
 
         }
-        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry, string crypt)
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry, string crypt, string prioFiles)
         {
             var saves = new Saves()
             {
@@ -226,7 +228,8 @@ namespace Livrable3.Model
                 destinationTarget = destinationTargetEntry,
                 type = typeEntry,
                 saveName = saveNameEntry,
-                cryptage = crypt
+                cryptage = crypt,
+                prioFiles = prioFiles
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
