@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
+using System.Threading;
 
 namespace Livrable3.ViewModel
 {
@@ -182,12 +183,13 @@ namespace Livrable3.ViewModel
 
         private SaveModel _saveModel;
         private LanguageModel _languageModel;
-
+        public List<Thread> allThread;
+        public Dictionary<string, bool> ThreadSleep;
         public ExecuteViewModel()
         {
 
             TypeLogCommand = new TypeLogCommand(this);
-
+            allThread= new List<Thread>();
             //get all projectSaves and display them into the view
             _saveModel = new SaveModel();
             _languageModel = new LanguageModel();
