@@ -55,9 +55,11 @@ namespace Livrable3.Commands
 
 
             });
-
+            thread.Name = _evm.SelectedItem.saveName;
             thread.Start();
 
+                _evm.allThread.Add(thread);
+                _evm.ThreadSleep.Add(_evm.SelectedItem.saveName, false);
             }
         }
     }

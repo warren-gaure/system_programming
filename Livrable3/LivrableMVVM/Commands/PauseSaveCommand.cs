@@ -23,17 +23,26 @@ namespace Livrable3.Commands
         }
         public override void Execute(object? parameter)
         {
-            i++;
-            if (i % 2 == 0)
+            
+            List<Thread> thread = _evm.allThread;
+            foreach (Thread t in thread)
             {
-                pause = false;
+                if (t.Name == _evm.SelectedItem.saveName)
+                {
+                    if (_evm.ThreadSleep[_evm.SelectedItem.saveName])
+                    {
+                        _evm.ThreadSleep[_evm.SelectedItem.saveName] = false;
+                        t.Start();
+                    }
+                    else
+                    {
+
+                        _evm.ThreadSleep[_evm.SelectedItem.saveName] = true;
+                        t.Suspend();
+                    }
+                    
+                }
             }
-            else
-            {
-                pause = true;
-            }
-            SaveModel saveM = new SaveModel();
-            saveM.ThreadPause(pause);
         }
     }
 }
