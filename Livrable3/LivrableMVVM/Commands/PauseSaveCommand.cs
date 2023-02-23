@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Livrable3.Commands
 {
@@ -14,15 +15,25 @@ namespace Livrable3.Commands
     {
 
         private ExecuteViewModel _evm;
-
+        static int i = 0;
+        bool pause;
         public PauseSavesCommand(ExecuteViewModel evm)
         {
             _evm = evm;
         }
-
         public override void Execute(object? parameter)
         {
-
+            i++;
+            if (i % 2 == 0)
+            {
+                pause = false;
+            }
+            else
+            {
+                pause = true;
+            }
+            SaveModel saveM = new SaveModel();
+            saveM.ThreadPause(pause);
         }
     }
 }

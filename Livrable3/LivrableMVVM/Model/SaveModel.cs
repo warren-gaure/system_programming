@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Livrable3.Model
 {
@@ -138,7 +130,6 @@ namespace Livrable3.Model
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
-
                 Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
@@ -171,14 +162,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString);
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString);
                 return true;
             }
 
@@ -200,14 +191,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString + ",");
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
 
@@ -325,23 +316,22 @@ namespace Livrable3.Model
             return fileToReturn;
         }
 
-        bool pause;
-        public void ThreadSleep(Thread thread)
+
+        public void ThreadSleep(bool pause/*, Thread thread*/)
         {
 
             while (pause)
             {
                 Thread.Sleep(2000);
-
             }
 
         }
 
-        public void ThreadPause(Thread thread)
+        public void ThreadPause(bool pause)
         {
-            pause = true;
-            ThreadSleep(thread);
+            ThreadSleep(pause);
         }
+
         public ObservableCollection<Saves> getSaves()
         {
             string fileName = "..\\..\\..\\Saves\\AllSaves.json";
@@ -349,7 +339,7 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 string jsonString = File.ReadAllText(fileName);
-                string[] lines = jsonString.Split(',');
+                string[] lines = jsonString.Split('\n');
                 foreach (string line in lines)
                 {
                     if (line != "")
