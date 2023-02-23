@@ -38,7 +38,7 @@ namespace Livrable3.ViewModel
             ListSaves = _saveModel.getSaves();
         }
 
-        private Saves selectedItem = new Saves();
+        private Saves selectedItem;
 
         public Saves SelectedItem
         {
@@ -157,7 +157,22 @@ namespace Livrable3.ViewModel
                 OnPropertyChanged(nameof(ButtonStop));
             }
         }
+        private bool _buttonEnabled;
+        public bool ButtonEnabled
+        {
+            get
+            {
+                
+                return _buttonEnabled;
+            }
+            set
+            {
+                
+                _buttonEnabled = value;
 
+                OnPropertyChanged(nameof(ButtonEnabled));
+            }
+        }
 
         public ICommand ExecuteCommand { get; set; }
         public ICommand PauseCommand { get; set; }
@@ -187,6 +202,7 @@ namespace Livrable3.ViewModel
                 dictionnary = _languageModel.languages("");
             }
             _saves = _saveModel.getSaves();
+            _buttonEnabled = true;
 
             //trad
             _title = dictionnary["executeTitle"];
@@ -195,7 +211,9 @@ namespace Livrable3.ViewModel
             _buttonTitle = dictionnary["execute"];
             _buttonPause = dictionnary["pause"];
             _buttonStop = dictionnary["stop"];
+            
             ExecuteCommand = new ExecuteSavesCommand(this);
+            
             PauseCommand = new PauseSavesCommand(this);
             StopCommand = new StopSavesCommand(this);
         }
