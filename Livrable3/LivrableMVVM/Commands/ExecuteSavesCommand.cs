@@ -25,12 +25,12 @@ namespace Livrable3.Commands
         {
             SaveModel saveModel = new SaveModel();
             DailyLogs dailyLogsModel = new DailyLogs();
-            string saves = "test";
+            string saves = "AllSaves.json";
             string sourcePath;
             string saveName = "";
             string extensions = "";
             SaveModel modelSave = new SaveModel();
-            string fileName = "..\\..\\..\\repoSaves\\" + saveName;
+            string fileName = "..\\..\\..\\Saves\\" + saves;
             var save = System.IO.File.ReadAllText(fileName);
             Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
             Thread thread = new Thread(() =>
