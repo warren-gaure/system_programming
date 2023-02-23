@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Livrable3.Model
 {
@@ -221,14 +213,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
 
@@ -345,10 +337,23 @@ namespace Livrable3.Model
 
             return fileToReturn;
         }
-        public void threadPause()
+
+
+        public void ThreadSleep(bool pause/*, Thread thread*/)
         {
-            //ici
+
+            while (pause)
+            {
+                Thread.Sleep(2000);
+            }
+
         }
+
+        public void ThreadPause(bool pause)
+        {
+            ThreadSleep(pause);
+        }
+
         public ObservableCollection<Saves> getSaves()
         {
             string fileName = "..\\..\\..\\Saves\\AllSaves.json";

@@ -15,22 +15,25 @@ namespace Livrable3.ViewModel
         public ViewModelBase? ExecuteViewModel { get; set; }
         public ViewModelBase? OptionViewModel { get; set; }
 
+        public ViewModelBase? HeaderViewModel { get; set; }
+
         public ICommand HomeViewCommand { get; }
         public ICommand CreateViewCommand { get; }
         public ICommand ExecuteViewCommand { get; }
         public ICommand OptionViewCommand { get; }
         public MainViewModel()
         {
-            CreateViewCommand = new CreateViewBindCommand(this);
-            ExecuteViewCommand = new ExecuteViewBindCommand(this);
-            OptionViewCommand = new OptionViewBindCommand(this);
 
             HomeViewModel = new ViewModelBase();
             CreateViewModel = new CreateViewModel();
             ExecuteViewModel = new ExecuteViewModel();
             OptionViewModel = new OptionViewModel();
+            HeaderViewModel = new HeaderViewModel();
+
+            ExecuteViewCommand = new ExecuteViewBindCommand(this);
         }
 
 
     }
 }
+
