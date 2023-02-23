@@ -41,7 +41,8 @@ namespace Livrable3.Model
             {"language","Langage" },
             {"businessSoftware","Logiciel Metier :" },
             {"homeTitle","Accueil" },
-
+            {"pause", "Pause" },
+            {"stop", "Stop" }
         };
         Dictionary<string, string> english = new Dictionary<string, string>
         {
@@ -73,7 +74,8 @@ namespace Livrable3.Model
             {"language","Language" },
             {"businessSoftware","Business Software :" },
             {"homeTitle","Home" },
-
+            {"pause", "Pause" },
+            {"stop", "Stop" }
         };
 
         /// <summary>
