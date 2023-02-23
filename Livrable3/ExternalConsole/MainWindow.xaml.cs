@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using ExternalConsole.ViewModel;
 namespace ExternalConsole
 {
     /// <summary>
@@ -25,9 +25,7 @@ namespace ExternalConsole
         public MainWindow()
         {
             InitializeComponent();
-            var list = new List<Save>();
-            var threadCom = new Thread(new ThreadStart(() => list = Communication.Start(list)));
-            threadCom.Start();
+            var ViewModel = new ViewModel.ViewModel();
         }
     }
 }

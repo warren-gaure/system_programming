@@ -24,5 +24,11 @@ namespace ExternalConsole.View
         {
             InitializeComponent();
         }
+
+        public void While()
+        {
+
+        }
+
     }
 }

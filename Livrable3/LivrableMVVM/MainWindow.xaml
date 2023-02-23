@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Livrable3" 
         xmlns:controls="clr-namespace:Livrable3.View"
         mc:Ignorable="d"
-        Title="EasySave" Height="450" Width="850">
+        Title="EasySave" Height="450" Width="850" MinHeight="450" MinWidth="850">
     <!--<Window.Background>
         <ImageBrush ImageSource="\Assets\asset.avif"  Stretch="None" />
     </Window.Background>-->

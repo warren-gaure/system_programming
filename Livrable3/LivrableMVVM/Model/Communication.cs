@@ -39,11 +39,16 @@ namespace Livrable3.Model
                             var message = GetSaves();
                             var Mbytes = Encoding.ASCII.GetBytes(message);
                             stream.Write(Mbytes, 0, Mbytes.Length);
+                            stream.Close();
+                            client.Close();
+                            break;
                         }
                         else if(data.StartsWith("SetSavesState")) // SetSavesState(Name1,Name2)[0]
                         {
                             var names = data.Substring(data.IndexOf('('), data.Length - 1 - data.IndexOf('(') - 4).Split(',');
                             var val = data.Substring(data.IndexOf('['), 1);
+                            stream.Close();
+                            client.Close();
                         }
                         Thread.Sleep(500);
                     }

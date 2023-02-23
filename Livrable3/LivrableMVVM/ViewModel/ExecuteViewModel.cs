@@ -116,6 +116,25 @@ namespace Livrable3.ViewModel
             }
         }
 
+        private int _state;
+        public string State
+        {
+            get
+            {
+                switch(_state)
+                {
+                    case 0:
+                        return "Stop";
+                    case 1:
+                        return "Running";
+                    case 2:
+                        return "Pause";
+                    default: // state shouldn't be > 2 or < 0
+                        return "";
+                }
+            }
+        }
+
         private string _buttonTitle;
         public string ButtonTitle
         {
