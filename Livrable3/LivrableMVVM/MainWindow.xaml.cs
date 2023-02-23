@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,8 @@ namespace Livrable3
         {
             InitializeComponent();
             DataContext = this;
-            Communication.Start();
+            var threadCom = new Thread(new ThreadStart(() => Communication.Start()));
+            threadCom.Start();
         }
 
 

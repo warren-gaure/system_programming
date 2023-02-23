@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livrable3", "LivrableMVVM\Livrable3.csproj", "{04B40ABE-94BB-4155-9AAD-7818EEC8DA2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalConsole", "ExternalConsole\ExternalConsole.csproj", "{B6369BA5-19BD-431C-A893-964BF6F760FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalConsole", "ExternalConsole\ExternalConsole.csproj", "{B6369BA5-19BD-431C-A893-964BF6F760FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

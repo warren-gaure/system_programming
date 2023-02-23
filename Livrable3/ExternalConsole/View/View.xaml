@@ -31,21 +31,21 @@
                 </ListView.View>
             </ListView>
         </ScrollViewer>
-        <Button Content="{Binding ButtonPlay}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="1" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PlayCommand}">
+        <Button Content="Play" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="1" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PlayCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="{Binding ButtonPause}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PauseCommand}">
+        <Button Content="Pause" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PauseCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="{Binding ButtonStop}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="3" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding StopCommand}">
+        <Button Content="Stop" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="5" Grid.Row="3" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding StopCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
