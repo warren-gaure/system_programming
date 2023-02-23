@@ -26,6 +26,7 @@ namespace Livrable3.Commands
         {
             if (_evm.SelectedItem != null) { 
             DailyLogs dailyLogsModel = new DailyLogs();
+            //InstantLogs instantLogsModel = new InstantLogs();
             SaveModel modelSave = new SaveModel();
             string extensions = "";
            
@@ -35,7 +36,7 @@ namespace Livrable3.Commands
                 var sw = new Stopwatch();
                 sw.Start();
                 List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, extensions);
-                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos);
+                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog);
                 sw.Stop();
                 long time = sw.ElapsedMilliseconds;
                 if (_evm.TypeLog == "JSON")
@@ -48,6 +49,8 @@ namespace Livrable3.Commands
                     dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
 
                 }
+
+
             });
 
             thread.Start();

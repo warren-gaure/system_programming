@@ -37,7 +37,7 @@ namespace Livrable3.Model
         /// <param name="NbFilesLeftToDoEntry"></param>
         /// <param name="progressionEntry"></param>
         /// <param name="dateEntry"></param>
-        public void InstantLogsFunction(string NameEntry, string FileSourceEntry, string destinationTargetEntry, Boolean stateEntry, long TotalFilesSizeEntry, int NbFilesLeftToDoEntry, long progressionEntry, DateTime dateEntry)
+        public static void InstantLogsFunction(string NameEntry, string FileSourceEntry, string destinationTargetEntry, Boolean stateEntry, long TotalFilesSizeEntry, int NbFilesLeftToDoEntry, long progressionEntry, DateTime dateEntry)
         {
             var instantLogs = new InstantLogsModel()
             {
@@ -56,7 +56,7 @@ namespace Livrable3.Model
             File.AppendAllText(fileName, jsonString);
 
         }
-        public void stateLogToXML(string name, string source, string destination, bool state, long size, int filesLeft, long progression, DateTime date)
+        public static void stateLogToXML(string name, string source, string destination, bool state, long size, int filesLeft, long progression, DateTime date)
         {
             string fileName = "..\\..\\..\\instantLogs" + DateTime.Now.ToString("yyyyMMdd") + ".xml";
             string xmlString =

@@ -79,7 +79,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="saveName"></param>
         /// <returns></returns>
-        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf)
+        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf,string typeOfLog)
         {
             name = saveFromFile.saveName;
             dest = saveFromFile.destinationTarget;
@@ -119,7 +119,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -134,16 +134,34 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType)
         {
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
 
-                Notify();
+                if (logType == "JSON")
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                else
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
-                Notify();
+                if (logType == "JSON")
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                else
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
 
             }
         }
