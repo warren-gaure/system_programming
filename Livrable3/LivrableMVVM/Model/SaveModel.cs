@@ -171,14 +171,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString + ",");
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString + ",");
                 return true;
             }
 
@@ -200,14 +200,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString + ",");
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString + ",");
                 return true;
             }
 
@@ -349,7 +349,7 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 string jsonString = File.ReadAllText(fileName);
-                string[] lines = jsonString.Split('\n');
+                string[] lines = jsonString.Split(',');
                 foreach (string line in lines)
                 {
                     if (line != "")
