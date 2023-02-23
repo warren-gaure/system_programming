@@ -130,10 +130,38 @@ namespace Livrable3.ViewModel
             }
         }
 
+        private string _buttonPause;
+        public string ButtonPause
+        {
+            get
+            {
+                return _buttonPause;
+            }
+            set
+            {
+                _buttonPause = value;
+                OnPropertyChanged(nameof(ButtonPause));
+            }
+        }
 
+        private string _buttonStop;
+        public string ButtonStop
+        {
+            get
+            {
+                return _buttonStop;
+            }
+            set
+            {
+                _buttonStop = value;
+                OnPropertyChanged(nameof(ButtonStop));
+            }
+        }
 
 
         public ICommand ExecuteCommand { get; set; }
+        public ICommand PauseCommand { get; set; }
+        public ICommand StopCommand { get; set; }
 
         public ICommand TypeLogCommand { get; set; }
 
@@ -165,8 +193,11 @@ namespace Livrable3.ViewModel
             _description = dictionnary["executeDetails"];
             _typeLogTitle = dictionnary["typeOfLog"];
             _buttonTitle = dictionnary["execute"];
+            _buttonPause = dictionnary["pause"];
+            _buttonStop = dictionnary["stop"];
             ExecuteCommand = new ExecuteSavesCommand(this);
-
+            PauseCommand = new PauseSavesCommand(this);
+            StopCommand = new StopSavesCommand(this);
         }
     }
 }
