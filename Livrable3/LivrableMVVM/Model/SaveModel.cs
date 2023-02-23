@@ -71,7 +71,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="saveName"></param>
         /// <returns></returns>
-        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf,string typeOfLog)
+        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf,string typeOfLog,string bSoftware)
         {
             name = saveFromFile.saveName;
             dest = saveFromFile.destinationTarget;
@@ -123,7 +123,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog, bSoftware);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -138,7 +138,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType,string bSoftware)
         {
             // Mutex used to execute the foreach loop in more secure way
             Mutex mutex = new Mutex();
@@ -146,7 +146,7 @@ namespace Livrable3.Model
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
-                detectBusinessSoftware();
+                detectBusinessSoftware(bSoftware);
                 // Blocking access to the critical section to one thread at the time
                 mutex.WaitOne();
 
@@ -161,7 +161,6 @@ namespace Livrable3.Model
                     InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
                 }
                 /* ------------- CRITICAL SECTION ------------- */
-                Notify();
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
                 if (logType == "JSON")
@@ -174,8 +173,6 @@ namespace Livrable3.Model
                     string[] temp = this.GetData();
                     InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
                 }
-
-                Notify();
                 /* -------------------------------------------- */
                 
                 // Releasing the mutex
@@ -444,23 +441,25 @@ namespace Livrable3.Model
                 File.AppendAllText(fileName, jsonString);
             }
         }
-
         // TODO : Mallory - Modifier la méthode pour qu'elle prenne en compte le logiciel métier indiqué par l'utilisateur (changer le if)
         /// <summary>
         /// detectBusinessSoftware is a method used by the application to detect if the business software indicated by the user in the options...
         /// is currently running or not. If it is, the thread executing detectBusinessSoftware will be put to sleep for 1 second.
         /// </summary>
-        public void detectBusinessSoftware()
+        public void detectBusinessSoftware(string bSoftware)
         {
             foreach (Process process in Process.GetProcesses())
             {
-                if (process.ProcessName == "CalculatorApp")
+                if (process.ProcessName == bSoftware)
                 {
                     Thread.Sleep(1000);
                     // Recursively calling the method to make sure if the business software is still running or not
-                    detectBusinessSoftware();
+
+                    detectBusinessSoftware(bSoftware);
                 }
             }
         }
+
+
     }
 }

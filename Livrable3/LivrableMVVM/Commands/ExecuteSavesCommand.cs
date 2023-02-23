@@ -16,10 +16,12 @@ namespace Livrable3.Commands
     {
 
         private ExecuteViewModel _evm;
+        private string bSoft;
 
-        public ExecuteSavesCommand(ExecuteViewModel evm)
+        public ExecuteSavesCommand(ExecuteViewModel evm,string bSoftware)
         {
             _evm = evm;
+            bSoft= bSoftware;
         }
 
         public override void Execute(object? parameter)
@@ -28,6 +30,7 @@ namespace Livrable3.Commands
             DailyLogs dailyLogsModel = new DailyLogs();
             //InstantLogs instantLogsModel = new InstantLogs();
             SaveModel modelSave = new SaveModel();
+            modelSave.detectBusinessSoftware(bSoft);
             string extensions = "";
            
             Thread thread = new Thread(() =>
@@ -36,7 +39,7 @@ namespace Livrable3.Commands
                 var sw = new Stopwatch();
                 sw.Start();
                 List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, extensions);
-                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog);
+                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
                 sw.Stop();
                 long time = sw.ElapsedMilliseconds;
                 if (_evm.TypeLog == "JSON")

@@ -212,7 +212,7 @@ namespace Livrable3.ViewModel
             _buttonPause = dictionnary["pause"];
             _buttonStop = dictionnary["stop"];
             
-            ExecuteCommand = new ExecuteSavesCommand(this);
+            ExecuteCommand = new ExecuteSavesCommand(this,conf.businessSoftware);
             
             PauseCommand = new PauseSavesCommand(this);
             StopCommand = new StopSavesCommand(this);
