@@ -24,10 +24,10 @@ namespace Livrable3.Model
             Byte[] bytes = new Byte[256];
             while (true)
             {
-                Debug.WriteLine("Waiting connection");
+                //Debug.WriteLine("Waiting connection");
                 using (var client = server.AcceptTcpClient())
                 {
-                    Debug.WriteLine("Connected");
+                    //Debug.WriteLine("Connected");
                     NetworkStream stream = client.GetStream();
                     int i;
                     data = null;
@@ -64,15 +64,33 @@ namespace Livrable3.Model
         /// <returns></returns>
         public static string GetSaves()
         {
-            var Save = new { Name = "Test", State = 1, Percent = 10 };
-            var Save2 = new { Name = "Test2", State = 0, Percent = 0 };
-            var Saves = new[] { Save, Save2 };
-            var message = JsonSerializer.Serialize(Saves);
+            var saveModel = new SaveModel();
+            var saves = saveModel.getSaves();
+            List<SaveTemp> saveTemps = new List<SaveTemp>();
+
+            foreach (var save in saves)
+            {
+                var saveTemp = new SaveTemp(save.saveName);
+                saveTemps.Add(saveTemp);
+            }
+            var message = JsonSerializer.Serialize(saveTemps);
 
             return message;
 
         }
 
+        class SaveTemp
+        {
+            public string Name { get; set; } = "";
+            public int Percent { get; set; } = 0;
+           public int State { get; set; } = 0;
+            public SaveTemp(string name, int percent = 0, int state = 0)
+            {
+                Name = name;
+                Percent = percent;
+                State = state;
+            }
+        }
 
     }
 }

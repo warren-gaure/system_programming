@@ -27,14 +27,20 @@ namespace ExternalConsole.ViewModel
         }
         public void reloadList()
         {
-            ListSaves = Save.GetSaves();
+            while (true)
+            { 
+                ListSaves = Save.GetSaves();
+                Thread.Sleep(2000);
+            }
         }
 
         public ViewModel()
         {
             //var thread = new Thread(new ThreadStart(() => this._saves = Save.GetSaves()));
             //thread.Start();
-            _saves = Save.GetSaves();
+            //_saves = Save.GetSaves();
+            var thread = new Thread(new ThreadStart(reloadList));
+            thread.Start();
         }
 
 

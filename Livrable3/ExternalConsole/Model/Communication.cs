@@ -43,7 +43,7 @@ namespace ExternalConsole.Model
                         }
                     }
                 }
-                Debug.WriteLine("Client Received: " + data);
+                //Debug.WriteLine("Client Received: " + data);
             }
             stream.Close();
             client.Close();

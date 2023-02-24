@@ -27,5 +27,6 @@ namespace ExternalConsole
             InitializeComponent();
             var ViewModel = new ViewModel.ViewModel();
         }
+
     }
 }
