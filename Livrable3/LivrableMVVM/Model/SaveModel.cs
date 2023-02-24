@@ -135,8 +135,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget,saveFromFile.sourceTarget, typeOfLog, bSoftware);
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog, bSoftware,name);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget,saveFromFile.sourceTarget, typeOfLog, bSoftware, name);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -151,8 +150,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string sourceDir,string logType,string bSoftware)
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType,string bSoftware,string saveName)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string sourceDir,string logType,string bSoftware,string saveName)
         {
             // Mutex used to execute the foreach loop in more secure way
             Mutex mutex = new Mutex();
