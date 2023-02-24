@@ -65,6 +65,7 @@ namespace Livrable3.Model
         int progresseion { get; set; }
         int filesDone { get; set; }
         long time { get; set; }
+        public long encryptionTime { get; set; }
 
         /// <summary>
         /// take the save's name, get the save from the file, if the save is complete call CopyDirectoryComplete if the save is differential call CopyDirectoryDifferential
@@ -320,6 +321,10 @@ namespace Livrable3.Model
         public void didCrypto(string[] extension, string sourcePath, int key)
         {
             List<FileInfo> files = nav(sourcePath);
+
+            // Stopwatch used to determine the exact encryption time of the file
+            Stopwatch encryptionTimer = new Stopwatch();
+            
             foreach (string ext in extension)
             {
                 foreach (FileInfo file in files)
@@ -329,11 +334,25 @@ namespace Livrable3.Model
                     dest = dest + file.Name.Split('.')[0]+"crypt"+fileExt;
                     if (ext.Equals(fileExt))
                     {
+                        // Starting the timer
+                        encryptionTimer.Start();
+
+                        /* ------------- FILE ENCRYPTION ------------- */
                         Process cryptoSoft = new Process();
                         cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
                         cryptoSoft.StartInfo.Arguments = "\"" + file.FullName + "\" " + "\"" + dest + "\" " + "\"" + key + "\"";
                         cryptoSoft.Start();
                         file.Delete();
+                        /* ------------------------------------------ */
+
+                        // Stopping the timer
+                        encryptionTimer.Stop();
+
+                        // Getting the value of the elapsed time
+                        encryptionTime = encryptionTimer.ElapsedMilliseconds;
+
+                        // Resetting the timer
+                        encryptionTimer.Reset();
                     }
                 }
             }
@@ -365,12 +384,10 @@ namespace Livrable3.Model
 
         public void ThreadSleep(bool pause/*, Thread thread*/)
         {
-
             while (pause)
             {
                 Thread.Sleep(2000);
             }
-
         }
 
         public void ThreadPause(bool pause)
@@ -445,7 +462,7 @@ namespace Livrable3.Model
                 File.AppendAllText(fileName, jsonString);
             }
         }
-        // TODO : Mallory - Modifier la méthode pour qu'elle prenne en compte le logiciel métier indiqué par l'utilisateur (changer le if)
+
         /// <summary>
         /// detectBusinessSoftware is a method used by the application to detect if the business software indicated by the user in the options...
         /// is currently running or not. If it is, the thread executing detectBusinessSoftware will be put to sleep for 1 second.
@@ -463,7 +480,5 @@ namespace Livrable3.Model
                 }
             }
         }
-
-
     }
 }
