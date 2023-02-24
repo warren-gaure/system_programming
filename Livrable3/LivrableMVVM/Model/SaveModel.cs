@@ -68,6 +68,12 @@ namespace Livrable3.Model
         int progresseion { get; set; }
         int filesDone { get; set; }
         long time { get; set; }
+        public long encryptionTime { get; set; }
+        List<FileInfo> filesInfo = new List<FileInfo>();
+        List<FileInfo> filesInforeturn = new List<FileInfo>();
+        List<FileInfo> filesdonttransfere = new List<FileInfo>();
+
+
 
         /// <summary>
         /// take the save's name, get the save from the file, if the save is complete call CopyDirectoryComplete if the save is differential call CopyDirectoryDifferential
@@ -128,7 +134,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog, bSoftware);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget,saveFromFile.sourceTarget, typeOfLog, bSoftware);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -143,10 +149,11 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType,string bSoftware)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string sourceDir,string logType,string bSoftware)
         {
             // Mutex used to execute the foreach loop in more secure way
             Mutex mutex = new Mutex();
+
 
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
@@ -154,6 +161,15 @@ namespace Livrable3.Model
                 detectBusinessSoftware(bSoftware);
                 // Blocking access to the critical section to one thread at the time
                 mutex.WaitOne();
+                string filePath = file.FullName.Replace(sourceDir, "");
+                string path = target.FullName + filePath;
+                string pathSplit = path.Replace("\\", "/");
+                path = path.Replace(pathSplit.Split('/').Last(), "");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                path = path.Replace("/", "\\");
 
                 if (logType == "JSON")
                 {
@@ -166,7 +182,7 @@ namespace Livrable3.Model
                     InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
                 }
                 /* ------------- CRITICAL SECTION ------------- */
-                file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
+                File.Copy(file.FullName, path + file.Name, true);
                 filesDone++;
                 if (logType == "JSON")
                 {
@@ -312,20 +328,26 @@ namespace Livrable3.Model
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             // Add file sizes.
             FileInfo[] fileInformation = directoryInfo.GetFiles();
-            List<FileInfo> filesInfo = fileInformation.ToList();
+            foreach(FileInfo fi in fileInformation)
+            {
+                filesInforeturn.Add(fi);
+            }
             DirectoryInfo[] dis = directoryInfo.GetDirectories();
             foreach (DirectoryInfo di in dis)
             {
-                filesInfo = nav(di.FullName);
+                filesInfo.AddRange(nav(di.FullName));
             }
-            return filesInfo;
+            return filesInforeturn;
         }
 
-        public void didCrypto(string[] extension, string sourcePath, int key)
+        public List<FileInfo> didCrypto(string[] extension, string sourcePath, string destPath, int key)
         {
             string dest = "..\\..\\..\\Saves\\temp\\";
             DirectoryInfo dirTemp = new DirectoryInfo(dest);
             List<FileInfo> files = nav(sourcePath);
+            Stopwatch encryptionTimer = new Stopwatch();
+            // Starting the timer
+            encryptionTimer.Start();
             foreach (string ext in extension)
             {
                 foreach (FileInfo file in files)
@@ -333,19 +355,38 @@ namespace Livrable3.Model
                     string fileExt = file.Name.Split('.').Last();
                     if (ext.Equals(fileExt))
                     {
+                        string filePath = file.FullName.Replace(sourcePath, "");
+                        string path = destPath + filePath;
+                        string pathSplit = path.Replace("\\", "/");
+                        path = path.Replace(pathSplit.Split('/').Last(), "");
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
                         Process cryptoSoft = new Process();
                         cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
-                        cryptoSoft.StartInfo.Arguments = file.FullName + " " + file.FullName + ".CRYPTED" + " " + key;
+                        cryptoSoft.StartInfo.Arguments = file.FullName + " " + path + file.Name + " " + key;
                         cryptoSoft.Start();
                         cryptoSoft.WaitForExit();
-                        file.Delete();
+                        filesdonttransfere.Add(file);
                     }
-
                 }
             }
+            /* ------------------------------------------ */
+
+            // Stopping the timer
+            encryptionTimer.Stop();
+
+            // Getting the value of the elapsed time
+            encryptionTime = encryptionTimer.ElapsedMilliseconds;
+
+            // Resetting the timer
+            encryptionTimer.Reset();
+            return filesdonttransfere;
         }
         public List<FileInfo> ParamSend(string sourcePath, string extensions)
         {
+            filesInforeturn = new List<FileInfo>();
             List<FileInfo> files = nav(sourcePath);
             List<FileInfo> filesToDelete = new List<FileInfo>();
             List<FileInfo> fileToReturn = new List<FileInfo>();

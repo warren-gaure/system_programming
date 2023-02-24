@@ -30,7 +30,9 @@ namespace Livrable3.Commands
             DailyLogs dailyLogsModel = new DailyLogs();
             SaveModel modelSave = new SaveModel();
             modelSave.detectBusinessSoftware(bSoft);
-           
+            List<FileInfo> docNotTransfer = new List<FileInfo>();
+
+
             Thread thread = new Thread(() =>
             {
                 
@@ -39,22 +41,26 @@ namespace Livrable3.Commands
                 if (_evm.SelectedItem.cryptage != null)
                 {
                     string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
-                    modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
+                    docNotTransfer = modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget,_evm.SelectedItem.destinationTarget, 2048);
                 }
                 
                 
                 List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
+                foreach (FileInfo doc in docNotTransfer)
+                {
+                    fileInfos.Remove(doc);
+                }
                 Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
                 sw.Stop();
                 long time = sw.ElapsedMilliseconds;
                 if (_evm.TypeLog == "JSON")
                 {
-                    dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+                    dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
 
                 }
                 else
                 {
-                    dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+                    dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
 
                 }
 
