@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace Livrable3.Model
@@ -423,10 +424,20 @@ namespace Livrable3.Model
                     }
                 }
             }
-            foreach (FileInfo file in filesToDelete)
+            foreach (FileInfo doc in filesToDelete)
             {
-                files.Remove(file);
+                
+                foreach (FileInfo file in files)
+                {
+                    if (file.FullName == doc.FullName)
+                    {
+                        files.Remove(file);
+                    }
+                }
+
             }
+
+          
             fileToReturn.AddRange(fileToSendFirst);
             fileToReturn.AddRange(files);
 

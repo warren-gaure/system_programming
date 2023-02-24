@@ -46,11 +46,12 @@ namespace Livrable3.Commands
                         docNotTransfer = modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, _evm.SelectedItem.destinationTarget, 2048);
                     }
 
-
-                    List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
+                    List<FileInfo> fileInfos = new List<FileInfo>();
+                    fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
                     foreach (FileInfo doc in docNotTransfer)
                     {
                         fileInfos.Remove(doc);
+                        
                     }
 
                     Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
