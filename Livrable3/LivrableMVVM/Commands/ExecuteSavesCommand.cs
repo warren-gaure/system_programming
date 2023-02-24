@@ -26,85 +26,56 @@ namespace Livrable3.Commands
 
         public override void Execute(object? parameter)
         {
-            if (_evm.SelectedItem != null) { 
-            DailyLogs dailyLogsModel = new DailyLogs();
-            SaveModel modelSave = new SaveModel();
-            modelSave.detectBusinessSoftware(bSoft);
-            List<FileInfo> docNotTransfer = new List<FileInfo>();
-
-
-            Thread thread = new Thread(() =>
+            if (_evm.SelectedItem != null)
             {
-                
-                var sw = new Stopwatch();
-                sw.Start();
-                if (_evm.SelectedItem.cryptage != null)
-                {
-                    string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
-                    docNotTransfer = modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget,_evm.SelectedItem.destinationTarget, 2048);
-                }
-                
-                
-                List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
-                foreach (FileInfo doc in docNotTransfer)
-                {
-                    fileInfos.Remove(doc);
-                }
-                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
-                sw.Stop();
-                long time = sw.ElapsedMilliseconds;
-                if (_evm.TypeLog == "JSON")
-                {
-                    dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
                 DailyLogs dailyLogsModel = new DailyLogs();
                 SaveModel modelSave = new SaveModel();
+                modelSave.detectBusinessSoftware(bSoft);
+                List<FileInfo> docNotTransfer = new List<FileInfo>();
 
-                
-           
 
                 Thread thread = new Thread(() =>
                 {
-                    Thread.Sleep(10000);
+                    
                     modelSave.detectBusinessSoftware(bSoft);
                     var sw = new Stopwatch();
                     sw.Start();
                     if (_evm.SelectedItem.cryptage != null)
                     {
                         string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
-                        modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
+                        docNotTransfer = modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, _evm.SelectedItem.destinationTarget, 2048);
                     }
 
+
                     List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
+                    foreach (FileInfo doc in docNotTransfer)
+                    {
+                        fileInfos.Remove(doc);
+                    }
 
-                    //Copy all files
                     Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
-
                     sw.Stop();
                     long time = sw.ElapsedMilliseconds;
-
-                    //Daily logs
                     if (_evm.TypeLog == "JSON")
                     {
-                        dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
-
-                }
-                else
-                {
-                    dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
+                        dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
+                    }
+                    else
+                    {
+                        dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
 
                     }
                 });
                 thread.Name = _evm.SelectedItem.saveName;
                 thread.Start();
-                try 
+                try
                 {
-                    ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName,false);
-                    ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName,false);
+                    ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName, false);
+                    ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName, false);
                 }
-                catch (Exception ex){ }
-
-
-
+                catch (Exception ex)
+                {
+                }
             }
         }
     }
