@@ -56,21 +56,55 @@ namespace Livrable3.Commands
                 if (_evm.TypeLog == "JSON")
                 {
                     dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
+                DailyLogs dailyLogsModel = new DailyLogs();
+                SaveModel modelSave = new SaveModel();
+
+                
+           
+
+                Thread thread = new Thread(() =>
+                {
+                    Thread.Sleep(10000);
+                    modelSave.detectBusinessSoftware(bSoft);
+                    var sw = new Stopwatch();
+                    sw.Start();
+                    if (_evm.SelectedItem.cryptage != null)
+                    {
+                        string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
+                        modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
+                    }
+
+                    List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
+
+                    //Copy all files
+                    Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
+
+                    sw.Stop();
+                    long time = sw.ElapsedMilliseconds;
+
+                    //Daily logs
+                    if (_evm.TypeLog == "JSON")
+                    {
+                        dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
 
                 }
                 else
                 {
                     dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
 
+                    }
+                });
+                thread.Name = _evm.SelectedItem.saveName;
+                thread.Start();
+                try 
+                {
+                    ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName,false);
+                    ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName,false);
                 }
+                catch (Exception ex){ }
 
 
-            });
-            thread.Name = _evm.SelectedItem.saveName;
-            thread.Start();
 
-                _evm.allThread.Add(thread);
-                _evm.ThreadSleep.Add(_evm.SelectedItem.saveName, false);
             }
         }
     }

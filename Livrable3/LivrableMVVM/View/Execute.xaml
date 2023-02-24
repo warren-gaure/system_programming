@@ -36,27 +36,28 @@
                             <GridViewColumn  Header="Destination target" Width="150" DisplayMemberBinding="{Binding destinationTarget}" />
                             <GridViewColumn  Header="Type" Width="80" DisplayMemberBinding="{Binding type}" />
                             <GridViewColumn  Header="Cryptage" Width="100" DisplayMemberBinding="{Binding cryptage}" />
+                            <GridViewColumn  Header="State" Width="100" DisplayMemberBinding="{Binding state}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
             </ScrollViewer>
         </Border>
 
-        <Button Content="{Binding ButtonTitle}" IsEnabled="{Binding ButtonEnable}" Background="#00A4D1" Foreground="#1E1E1E" Click="onExecute" FontWeight="Bold" Grid.Column="3" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding ExecuteCommand}">
+        <Button Content="{Binding ButtonTitle}" IsEnabled="{Binding ButtonEnable}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="2" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding ExecuteCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="{Binding ButtonPause}" Background="#00A4D1" Foreground="#1E1E1E" Click="onExecute" FontWeight="Bold" Grid.Column="3" Grid.Row="3" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PauseCommand}">
+        <Button Content="{Binding ButtonPause}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="3" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding PauseCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="{Binding ButtonStop}" Background="#00A4D1" Foreground="#1E1E1E" Click="onExecute" FontWeight="Bold" Grid.Column="3" Grid.Row="4" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding StopCommand}">
+        <Button Content="{Binding ButtonStop}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="4" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding StopCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

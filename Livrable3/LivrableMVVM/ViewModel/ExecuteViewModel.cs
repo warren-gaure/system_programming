@@ -117,6 +117,25 @@ namespace Livrable3.ViewModel
             }
         }
 
+        private int _state;
+        public string State
+        {
+            get
+            {
+                switch(_state)
+                {
+                    case 0:
+                        return "Stop";
+                    case 1:
+                        return "Running";
+                    case 2:
+                        return "Pause";
+                    default: // state shouldn't be > 2 or < 0
+                        return "";
+                }
+            }
+        }
+
         private string _buttonTitle;
         public string ButtonTitle
         {
@@ -184,13 +203,15 @@ namespace Livrable3.ViewModel
         private SaveModel _saveModel;
         private LanguageModel _languageModel;
         public List<Thread> allThread;
-        public Dictionary<string, bool> ThreadSleep;
+        public static Dictionary<string, bool> ThreadSleep;
+        public static Dictionary<string, bool> ThreadAbort;
         public ExecuteViewModel()
         {
 
             TypeLogCommand = new TypeLogCommand(this);
             allThread= new List<Thread>();
             ThreadSleep = new Dictionary<string, bool>();
+            ThreadAbort = new Dictionary<string, bool>();
             //get all projectSaves and display them into the view
             _saveModel = new SaveModel();
             _languageModel = new LanguageModel();

@@ -1,8 +1,10 @@
-﻿using Livrable3.ViewModel;
+﻿using Livrable3.Model;
+using Livrable3.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +27,8 @@ namespace Livrable3
         {
             InitializeComponent();
             DataContext = this;
+            var threadCom = new Thread(new ThreadStart(() => Communication.Start()));
+            threadCom.Start();
         }
 
 

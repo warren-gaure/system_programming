@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ExternalConsole.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,17 +14,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-namespace Livrable3.View
+using ExternalConsole.ViewModel;
+namespace ExternalConsole
 {
     /// <summary>
-    /// Logique d'interaction pour Execute.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Execute : UserControl
+    public partial class MainWindow : Window
     {
-        public Execute()
+        public MainWindow()
         {
             InitializeComponent();
+            var ViewModel = new ViewModel.ViewModel();
         }
 
     }
