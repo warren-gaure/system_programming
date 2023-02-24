@@ -50,7 +50,13 @@ namespace Livrable3.Commands
                     List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
                     foreach (FileInfo doc in docNotTransfer)
                     {
-                        fileInfos.Remove(doc);
+                        foreach (FileInfo file in fileInfos)
+                        {
+                            if (file.FullName == doc.FullName)
+                            {
+                                fileInfos.Remove(file);
+                            }
+                        }
                     }
 
                     Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
