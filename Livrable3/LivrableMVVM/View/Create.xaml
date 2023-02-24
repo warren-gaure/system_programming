@@ -48,7 +48,7 @@
         </Button>
         <TextBlock Grid.Row="4" Text="{Binding CryptTitle}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Extension, UpdateSourceTrigger=PropertyChanged}" TextChanged="Type_TextChanged"></TextBox>
-        <TextBlock Text="{Binding prioFilesName}" Grid.Row="5" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <TextBlock Text="{Binding PrioFilesName}" Grid.Row="5" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="prioFiles" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding prioFiles, UpdateSourceTrigger=PropertyChanged}" TextChanged="Type_TextChanged"></TextBox>
         <Button Content="{Binding ButtonTitle}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="6" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
             <Button.Resources>
