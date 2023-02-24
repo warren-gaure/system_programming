@@ -76,7 +76,7 @@ namespace Livrable3.Commands
 
 
 
-            });
+            }
         }
     }
 }
