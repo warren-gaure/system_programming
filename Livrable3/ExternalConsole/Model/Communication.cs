@@ -21,7 +21,7 @@ namespace ExternalConsole.Model
             NetworkStream stream = client.GetStream();
             int i;
             String data = null;
-            Byte[] bytes = new Byte[256];
+            Byte[] bytes = new Byte[2048];
             data = null;
             stream.Write(Encoding.ASCII.GetBytes("GetSaves"), 0, 8);
             while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
@@ -34,8 +34,8 @@ namespace ExternalConsole.Model
                     {
                         if (saves.Where(e => e.Name == save.Name).Count() > 0)
                         {
-                            saves.Where(e => e.Name == save.Name).First().Percent = save.Percent;
-                            saves.Where(e => e.Name == save.Name).First().State = save.State;
+                            if(saves.Where(e => e.Name == save.Name).First().Percent != save.Percent) saves.Where(e => e.Name == save.Name).First().Percent = save.Percent;
+                            if (saves.Where(e => e.Name == save.Name).First().State != save.State) saves.Where(e => e.Name == save.Name).First().State = save.State;
                         }
                         else
                         {

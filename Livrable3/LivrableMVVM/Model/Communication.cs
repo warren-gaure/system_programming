@@ -67,10 +67,10 @@ namespace Livrable3.Model
             var saveModel = new SaveModel();
             var saves = saveModel.getSaves();
             List<SaveTemp> saveTemps = new List<SaveTemp>();
-
+            
             foreach (var save in saves)
             {
-                var saveTemp = new SaveTemp(save.saveName);
+                SaveTemp saveTemp = new SaveTemp(save.saveName);
                 saveTemps.Add(saveTemp);
             }
             var message = JsonSerializer.Serialize(saveTemps);

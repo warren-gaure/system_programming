@@ -22,12 +22,10 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.ColumnSpan="5" Grid.RowSpan="4">
-            <ListView ItemsSource="{Binding ListSaves, Mode=TwoWay}" SelectionMode="Single" > <!-- SelectedItem="{Binding SelectedItem, Mode=TwoWay}" -->
+            <ListView ItemsSource="{Binding ListSaves, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn  Header="Save Name" Width="80" DisplayMemberBinding="{Binding Name}"  />
-                        <GridViewColumn Header="Percent" Width="80" DisplayMemberBinding="{Binding Percent}"/>
-                        <GridViewColumn Header="State" Width="80" DisplayMemberBinding="{Binding State}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

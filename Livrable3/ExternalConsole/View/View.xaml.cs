@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExternalConsole.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,6 @@ namespace ExternalConsole.View
         public View()
         {
             InitializeComponent();
-        }
-
-        public void While()
-        {
-
         }
 
     }
