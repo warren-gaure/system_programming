@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Livrable3.Model;
 using System.IO;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace Livrable3.Commands
 {
@@ -15,31 +16,51 @@ namespace Livrable3.Commands
     {
 
         private ExecuteViewModel _evm;
+        private string bSoft;
 
-        public ExecuteSavesCommand(ExecuteViewModel evm)
+        public ExecuteSavesCommand(ExecuteViewModel evm,string bSoftware)
         {
             _evm = evm;
+            bSoft= bSoftware;
         }
 
         public override void Execute(object? parameter)
         {
-            SaveModel saveModel = new SaveModel();
+            if (_evm.SelectedItem != null) { 
             DailyLogs dailyLogsModel = new DailyLogs();
-            string saves = "test";
-            string sourcePath;
-            string saveName = "";
-            string extensions = "";
             SaveModel modelSave = new SaveModel();
-            string fileName = "..\\..\\..\\repoSaves\\" + saveName;
-            var save = System.IO.File.ReadAllText(fileName);
-            Saves? saveFromFile = JsonSerializer.Deserialize<Saves>(save);
+            modelSave.detectBusinessSoftware(bSoft);
+           
             Thread thread = new Thread(() =>
             {
-                List<FileInfo> fileInfos = modelSave.ParamSend(saveFromFile.sourceTarget, extensions);
-                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos);
-            });
+                
+                var sw = new Stopwatch();
+                sw.Start();
+                string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
+                modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
+                List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
+                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
+                sw.Stop();
+                long time = sw.ElapsedMilliseconds;
+                if (_evm.TypeLog == "JSON")
+                {
+                    dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
 
+                }
+                else
+                {
+                    dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+
+                }
+
+
+            });
+            thread.Name = _evm.SelectedItem.saveName;
             thread.Start();
+
+                _evm.allThread.Add(thread);
+                _evm.ThreadSleep.Add(_evm.SelectedItem.saveName, false);
+            }
         }
     }
 }

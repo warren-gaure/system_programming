@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Livrable3.Model
@@ -35,6 +28,7 @@ namespace Livrable3.Model
         public string type { get; set; }
         public string saveName { get; set; }
         public string cryptage { get; set; }
+        public string prioFiles { get; set; }
 
         public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
         {
@@ -43,13 +37,14 @@ namespace Livrable3.Model
             this.type = type;
             this.saveName = saveName;
         }
-        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage)
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage, string prioFiles)
         {
             this.sourceTarget = sourceTarget;
             this.destinationTarget = destinationTarget;
             this.type = type;
             this.saveName = saveName;
             this.cryptage = cryptage;
+            this.prioFiles = prioFiles;
         }
         public Saves()
         {
@@ -79,10 +74,11 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="saveName"></param>
         /// <returns></returns>
-        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf)
+        public Saves executeSave(Saves saveFromFile, List<FileInfo> filesToTransf,string typeOfLog,string bSoftware)
         {
             name = saveFromFile.saveName;
             dest = saveFromFile.destinationTarget;
+            source = saveFromFile.sourceTarget;
             List<FileInfo> fileToCopy = new List<FileInfo>();
             List<FileInfo> fileTemp = new List<FileInfo>();
             filesDone = 0;
@@ -93,6 +89,20 @@ namespace Livrable3.Model
             totalFilesSize = temp[0];
             nbTotalFiles = temp[1];
             DirectoryInfo target = new DirectoryInfo(dest);
+            
+            
+
+            /* ----------------------------- */
+            // Business Software Handling
+            foreach (Process process in Process.GetProcesses())
+            {
+                if (process.ProcessName == "CalculatorApp")
+                {
+                    process.WaitForExit();
+                }
+            }
+            /* ----------------------------- */
+
             try
             {
 
@@ -118,7 +128,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog, bSoftware);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -129,21 +139,49 @@ namespace Livrable3.Model
             return saveFromFile;
         }
         /// <summary>
-        /// Copy all modified file or new file from sourceDirectory to targetDirectory
+        /// Copy all modified files or new files from sourceDirectory to targetDirectory
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType,string bSoftware)
         {
+            // Mutex used to execute the foreach loop in more secure way
+            Mutex mutex = new Mutex();
+
             DirectoryInfo target = new DirectoryInfo(targetDirectory);
             foreach (FileInfo file in files)
             {
+                detectBusinessSoftware(bSoftware);
+                // Blocking access to the critical section to one thread at the time
+                mutex.WaitOne();
 
-                Notify();
+                if (logType == "JSON")
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                else
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                /* ------------- CRITICAL SECTION ------------- */
                 file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
                 filesDone++;
-                Notify();
-
+                if (logType == "JSON")
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.InstantLogsFunction(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                else
+                {
+                    string[] temp = this.GetData();
+                    InstantLogs.stateLogToXML(temp[0], temp[1], temp[2], Convert.ToBoolean(temp[3]), long.Parse(temp[4]), Convert.ToInt32(temp[5]), long.Parse(temp[6]), DateTime.Now);
+                }
+                /* -------------------------------------------- */
+                
+                // Releasing the mutex
+                mutex.ReleaseMutex();
             }
         }
 
@@ -183,7 +221,7 @@ namespace Livrable3.Model
             }
 
         }
-        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry, string crypt)
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry, string crypt, string prioFiles)
         {
             var saves = new Saves()
             {
@@ -191,7 +229,8 @@ namespace Livrable3.Model
                 destinationTarget = destinationTargetEntry,
                 type = typeEntry,
                 saveName = saveNameEntry,
-                cryptage = crypt
+                cryptage = crypt,
+                prioFiles = prioFiles
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
@@ -200,14 +239,14 @@ namespace Livrable3.Model
             if (File.Exists(fileName))
             {
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
             else
             {
                 File.Create(fileName);
                 jsonString += "\n";
-                File.AppendAllText(fileName, jsonString);
+                File.AppendAllText(fileName, jsonString );
                 return true;
             }
 
@@ -282,10 +321,11 @@ namespace Livrable3.Model
             return filesInfo;
         }
 
-        public void didCrypto(string[] extension, string path, string destPath, int key)
+        public void didCrypto(string[] extension, string sourcePath, int key)
         {
-
-            List<FileInfo> files = nav(path);
+            string dest = "..\\..\\..\\Saves\\temp\\";
+            DirectoryInfo dirTemp = new DirectoryInfo(dest);
+            List<FileInfo> files = nav(sourcePath);
             foreach (string ext in extension)
             {
                 foreach (FileInfo file in files)
@@ -295,9 +335,12 @@ namespace Livrable3.Model
                     {
                         Process cryptoSoft = new Process();
                         cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
-                        cryptoSoft.StartInfo.Arguments = "\"" + file.FullName + "\" " + "\"" + destPath + "\" " + "\"" + key + "\"";
+                        cryptoSoft.StartInfo.Arguments = file.FullName + " " + file.FullName + ".CRYPTED" + " " + key;
                         cryptoSoft.Start();
+                        cryptoSoft.WaitForExit();
+                        file.Delete();
                     }
+
                 }
             }
         }
@@ -325,23 +368,22 @@ namespace Livrable3.Model
             return fileToReturn;
         }
 
-        bool pause;
-        public void ThreadSleep(Thread thread)
+
+        public void ThreadSleep(bool pause/*, Thread thread*/)
         {
 
             while (pause)
             {
                 Thread.Sleep(2000);
-
             }
 
         }
 
-        public void ThreadPause(Thread thread)
+        public void ThreadPause(bool pause)
         {
-            pause = true;
-            ThreadSleep(thread);
+            ThreadSleep(pause);
         }
+
         public ObservableCollection<Saves> getSaves()
         {
             string fileName = "..\\..\\..\\Saves\\AllSaves.json";
@@ -409,5 +451,25 @@ namespace Livrable3.Model
                 File.AppendAllText(fileName, jsonString);
             }
         }
+        // TODO : Mallory - Modifier la méthode pour qu'elle prenne en compte le logiciel métier indiqué par l'utilisateur (changer le if)
+        /// <summary>
+        /// detectBusinessSoftware is a method used by the application to detect if the business software indicated by the user in the options...
+        /// is currently running or not. If it is, the thread executing detectBusinessSoftware will be put to sleep for 1 second.
+        /// </summary>
+        public void detectBusinessSoftware(string bSoftware)
+        {
+            foreach (Process process in Process.GetProcesses())
+            {
+                if (process.ProcessName == bSoftware)
+                {
+                    Thread.Sleep(1000);
+                    // Recursively calling the method to make sure if the business software is still running or not
+
+                    detectBusinessSoftware(bSoftware);
+                }
+            }
+        }
+
+
     }
 }
