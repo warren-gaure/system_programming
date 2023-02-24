@@ -72,7 +72,7 @@ namespace Livrable3.Commands
                     ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName,false);
                     ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName,false);
                 }
-                catch { }
+                catch (Exception ex){ }
 
 
 
