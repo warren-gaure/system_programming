@@ -18,7 +18,7 @@ namespace Livrable3.Commands
         public override void Execute(object? parameter)
         {
             SaveModel temp = new SaveModel();
-            temp.createNewSave(_cvm.Source, _cvm.Target, _cvm.Type, _cvm.Name, _cvm.Extension);
+            //temp.createNewSave(_cvm.Source, _cvm.Target, _cvm.Type, _cvm.Name, _cvm.Extension, _cvm.pri);
         }
 
     }

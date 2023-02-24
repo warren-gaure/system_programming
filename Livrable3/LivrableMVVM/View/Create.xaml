@@ -14,6 +14,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -26,7 +27,7 @@
             <TextBlock Text="{Binding Description}" FontWeight="Medium" FontSize="18"  Foreground="White"/>
         </StackPanel>
         <TextBlock Text="{Binding SaveName}" TextAlignment="Center" Grid.Row="1" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
-        <TextBox Background="#303030" Foreground="White" FontWeight="Bold" Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Background="#303030" Foreground="White" FontWeight="Bold" Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"></TextBox>
         <TextBlock Text="{Binding SourceTitle}" Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
         <TextBox Background="#303030" Foreground="White" Name="Source" Grid.ColumnSpan="2" Margin="10" Grid.Column="1" Grid.Row="2" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <Button Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Grid.Column="3" Grid.Row="2" MaxHeight="20" MaxWidth="45" Click="OnSourceClicked">
@@ -46,16 +47,18 @@
             </Button.Resources> ...
         </Button>
         <TextBlock Grid.Row="4" Text="{Binding CryptTitle}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
-        <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Extension, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button Content="{Binding ButtonTitle}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="5" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
+        <TextBox Background="#303030" Foreground="White" Name="Type" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding Extension, UpdateSourceTrigger=PropertyChanged}" TextChanged="Type_TextChanged"></TextBox>
+        <TextBlock Text="{Binding prioFilesName}" Grid.Row="5" TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <TextBox Background="#303030" Foreground="White" Name="prioFiles" Margin="10" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" MaxHeight="30" MaxWidth="800" VerticalContentAlignment="Center" Text="{Binding prioFiles, UpdateSourceTrigger=PropertyChanged}" TextChanged="Type_TextChanged"></TextBox>
+        <Button Content="{Binding ButtonTitle}" Background="#00A4D1" Foreground="#1E1E1E" FontWeight="Bold" Click="OnCreateButtonClicked" Grid.Column="3" Grid.Row="6" Margin="10" MaxHeight="60" MaxWidth="140" FontSize="18" Command="{Binding CreateCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Text="{Binding TypeSaveTitle}" Grid.Row="5"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
-        <RadioButton x:Name="complete" Content="COMPLETE" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
-        <RadioButton x:Name="differential" Content="DIFFERENTIAL" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
+        <TextBlock Text="{Binding TypeSaveTitle}" Grid.Row="6"  TextAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+        <RadioButton x:Name="complete" Content="COMPLETE" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=complete, Path=Content}"></RadioButton>
+        <RadioButton x:Name="differential" Content="DIFFERENTIAL" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White" Command="{Binding TypeCommand}" CommandParameter="{Binding ElementName=differential, Path=Content}"></RadioButton>
     </Grid>
 </UserControl>

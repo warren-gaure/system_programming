@@ -63,5 +63,15 @@ namespace Livrable3.View
         {
 
         }
+
+        private void Type_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
