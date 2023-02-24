@@ -9,6 +9,7 @@ using Livrable3.Model;
 using System.IO;
 using System.Text.Json;
 using System.Diagnostics;
+using static System.Net.WebRequestMethods;
 
 namespace Livrable3.Commands
 {
@@ -46,20 +47,29 @@ namespace Livrable3.Commands
                         docNotTransfer = modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, _evm.SelectedItem.destinationTarget, 2048);
                     }
 
-                    List<FileInfo> fileInfos = new List<FileInfo>();
-                    fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
-                    foreach (FileInfo doc in docNotTransfer)
+                    List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
+                    List<FileInfo> filesTemp = new List<FileInfo>();
+                    
+                    foreach (FileInfo doc in fileInfos)
                     {
-                        foreach (FileInfo file in fileInfos)
+                        bool fileFind = false;
+                        foreach (FileInfo file in docNotTransfer)
                         {
                             if (file.FullName == doc.FullName)
                             {
-                                fileInfos.Remove(file);
+                                fileFind = true;
                             }
                         }
-                    }
+                        if (fileFind == false)
+                        {
+                            filesTemp.Add(doc);
+                        }
+                                                
+                       }
 
-                    Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
+                    
+
+                    Saves execSave = modelSave.executeSave(_evm.SelectedItem, filesTemp, _evm.TypeLog, bSoft);
                     sw.Stop();
                     long time = sw.ElapsedMilliseconds;
                     if (_evm.TypeLog == "JSON")

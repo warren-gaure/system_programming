@@ -424,22 +424,29 @@ namespace Livrable3.Model
                     }
                 }
             }
-            foreach (FileInfo doc in filesToDelete)
+
+            List<FileInfo> filetemp = new List<FileInfo>();
+
+
+            foreach (FileInfo doc in files)
             {
-                
-                foreach (FileInfo file in files)
+                bool fileFind = false;
+                foreach (FileInfo file in filesToDelete)
                 {
                     if (file.FullName == doc.FullName)
                     {
-                        files.Remove(file);
+                        fileFind = true;
                     }
                 }
-
+                if (fileFind == false)
+                {
+                    filetemp.Add(doc);
+                }
             }
 
           
             fileToReturn.AddRange(fileToSendFirst);
-            fileToReturn.AddRange(files);
+            fileToReturn.AddRange(filetemp);
 
             return fileToReturn;
         }
