@@ -353,16 +353,16 @@ namespace Livrable3.Model
 
         public List<FileInfo> didCrypto(string[] extension, string sourcePath, string destPath, int key)
         {
-            string dest = "..\\..\\..\\Saves\\temp\\";
-            DirectoryInfo dirTemp = new DirectoryInfo(dest);
             List<FileInfo> files = nav(sourcePath);
             Stopwatch encryptionTimer = new Stopwatch();
             // Starting the timer
             encryptionTimer.Start();
+            Mutex mutex = new Mutex();
             foreach (string ext in extension)
             {
                 foreach (FileInfo file in files)
                 {
+                    mutex.WaitOne();
                     string fileExt = file.Name.Split('.').Last();
                     if (ext.Equals(fileExt))
                     {
@@ -376,11 +376,12 @@ namespace Livrable3.Model
                         }
                         Process cryptoSoft = new Process();
                         cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
-                        cryptoSoft.StartInfo.Arguments = file.FullName + " " + path + file.Name + " " + key;
+                        cryptoSoft.StartInfo.Arguments = file.FullName + " " + (path + file.Name) + " " + key;
                         cryptoSoft.Start();
                         cryptoSoft.WaitForExit();
                         filesdonttransfere.Add(file);
                     }
+                    mutex.ReleaseMutex();
                 }
             }
             /* ------------------------------------------ */
