@@ -48,7 +48,7 @@ namespace Livrable3.Commands
                     }
 
                     List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
-                    List<FileInfo> filesTemp = new List<FileInfo>();
+                    /*List<FileInfo> filesTemp = new List<FileInfo>();
                     
                     foreach (FileInfo doc in fileInfos)
                     {
@@ -65,11 +65,11 @@ namespace Livrable3.Commands
                             filesTemp.Add(doc);
                         }
                                                 
-                       }
+                       }*/
 
                     
 
-                    Saves execSave = modelSave.executeSave(_evm.SelectedItem, filesTemp, _evm.TypeLog, bSoft);
+                    Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
                     sw.Stop();
                     long time = sw.ElapsedMilliseconds;
                     if (_evm.TypeLog == "JSON")
