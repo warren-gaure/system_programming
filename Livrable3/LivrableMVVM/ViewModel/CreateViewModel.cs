@@ -211,7 +211,7 @@ namespace Livrable3.ViewModel
         }
 
         private string _prioFilesName;
-        public string prioFilesName
+        public string PrioFilesName
         {
             get
             {
@@ -220,7 +220,7 @@ namespace Livrable3.ViewModel
             set
             {
                 _prioFilesName = value;
-                OnPropertyChanged(nameof(_prioFilesName));
+                OnPropertyChanged(nameof(PrioFilesName));
             }
         }
 
