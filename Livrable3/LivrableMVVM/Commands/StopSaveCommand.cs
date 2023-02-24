@@ -22,6 +22,12 @@ namespace Livrable3.Commands
 
         public override void Execute(object? parameter)
         {
+            string threadName = _evm.SelectedItem.saveName;
+            
+            ExecuteViewModel.ThreadAbort[threadName] = true;
+
+            
+
 
         }
     }

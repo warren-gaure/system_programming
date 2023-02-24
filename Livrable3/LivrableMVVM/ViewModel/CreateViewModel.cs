@@ -79,6 +79,21 @@ namespace Livrable3.ViewModel
             }
         }
 
+        private string _prioFiles;
+
+        public string PrioFiles
+        {
+            get
+            {
+                return _prioFiles;
+            }
+            set
+            {
+                _prioFiles = value;
+                OnPropertyChanged(nameof(PrioFiles));
+            }
+        }
+
         private string _type;
 
         public string Type

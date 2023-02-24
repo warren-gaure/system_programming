@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Livrable3.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -129,7 +130,7 @@ namespace Livrable3.Model
                     default:
                         break;
                 }
-                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog, bSoftware);
+                CopyDirectory(fileToCopy, saveFromFile.destinationTarget, typeOfLog, bSoftware,name);
                 Console.WriteLine("Backup completed successfully.");
             }
             catch (Exception ex)
@@ -144,7 +145,7 @@ namespace Livrable3.Model
         /// </summary>
         /// <param name="sourceDirectory"></param>
         /// <param name="targetDirectory"></param>
-        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType,string bSoftware)
+        private void CopyDirectory(List<FileInfo> files, string targetDirectory,string logType,string bSoftware,string saveName)
         {
             // Mutex used to execute the foreach loop in more secure way
             Mutex mutex = new Mutex();
@@ -153,6 +154,15 @@ namespace Livrable3.Model
             foreach (FileInfo file in files)
             {
                 detectBusinessSoftware(bSoftware);
+
+                while (ExecuteViewModel.ThreadSleep[saveName])
+                {
+
+                }
+                if (ExecuteViewModel.ThreadAbort[saveName])
+                {
+                    Thread.CurrentThread.Abort();
+                }
                 // Blocking access to the critical section to one thread at the time
                 mutex.WaitOne();
 
@@ -366,9 +376,18 @@ namespace Livrable3.Model
         public List<FileInfo> ParamSend(string sourcePath, string extensions)
         {
             List<FileInfo> files = nav(sourcePath);
+            List<FileInfo> filesToDelete = new List<FileInfo>();
             List<FileInfo> fileToReturn = new List<FileInfo>();
             List<FileInfo> fileToSendFirst = new List<FileInfo>();
-            List<string> exts = extensions.Split(",").ToList();
+            List<string> exts;
+            if (extensions == null)
+            {
+                exts = new List<string>();
+            } else
+            {
+               exts = extensions.Split(",").ToList();
+            }
+             
             foreach (FileInfo file in files)
             {
                 foreach (string ext in exts)
@@ -377,9 +396,14 @@ namespace Livrable3.Model
                     if (fileExt.Equals(ext))
                     {
                         fileToSendFirst.Add(file);
-                        files.Remove(file);
+                        filesToDelete.Add(file);
+                        
                     }
                 }
+            }
+            foreach (FileInfo file in filesToDelete)
+            {
+                files.Remove(file);
             }
             fileToReturn.AddRange(fileToSendFirst);
             fileToReturn.AddRange(files);

@@ -51,15 +51,15 @@ namespace Livrable3.Commands
                 {
                     dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, modelSave.encryptionTime);
 
-                }
+                    }
+                });
+                thread.Name = _evm.SelectedItem.saveName;
+                thread.Start();
+
+                ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName,false);
+                ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName,false);
 
 
-            });
-            thread.Name = _evm.SelectedItem.saveName;
-            thread.Start();
-
-                _evm.allThread.Add(thread);
-                _evm.ThreadSleep.Add(_evm.SelectedItem.saveName, false);
             }
         }
     }

@@ -16,32 +16,24 @@ namespace Livrable3.Commands
 
         private ExecuteViewModel _evm;
         bool pause;
+        
         public PauseSavesCommand(ExecuteViewModel evm)
         {
             _evm = evm;
         }
         public override void Execute(object? parameter)
         {
-            
-            List<Thread> thread = _evm.allThread;
-            foreach (Thread t in thread)
-            {
-                if (t.Name == _evm.SelectedItem.saveName)
-                {
-                    if (_evm.ThreadSleep[_evm.SelectedItem.saveName])
-                    {
-                        _evm.ThreadSleep[_evm.SelectedItem.saveName] = false;
-                        t.Start();
-                    }
-                    else
-                    {
 
-                        _evm.ThreadSleep[_evm.SelectedItem.saveName] = true;
-                        t.Suspend();
-                    }
-                    
-                }
+            string threadName = _evm.SelectedItem.saveName;
+            if (ExecuteViewModel.ThreadSleep[threadName])
+            {
+               ExecuteViewModel.ThreadSleep[threadName] = false;
+                   
+            }else
+            {
+                ExecuteViewModel.ThreadSleep[threadName] = true;    
             }
+            
         }
     }
 }
