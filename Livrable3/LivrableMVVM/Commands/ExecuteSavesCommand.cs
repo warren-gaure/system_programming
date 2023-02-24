@@ -67,15 +67,16 @@ namespace Livrable3.Commands
                 });
                 thread.Name = _evm.SelectedItem.saveName;
                 thread.Start();
-                try
+                try 
                 {
-                    ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName, false);
-                    ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName, false);
+                    ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName,false);
+                    ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName,false);
                 }
-                 catch(Exception ex) { }
+                catch { }
 
 
-            }
+
+            });
         }
     }
 }
