@@ -27,44 +27,51 @@ namespace Livrable3.Commands
         public override void Execute(object? parameter)
         {
             if (_evm.SelectedItem != null) { 
-            DailyLogs dailyLogsModel = new DailyLogs();
-            SaveModel modelSave = new SaveModel();
-            modelSave.detectBusinessSoftware(bSoft);
+                DailyLogs dailyLogsModel = new DailyLogs();
+                SaveModel modelSave = new SaveModel();
+
+                
            
-            Thread thread = new Thread(() =>
-            {
-                
-                var sw = new Stopwatch();
-                sw.Start();
-                if (_evm.SelectedItem.cryptage != null)
+
+                Thread thread = new Thread(() =>
                 {
-                    string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
-                    modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
-                }
-                
-                
-                List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
-                Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
-                sw.Stop();
-                long time = sw.ElapsedMilliseconds;
-                if (_evm.TypeLog == "JSON")
-                {
-                    dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+                    Thread.Sleep(10000);
+                    modelSave.detectBusinessSoftware(bSoft);
+                    var sw = new Stopwatch();
+                    sw.Start();
+                    if (_evm.SelectedItem.cryptage != null)
+                    {
+                        string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
+                        modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
+                    }
 
-                }
-                else
-                {
-                    dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+                    List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
 
-                }
+                    //Copy all files
+                    Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
+
+                    sw.Stop();
+                    long time = sw.ElapsedMilliseconds;
+
+                    //Daily logs
+                    if (_evm.TypeLog == "JSON")
+                    {
+                        dailyLogsModel.DailyLogsFunction(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+
+                    }
+                    else
+                    {
+                        dailyLogsModel.dailyLogToXML(execSave.saveName, execSave.sourceTarget, execSave.destinationTarget, modelSave.GetData()[4], time, DateTime.Now, 0);
+
+                    }
+                });
+                thread.Name = _evm.SelectedItem.saveName;
+                thread.Start();
+
+                ExecuteViewModel.ThreadSleep.Add(_evm.SelectedItem.saveName,false);
+                ExecuteViewModel.ThreadAbort.Add(_evm.SelectedItem.saveName,false);
 
 
-            });
-            thread.Name = _evm.SelectedItem.saveName;
-            thread.Start();
-
-                _evm.allThread.Add(thread);
-                _evm.ThreadSleep.Add(_evm.SelectedItem.saveName, false);
             }
         }
     }

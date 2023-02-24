@@ -184,13 +184,15 @@ namespace Livrable3.ViewModel
         private SaveModel _saveModel;
         private LanguageModel _languageModel;
         public List<Thread> allThread;
-        public Dictionary<string, bool> ThreadSleep;
+        public static Dictionary<string, bool> ThreadSleep;
+        public static Dictionary<string, bool> ThreadAbort;
         public ExecuteViewModel()
         {
 
             TypeLogCommand = new TypeLogCommand(this);
             allThread= new List<Thread>();
             ThreadSleep = new Dictionary<string, bool>();
+            ThreadAbort = new Dictionary<string, bool>();
             //get all projectSaves and display them into the view
             _saveModel = new SaveModel();
             _languageModel = new LanguageModel();

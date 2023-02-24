@@ -22,20 +22,12 @@ namespace Livrable3.Commands
 
         public override void Execute(object? parameter)
         {
-            List<Thread> thread = _evm.allThread;
-          
-            foreach (Thread t in thread)
-            {
-                if (t.Name == _evm.SelectedItem.saveName)
-                {
-                  
-                    t.Abort();
-                    
-                    _evm.allThread.Remove(t);
-                    _evm.ThreadSleep.Remove(t.Name);
-                }
-            }
-           
+            string threadName = _evm.SelectedItem.saveName;
+            
+            ExecuteViewModel.ThreadAbort[threadName] = true;
+
+            
+
 
         }
     }
