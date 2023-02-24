@@ -15,7 +15,6 @@ namespace Livrable3.Commands
     {
 
         private ExecuteViewModel _evm;
-        static int i = 0;
         bool pause;
         public PauseSavesCommand(ExecuteViewModel evm)
         {

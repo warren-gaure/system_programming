@@ -190,8 +190,9 @@ namespace Livrable3.ViewModel
 
             TypeLogCommand = new TypeLogCommand(this);
             allThread= new List<Thread>();
-            //get all projectSaves and display them into the view
-            _saveModel = new SaveModel();
+            ThreadSleep = new Dictionary<string, bool>();
+        //get all projectSaves and display them into the view
+        _saveModel = new SaveModel();
             _languageModel = new LanguageModel();
             var conf = _saveModel.GetConfig();
 

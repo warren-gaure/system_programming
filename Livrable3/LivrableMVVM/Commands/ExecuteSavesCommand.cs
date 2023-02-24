@@ -30,7 +30,6 @@ namespace Livrable3.Commands
             DailyLogs dailyLogsModel = new DailyLogs();
             SaveModel modelSave = new SaveModel();
             modelSave.detectBusinessSoftware(bSoft);
-            string extensions = "";
            
             Thread thread = new Thread(() =>
             {
@@ -39,7 +38,7 @@ namespace Livrable3.Commands
                 sw.Start();
                 string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
                 modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
-                List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, extensions);
+                List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, ""/*_evm.prioFiles*/);
                 Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
                 sw.Stop();
                 long time = sw.ElapsedMilliseconds;

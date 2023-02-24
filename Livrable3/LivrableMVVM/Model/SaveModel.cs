@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
+using System.Windows.Shapes;
 
 namespace Livrable3.Model
 {
@@ -27,6 +28,7 @@ namespace Livrable3.Model
         public string type { get; set; }
         public string saveName { get; set; }
         public string cryptage { get; set; }
+        public string prioFiles { get; set; }
 
         public Saves(string sourceTarget, string destinationTarget, string type, string saveName)
         {
@@ -35,13 +37,14 @@ namespace Livrable3.Model
             this.type = type;
             this.saveName = saveName;
         }
-        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage)
+        public Saves(string sourceTarget, string destinationTarget, string type, string saveName, string cryptage, string prioFiles)
         {
             this.sourceTarget = sourceTarget;
             this.destinationTarget = destinationTarget;
             this.type = type;
             this.saveName = saveName;
             this.cryptage = cryptage;
+            this.prioFiles = prioFiles;
         }
         public Saves()
         {
@@ -219,7 +222,7 @@ namespace Livrable3.Model
             }
 
         }
-        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry, string crypt)
+        public bool createNewSave(string sourceTargetEntry, string destinationTargetEntry, string typeEntry, string saveNameEntry, string crypt, string prioFiles)
         {
             var saves = new Saves()
             {
@@ -227,7 +230,8 @@ namespace Livrable3.Model
                 destinationTarget = destinationTargetEntry,
                 type = typeEntry,
                 saveName = saveNameEntry,
-                cryptage = crypt
+                cryptage = crypt,
+                prioFiles = prioFiles
             };
 
             string jsonString = JsonSerializer.Serialize(saves);
@@ -320,6 +324,8 @@ namespace Livrable3.Model
 
         public void didCrypto(string[] extension, string sourcePath, int key)
         {
+            string dest = "..\\..\\..\\Saves\\temp\\";
+            DirectoryInfo dirTemp = new DirectoryInfo(dest);
             List<FileInfo> files = nav(sourcePath);
 
             // Stopwatch used to determine the exact encryption time of the file
@@ -330,8 +336,6 @@ namespace Livrable3.Model
                 foreach (FileInfo file in files)
                 {
                     string fileExt = file.Name.Split('.').Last();
-                    string dest = file.FullName.Replace(file.Name, "");
-                    dest = dest + file.Name.Split('.')[0]+"crypt"+fileExt;
                     if (ext.Equals(fileExt))
                     {
                         // Starting the timer
@@ -340,8 +344,9 @@ namespace Livrable3.Model
                         /* ------------- FILE ENCRYPTION ------------- */
                         Process cryptoSoft = new Process();
                         cryptoSoft.StartInfo.FileName = "CryptoSoft.exe";
-                        cryptoSoft.StartInfo.Arguments = "\"" + file.FullName + "\" " + "\"" + dest + "\" " + "\"" + key + "\"";
+                        cryptoSoft.StartInfo.Arguments = file.FullName + " " + file.FullName + ".CRYPTED" + " " + key;
                         cryptoSoft.Start();
+                        cryptoSoft.WaitForExit();
                         file.Delete();
                         /* ------------------------------------------ */
 
@@ -354,6 +359,7 @@ namespace Livrable3.Model
                         // Resetting the timer
                         encryptionTimer.Reset();
                     }
+
                 }
             }
         }

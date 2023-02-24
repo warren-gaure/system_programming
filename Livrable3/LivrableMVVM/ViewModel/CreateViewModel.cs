@@ -210,6 +210,19 @@ namespace Livrable3.ViewModel
             }
         }
 
+        private string _prioFilesName;
+        public string prioFilesName
+        {
+            get
+            {
+                return _prioFilesName;
+            }
+            set
+            {
+                _prioFilesName = value;
+                OnPropertyChanged(nameof(_prioFilesName));
+            }
+        }
 
 
 
@@ -247,6 +260,8 @@ namespace Livrable3.ViewModel
             _cryptTitle = dictionnary["encryption"];
             _typeSaveTitle = dictionnary["typeOfSave"];
             _buttonTitle = dictionnary["save"];
+            _prioFilesName = dictionnary["prioFilesName"];
+
 
 
 

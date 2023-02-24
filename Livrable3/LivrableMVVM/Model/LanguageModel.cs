@@ -42,7 +42,8 @@ namespace Livrable3.Model
             {"businessSoftware","Logiciel Metier :" },
             {"homeTitle","Accueil" },
             {"pause", "Pause" },
-            {"stop", "Stop" }
+            {"stop", "Stop" },
+            {"prioFilesName", "Extensions Prioritaire" }
         };
         Dictionary<string, string> english = new Dictionary<string, string>
         {
@@ -75,7 +76,8 @@ namespace Livrable3.Model
             {"businessSoftware","Business Software :" },
             {"homeTitle","Home" },
             {"pause", "Pause" },
-            {"stop", "Stop" }
+            {"stop", "Stop" },
+            {"prioFilesName", "Priority Extension" }
         };
 
         /// <summary>
