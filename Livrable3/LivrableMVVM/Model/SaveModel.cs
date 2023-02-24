@@ -347,6 +347,7 @@ namespace Livrable3.Model
         public List<FileInfo> ParamSend(string sourcePath, string extensions)
         {
             List<FileInfo> files = nav(sourcePath);
+            List<FileInfo> filesToDelete = new List<FileInfo>();
             List<FileInfo> fileToReturn = new List<FileInfo>();
             List<FileInfo> fileToSendFirst = new List<FileInfo>();
             List<string> exts = extensions.Split(",").ToList();
@@ -358,9 +359,14 @@ namespace Livrable3.Model
                     if (fileExt.Equals(ext))
                     {
                         fileToSendFirst.Add(file);
-                        files.Remove(file);
+                        filesToDelete.Add(file);
+                        
                     }
                 }
+            }
+            foreach (FileInfo file in filesToDelete)
+            {
+                files.Remove(file);
             }
             fileToReturn.AddRange(fileToSendFirst);
             fileToReturn.AddRange(files);

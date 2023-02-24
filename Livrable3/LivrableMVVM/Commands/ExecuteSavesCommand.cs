@@ -36,8 +36,13 @@ namespace Livrable3.Commands
                 
                 var sw = new Stopwatch();
                 sw.Start();
-                string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
-                modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
+                if (_evm.SelectedItem.cryptage != null)
+                {
+                    string[] AllCryptExt = _evm.SelectedItem.cryptage.Split(",");
+                    modelSave.didCrypto(AllCryptExt, _evm.SelectedItem.sourceTarget, 2048);
+                }
+                
+                
                 List<FileInfo> fileInfos = modelSave.ParamSend(_evm.SelectedItem.sourceTarget, _evm.SelectedItem.prioFiles);
                 Saves execSave = modelSave.executeSave(_evm.SelectedItem, fileInfos, _evm.TypeLog, bSoft);
                 sw.Stop();
